@@ -1,12 +1,19 @@
 .posts-container {
 	display: flex;
-	gap: 20px;
-	justify-content: center;
-	max-width: 50rem;
-    min-width: 50rem;
-    width: 50rem;
+	gap: 30px;
+	/* justify-content: center; */
+	max-width: 100%;
+    min-width: 35%;
+    width: 935px;
     margin: auto;
     flex-wrap: wrap;
-    
+
 }
 
+@media screen and (max-width: 980px) {
+    .posts-container{
+        gap: 3px;
+        margin: 0;
+    }
+
+}
