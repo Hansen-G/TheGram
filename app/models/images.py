@@ -16,22 +16,17 @@ class Image(db.Model):
     createdAt = db.Column(db.DateTime, nullable=False, default=datetime.now())
     updatedAt = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
-    comments = db.relationship("Comment", back_populates="image")
-    user = db.relationship("User", back_populates='images')
+    comments = db.relationship("Comment", back_populates="image", cascade="all, delete-orphan")
+    user = db.relationship("User", back_populates="images")
 
     user_image_likes = db.relationship(
         "User", 
         secondary=Imageslikes, 
         back_populates="images_likes",
-        cascade="all, delete"
+        # cascade="all, delete"
     )
 
-    # comments_likes = db.relationship(
-    #     "Comment", 
-    #     secondary=CommentsLikes, 
-    #     back_populates="user_comment_likes",
-    #     cascade="all, delete"
-    # )
+
  

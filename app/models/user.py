@@ -7,7 +7,7 @@ from .comments_likes import CommentsLikes
 from .images_likes import Imageslikes
 
 class User(db.Model, UserMixin):
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
     username = db.Column(db.String(40), nullable=False, unique=True)
@@ -25,20 +25,23 @@ class User(db.Model, UserMixin):
     updatedAt = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
 
-    images = db.relationship("Image", back_populates='user')
+    images = db.relationship("Image", back_populates="user", cascade="all, delete-orphan")
+    # images = db.relationship("Image", back_populates="user")
     images_likes = db.relationship(
         "Image",
         secondary=Imageslikes, 
         back_populates="user_image_likes",
-        cascade="all, delete"
+        # cascade="all,delete"
     )
 
-    comments = db.relationship('Comment', back_populates='user')
+    comments = db.relationship("Comment", back_populates="user", cascade="all, delete-orphan")
+    # comments = db.relationship("Comment", back_populates="user")
+
     comments_likes = db.relationship(
         "Comment", 
         secondary=CommentsLikes, 
         back_populates="user_comment_likes",
-        cascade="all, delete"
+        # cascade="all, delete"
     )
 
     followers = db.relationship(
@@ -46,6 +49,7 @@ class User(db.Model, UserMixin):
         secondary=follows,
         primaryjoin=(follows.c.follower_id == id),
         secondaryjoin=(follows.c.followed_id == id),
+        # cascade="all, delete",
         backref=db.backref("following", lazy="dynamic"),
         lazy="dynamic"
     )
@@ -63,7 +67,7 @@ class User(db.Model, UserMixin):
 
     def to_dict(self):
         return {
-            'id': self.id,
-            'username': self.username,
-            'email': self.email
+            "id": self.id,
+            "username": self.username,
+            "email": self.email
         }
