@@ -7,7 +7,7 @@ const NavBar = () => {
   return (
     <nav className='nav-bar-container'>
         <div className='nav-bar-logo-container'>
-            <Link title="Instagram / Mackey Saturday, Public domain, via Wikimedia Commons" href="/">
+            <Link title="Instagram / Mackey Saturday, Public domain, via Wikimedia Commons" to="/">
                 <img alt="Instagram logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/512px-Instagram_logo.svg.png" className='logo'/>
             </Link>
         </div>

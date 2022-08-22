@@ -8,20 +8,19 @@ img_routes = Blueprint('images', __name__)
 @img_routes.route('/')
 @login_required
 def get_images():
-    
     id = current_user.id
-    all_images = Image.query.filter(Image.user_id == id).order_by(Image.createdAt.desc()).all()
-
+    # all_images = Image.query.filter(Image.user_id == id).order_by(Image.createdAt.desc()).all()
+    all_images = Image.query.all()
     return_JSON = ([i.to_dict() for i in all_images])
 
 
-    for i in return_JSON:
-        for j in i["liked_user_ids"]:
-            if j["id"] == current_user.id:
-                i['curent_user_liked'] = True
-                break
-            else:
-                i['curent_user_liked'] = False
+    # for i in return_JSON:
+    #     for j in i["liked_user_ids"]:
+    #         if j["id"] == current_user.id:
+    #             i['curent_user_liked'] = True
+    #             break
+    #         else:
+    #             i['curent_user_liked'] = False
               
 
     return jsonify(return_JSON)
