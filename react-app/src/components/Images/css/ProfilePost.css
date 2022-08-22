@@ -1,0 +1,12 @@
+.profile-post {
+	/* width: 33%;
+	height: 33%; */
+	width: 15rem;
+	height: 15rem;
+	object-fit: cover;
+}
+
+.single-post-container {
+	width: 30%;
+	object-fit: cover;
+}

@@ -1,0 +1,12 @@
+.posts-container {
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+	max-width: 50rem;
+    min-width: 50rem;
+    width: 50rem;
+    margin: auto;
+    flex-wrap: wrap;
+    
+}
+
