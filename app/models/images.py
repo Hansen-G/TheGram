@@ -2,6 +2,7 @@ from email.policy import default
 from .db import db
 from .images_likes import Imageslikes
 from datetime import datetime
+from .comments_likes import CommentsLikes
 
 class Image(db.Model):
     __tablename__ = "images"
@@ -17,7 +18,7 @@ class Image(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-    comment = db.relationship("Comment", back_populates="image")
+    comments = db.relationship("Comment", back_populates="image")
     user = db.relationship("User", back_populates='images')
 
     user_image_likes = db.relationship(
@@ -27,5 +28,10 @@ class Image(db.Model):
         cascade="all, delete"
     )
 
-
+    # comments_likes = db.relationship(
+    #     "Comment", 
+    #     secondary=CommentsLikes, 
+    #     back_populates="user_comment_likes",
+    #     cascade="all, delete"
+    # )
  
