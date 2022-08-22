@@ -16,8 +16,15 @@
 }
 .logo {
     display: inline-block;
-    width: 6.438rem;
-    height: 1.813rem;
+    width: 7rem;
+    height: 3rem;
+}
+.icon {
+    font-size: 1.5rem;
+    color: black;
+}
+.icon:active {
+    color: gray;
 }
 .nav-bar-li {
     list-style: none;
