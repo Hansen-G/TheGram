@@ -28,5 +28,21 @@ class Image(db.Model):
         # cascade="all, delete"
     )
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "url": self.url,
+            "description": self.description,
+            "alt_description": self.alt_description,
+            "show_stats": self.show_stats,
+            "location": self.location,
+            "createdAt": self.createdAt,
+            "updatedAt": self.updatedAt,
+            "user_id": self.user_id,
+            "comments": [c.to_dict() for c in self.comments],
+            "user_image_likes": len(self.user_image_likes),
+            "liked_user_ids": [{'id':i.id, 'name':i.name} for i in self.user_image_likes]
+        }
+
 
  
