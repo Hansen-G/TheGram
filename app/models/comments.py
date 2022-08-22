@@ -24,3 +24,15 @@ class Comment(db.Model):
         back_populates="comments_likes",
         # cascade="all, delete"
     )
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "image_id": self.image_id,
+            "user_id": self.user_id,
+            "comment": self.comment,
+            "createdAt": self.createdAt,
+            "updatedAt": self.updatedAt,
+            "user": self.user.to_dict(),
+            "user_comment_likes": len(self.user_comment_likes)
+        }
