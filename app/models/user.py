@@ -70,7 +70,12 @@ class User(db.Model, UserMixin):
             "id": self.id,
             "username": self.username,
             "email": self.email,
-            
+            "following": [{"following_id": i.id, "following_name": i.name} for i in self.followers]
         }
-    # def followers(self):
-    #     return self.followers.all()
+
+    @property
+    def for_following(self):
+        return {
+            "following": [i.id for i in self.followers]
+        }
+
