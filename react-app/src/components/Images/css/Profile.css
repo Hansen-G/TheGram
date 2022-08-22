@@ -9,7 +9,40 @@
     flex-wrap: wrap;
 
 }
+.profile-master-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2%;
+    width: 100%;
+}
+.user-info {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
 
+}
+.profile-image-container {
+    border-radius: 50%;
+    /* border: black 1px solid; */
+}
+.profile-image {
+    display: flex;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    flex-basis: 25%;
+}
+.inner-user-info {
+    display: flex;
+    flex-grow: 3;
+    display: flex;
+    flex-flow: row;
+}
+.profile-username {
+    font-weight: normal;
+}
 @media screen and (max-width: 980px) {
     .posts-container{
         gap: 3px;

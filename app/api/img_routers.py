@@ -24,7 +24,7 @@ def get_images():
 # Get all images home page for the current user
 @img_routes.route('/')
 @login_required
-def get_images_homepage():   
+def get_images_homepage():
     id = current_user.id
     following_id = User.query.get(id).for_following["following"]
     all_images = Image.query.filter(Image.user_id.in_(
@@ -39,4 +39,3 @@ def get_images_homepage():
             else:
                 i['curent_user_liked'] = False
     return jsonify(return_JSON)
-    
