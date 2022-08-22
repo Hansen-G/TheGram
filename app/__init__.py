@@ -12,6 +12,9 @@ from .api.auth_routes import auth_routes
 from .seeds import seed_commands
 
 from .config import Config
+from .models import User
+
+
 
 app = Flask(__name__)
 
@@ -70,3 +73,12 @@ def react_root(path):
     if path == 'favicon.ico':
         return app.send_static_file('favicon.ico')
     return app.send_static_file('index.html')
+
+
+@app.route('/delete')
+def delete_user():
+    user1 = User.query.get(1)
+    print("!!!!!!!!!!!!!", user1)
+    db.session.delete(user1)
+    db.session.commit()
+    return 'success'

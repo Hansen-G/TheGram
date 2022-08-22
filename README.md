@@ -37,7 +37,7 @@ This is the starter for the Flask React project.
    flask run
    ```
 
-6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+6. To run the React App in development, checkout the [](./react-app/README.md) inside the `react-app` directory.
 
 
 <br>
