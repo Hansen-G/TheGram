@@ -48,7 +48,7 @@ class User(db.Model, UserMixin):
         "User", 
         secondary=follows,
         primaryjoin=(follows.c.follower_id == id),
-        secondaryjoin=(follows.c.followed_id == id),
+        secondaryjoin=(follows.c.following_id == id),
         # cascade="all, delete",
         backref=db.backref("following", lazy="dynamic"),
         lazy="dynamic"
@@ -69,5 +69,8 @@ class User(db.Model, UserMixin):
         return {
             "id": self.id,
             "username": self.username,
-            "email": self.email
+            "email": self.email,
+            
         }
+    # def followers(self):
+    #     return self.followers.all()
