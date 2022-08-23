@@ -1,0 +1,49 @@
+.nav-bar-container {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: rgba(219, 219, 219) 1px solid ;
+    color: rgb(38, 38, 38);
+}
+.nav-bar-logo-container {
+    display: inline-block;
+    width: fit-content;
+}
+.nav-bar {
+    display: flex;
+    flex-flow: row;
+}
+.logo {
+    display: inline-block;
+    width: 7rem;
+    height: 3rem;
+}
+.icon {
+    font-size: 1.5rem;
+    color: black;
+}
+.icon:active {
+    color: gray;
+}
+.nav-bar-li {
+    list-style: none;
+    padding-right: 10px;
+    display: flex;
+}
+
+.nav-bar-link {
+    text-decoration: none;
+    padding-right: .75rem;
+}
+
+
+.profile-pic-anchor {
+    position: relative;
+}
+
+
+.nav-bar-icons {
+    display: flex;
+    justify-content: space-between;
+}

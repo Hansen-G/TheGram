@@ -1,0 +1,78 @@
+.posts-container {
+	display: flex;
+	gap: 20px;
+	max-width: 100%;
+	min-width: 70%;
+	width: 100%;
+	flex-wrap: wrap;
+	justify-content: start;
+	padding-left: 1.25rem;
+}
+.profile-master-div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: auto;
+	max-width: 935px;
+	width: 80%;
+}
+.user-info {
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+	max-width: 100%;
+	width: 100%;
+	justify-content: center;
+	padding-bottom: 40px;
+	padding-top: 30px;
+	margin-bottom: 40px;
+	border-bottom: solid 1px rgb(219, 219, 219);
+}
+.profile-image-container {
+	border-radius: 50%;
+	flex-grow: 1;
+	display: flex;
+	justify-content: center;
+}
+.profile-image {
+	display: flex;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	padding-right: 0px;
+}
+
+.profile-stats {
+	flex-grow: 1.5;
+}
+.inner-user-info {
+	display: flex;
+	flex-flow: row;
+}
+
+.inner-user-info-stat {
+	padding-right: 30px;
+}
+.bold-text,
+.profile-name {
+	font-weight: 600;
+}
+
+.profile-username {
+	font-weight: 300;
+	font-size: 1.75rem;
+	line-height: 1.75rem;
+}
+
+.profile-name {
+	margin-top: 1rem;
+}
+.profile-bio {
+	margin-top: 0.25rem;
+}
+@media screen and (max-width: 1200px) {
+	.posts-container {
+		gap: 3px;
+		margin: 0;
+	}
+}

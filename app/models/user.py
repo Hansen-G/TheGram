@@ -29,7 +29,7 @@ class User(db.Model, UserMixin):
     # images = db.relationship("Image", back_populates="user")
     images_likes = db.relationship(
         "Image",
-        secondary=Imageslikes, 
+        secondary=Imageslikes,
         back_populates="user_image_likes",
         # cascade="all,delete"
     )
@@ -38,17 +38,17 @@ class User(db.Model, UserMixin):
     # comments = db.relationship("Comment", back_populates="user")
 
     comments_likes = db.relationship(
-        "Comment", 
-        secondary=CommentsLikes, 
+        "Comment",
+        secondary=CommentsLikes,
         back_populates="user_comment_likes",
         # cascade="all, delete"
     )
 
     followers = db.relationship(
-        "User", 
+        "User",
         secondary=follows,
         primaryjoin=(follows.c.follower_id == id),
-        secondaryjoin=(follows.c.followed_id == id),
+        secondaryjoin=(follows.c.following_id == id),
         # cascade="all, delete",
         backref=db.backref("following", lazy="dynamic"),
         lazy="dynamic"
@@ -69,5 +69,17 @@ class User(db.Model, UserMixin):
         return {
             "id": self.id,
             "username": self.username,
-            "email": self.email
+            "name": self.name,
+            "email": self.email,
+            "following": [{"following_id": i.id, "following_name": i.name} for i in self.followers],
+            "profile_img": self.profile_img,
+            "bio": self.bio,
+            "gender": self.gender,
+            "website": self.website
+        }
+
+    @property
+    def for_following(self):
+        return {
+            "following": [i.id for i in self.followers]
         }
