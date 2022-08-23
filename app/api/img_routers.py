@@ -36,7 +36,7 @@ def update_images(id):
         db.session.commit()
         return redirect('/api/images')
 
-    else: 
+    else:
         return jsonify(form.errors)
 
 # delete image
@@ -79,7 +79,7 @@ def create_images():
         db.session.commit()
         return redirect('/api/images')
 
-    else: 
+    else:
         return jsonify(form.errors)
 
 
@@ -87,7 +87,6 @@ def create_images():
 @img_routes.route('/users/<int:id>', methods=['GET'])
 @login_required
 def get_images_by_user_id(id):
-    id = current_user.id
     all_images = Image.query.filter(Image.user_id == id).order_by(
         Image.createdAt.desc()).all()
     return_JSON = ([i.to_dict() for i in all_images])
