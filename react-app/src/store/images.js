@@ -28,6 +28,22 @@ const editImage = (id) => ({
 	type: EDIT_IMAGE,
 	id,
 });
+
+
+// get the homepage of the current user
+// and get images by current user in profile page
+export const loadHomePage = (id) => async (dispatch) => {
+	const response = await fetch(`/api/images/`);
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(getImages(data))
+		return data;
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
+
 // get images by user ID
 // and get images by current user in profile page
 export const loadImages = (id) => async (dispatch) => {
