@@ -17,8 +17,19 @@ function pastDate(date) {
     const diff = now - then;
     const diffDays = Math.floor(diff / (1000 * 60 * 60 * 24));
     if (diffDays === 0) {
-        return 'Today';
-    } else {
+        const diffHours = Math.floor(diff / (1000 * 60 * 60));
+        if (diffHours === 0) {
+            const diffMinutes = Math.floor(diff / (1000 * 60));
+            if (diffMinutes === 0) {
+                const diffSeconds = Math.floor(diff / (1000));
+                return `${diffSeconds} seconds ago`;
+            }
+            return `${diffMinutes} minutes ago`;
+        }
+        return `${diffHours} hours ago`;
+    } else if (diffDays === 1) {
+        return '1 day ago';
+    }else {
         return diffDays + ' days ago';
     }
 }
@@ -54,15 +65,15 @@ function HomePage() {
             <div className='home-left flex'>
                 {imagesArr.length > 0 &&
                     imagesArr.map((image) => (
-                        <div className="card-post-container" key={image.id}>
+                        <div className="card-post-container flex" key={image.id}>
 
                             <div className='post-user-info flex'>
                                 <div className='profile-image-div'>
-                                    <img src={image.post_user.profile_image} className="profile-image"></img>
+                                    <img src={image.post_user.profile_img} className="profile-image"></img>
                                 </div>
                                 <div className='post-user-name-div flex'>
                                     <Link to={`/${image.post_user.id}`}>
-                                        <div>{image.post_user.username}</div>
+                                        <div className='post-user-name-div-username'>{image.post_user.username}</div>
                                     </Link>
                                     {
                                         (image['location']) && (
@@ -78,47 +89,68 @@ function HomePage() {
                                 <img src={image.url} className="post-image-detail"></img>
                             </div>
                             <div className='post-info'>
-                                <div className='post-function-bar'>
+                                <div className='post-function-bar flex'>
                                     <div className='post-function-bar-left'>
-                                        <i className="fa-regular fa-heart"></i>
+                                        {
+                                            (image.curent_user_liked) && (
+                                                <i class="fa-solid fa-heart curent_user_liked"></i>
+                                            )
+                                        }
+                                        {
+                                            (!image.curent_user_liked) && (
+                                                <i className="fa-regular fa-heart"></i>
+                                            )
+                                        }
+                                       
                                         <i className="fa-regular fa-comment"></i>
                                         <i className="fa-regular fa-paper-plane"></i>
                                     </div>
-                                    <div className='post-function-bar-right'>
+                                    {/* <div className='post-function-bar-right'>
                                         <i className="fa-regular fa-bookmark"></i>
-                                    </div>    
+                                    </div>     */}
                                 </div>
                                 <div className='image-likes'>
                                     {image.user_image_likes} likes
                                 </div>
                                 {
                                     (image['description'].length <= 100 ) && (
-                                        <div>
-                                            <a className=''>{image.post_user.username}</a> 
-                                            <a> {image.description}</a>
+                                        <div className='post-description'>
+                                            <Link to={`/${image.post_user.id}`}>
+                                                <a className='post-description-user'>{image.post_user.username}</a> 
+                                            </Link>
+                                            
+                                            <a className='post-description-detail'> {image.description}</a>
                                         </div>
                                     ) 
                                 }
                                 {
                                     (image['description'].length > 100) && (
-                                        <div>
-                                            <a className=''>{image.post_user.username}</a>
-                                            <a> {cut(image.description)}</a>
+                                        <div className='post-description'>
+                                            <Link to={`/${image.post_user.id}`}>
+                                                <a className='post-description-user'>{image.post_user.username}</a>
+                                            </Link>
+                                            <a className='post-description-detail'> {cut(image.description)}</a>
                                         </div>
                                     ) 
                                 }
+                                <div className='post-all-comments'>
+                                    View all {image.comments.length} comments
+                                </div>
+                                <div className='post-date'>
+                                   {pastDate(image.createdAt)} 
+                                </div>
+                                <div className='div-line'></div>
+                                <div className='post-add-comment flex'>
+                                    <i className="fa-regular fa-face-smile"></i>
+                                    <form onSubmit={handleSubmit}>
+                                        <input type="text" placeholder='Add a comment...' value={comment} onChange={e => setComment(e.target.value)} className='post-comment-input'></input>
+                                        <button type="submit" disabled={comment.length === 0} className={comment.length === 0 ? 'disabled post-commit-submit' : 'enabled post-commit-submit'} id='editgroup'>Post</button>
+                                    </form>
+                                </div>
                                
                             </div>
-                            <div className='post-date'>
-                                {pastDate(image.createdAt)}
-                            </div>
-                            <div className='post-add-comment'>
-                                <i className="fa-regular fa-face-smile"></i>
-                                <form onSubmit={handleSubmit}>
-                                    <input type="text" placeholder='Add a comment...' value={comment} onChange={e => setComment(e.target.value)}></input>
-                                    <button type="submit" disabled={comment.length===0} className={comment.length > 0 ? 'disabled' : 'enabled'} id='editgroup'>Post</button>
-                                </form>
-                            </div>
+                            
+                            
                                     
                         </div>
                     ))}
