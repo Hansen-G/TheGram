@@ -106,7 +106,7 @@ def get_images_by_user_id(id):
 
 
 
-# Get all images home page of the current user
+# Get all images on the profile page of the current user
 @img_routes.route('/current_user_images', methods=['GET'])
 @login_required
 def get_images():
