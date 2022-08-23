@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, session, request, redirect, url_for
 from app.models import User, db, Image
 from flask_login import current_user, login_user, logout_user, login_required
 from app.forms import ImageForm
+from app.forms.comment_form import CommentForm
 
 img_routes = Blueprint('images', __name__)
 
@@ -143,6 +144,13 @@ def get_images_homepage():
             else:
                 i['curent_user_liked'] = False
     return jsonify(return_JSON)
+
+@img_routes.route('/<image_id>/comment')
+@login_required
+def create_new_comment():
+    form = CommentForm()
+
+    data = form.data
 
 
 # #New route by Yoni
