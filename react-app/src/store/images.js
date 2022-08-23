@@ -42,7 +42,23 @@ export const loadImages = (id) => async (dispatch) => {
 	}
 };
 // create a image
-// export const CreateImage =
+export const CreateImage = (image) => async (dispatch) => {
+	const response = await fetch('api/images/new', {
+		method: "POST",
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(image)
+	})
+
+	if (response.ok) {
+		const image = await response.json()
+		dispatch(addImage(image))
+	} 
+}
+
+// update a image 
+// export const UpdateImage = (image) => async(dispatch)
 
 const initialState = {};
 
@@ -52,8 +68,12 @@ export default function images(state = initialState, action) {
 		case GET_IMAGES:
 			newState = { ...action.images };
             return newState;
-		// case ADD_IMAGE:
-
+		case ADD_IMAGE:
+			newState = {...state, ...action.image}
+			return newState
+		case EDIT_IMAGE:
+			newState = {...state, ...action.image}
+			return newState
         default:
             return state
 	}

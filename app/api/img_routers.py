@@ -35,7 +35,7 @@ def update_images(id):
             image_to_be_updated.location = form.data['location']
 
         db.session.commit()
-        return redirect('/api/images')
+        return jsonify(image_to_be_updated)
 
     else:
         return jsonify(form.errors)
