@@ -8,13 +8,13 @@ function ProfileMenu({ showMenu, userId }) {
 			{showMenu && (
 				<div>
                     <Link className="profile-menu-link" to={`/${userId}`}>
-                        <i class="fa-regular fa-circle-user"></i>
+                        <i className="fa-regular fa-circle-user"></i>
 						<p className="nav-bar-p ">Profile</p>
 					</Link>
 
-					<p className="nav-bar-p logout">
+					<div className="nav-bar-p logout">
 						<LogoutButton />
-					</p>
+					</div>
 				</div>
 			)}
 		</div>

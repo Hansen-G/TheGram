@@ -12,7 +12,7 @@ const Profile = () => {
 
 	useEffect(() => {
         dispatch(loadImages(userId));
-        
+
         //Call backend
 		getUser();
 	}, [dispatch]);
@@ -80,7 +80,7 @@ const Profile = () => {
 									<Post post={image} key={image.id}></Post>
 								);
 							})}
-					
+
 					</div>
 				</div>
 			)}

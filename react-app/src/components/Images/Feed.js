@@ -5,9 +5,10 @@ import Post from "./Post";
 
 const Feed = () => {
 	const dispatch = useDispatch();
+	const user = useSelector(state => state.session.user)
 
 	useEffect(() => {
-		dispatch(loadImages());
+		dispatch(loadImages(user.id));
 	}, [dispatch]);
 
 	const images = Object.values(useSelector((state) => state.images));

@@ -28,7 +28,7 @@ const editImage = (id) => ({
 	type: EDIT_IMAGE,
 	id,
 });
-// get images by user ID 
+// get images by user ID
 // and get images by current user in profile page
 export const loadImages = (id) => async (dispatch) => {
 	const response = await fetch(`/api/images/users/${id}`);
