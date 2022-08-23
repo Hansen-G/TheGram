@@ -11,10 +11,17 @@ img_routes = Blueprint('images', __name__)
 def update_images(id):
     form = ImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print("!!!!!!!", id)
     image_to_be_updated = Image.query.get(id)
+    # print("!!!!!!!", image_to_be_updated)
+    if not image_to_be_updated:
+        result = {
+            "message": "Image couldn't be found",
+            "statusCode": 404
+        }
+        return jsonify(result)
+
     if image_to_be_updated and form.validate_on_submit():
-        print("~~~~~~", form.data['url'])
+        # print("~~~~~~", form.data['url'])
         if len(form.data['url']) >0:
             image_to_be_updated.url = form.data['url']
         if form.data['description']:
@@ -77,7 +84,7 @@ def create_images():
 
 
 # Get images by user_id
-@img_routes.route('/current_user_images/<int:id>', methods=['GET'])
+@img_routes.route('/users/<int:id>', methods=['GET'])
 @login_required
 def get_images_by_user_id(id):
     id = current_user.id

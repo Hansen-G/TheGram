@@ -28,9 +28,10 @@ const editImage = (id) => ({
 	type: EDIT_IMAGE,
 	id,
 });
-
+// get images by user ID 
+// and get images by current user in profile page
 export const loadImages = (id) => async (dispatch) => {
-	const response = await fetch(`/api/images/current_user_images/${id}`);
+	const response = await fetch(`/api/images/users/${id}`);
 
 	if (response.ok) {
 		const data = await response.json();
@@ -40,6 +41,8 @@ export const loadImages = (id) => async (dispatch) => {
 		return ["An error occurred. Please try again."];
 	}
 };
+// create a image
+// export const CreateImage =
 
 const initialState = {};
 
@@ -49,6 +52,8 @@ export default function images(state = initialState, action) {
 		case GET_IMAGES:
 			newState = { ...action.images };
             return newState;
+		// case ADD_IMAGE:
+
         default:
             return state
 	}
