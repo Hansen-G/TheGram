@@ -30,7 +30,7 @@ const editImage = (id) => ({
 });
 
 export const loadImages = (id) => async (dispatch) => {
-	const response = await fetch(`/api/images/${id}`);
+	const response = await fetch(`/api/images/current_user_images/${id}`);
 
 	if (response.ok) {
 		const data = await response.json();

@@ -1,11 +1,12 @@
 .posts-container {
 	display: flex;
-	row-gap: 20px;
+	gap: 20px;
 	max-width: 100%;
-	min-width: 35%;
+	min-width: 70%;
 	width: 100%;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: start;
+	padding-left: 1.25rem;
 }
 .profile-master-div {
 	display: flex;
@@ -30,8 +31,8 @@
 .profile-image-container {
 	border-radius: 50%;
 	flex-grow: 1;
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 .profile-image {
 	display: flex;
@@ -52,23 +53,24 @@
 .inner-user-info-stat {
 	padding-right: 30px;
 }
-.bold-text, .profile-name {
+.bold-text,
+.profile-name {
 	font-weight: 600;
 }
 
 .profile-username {
 	font-weight: 300;
-    font-size: 1.75rem;
-    line-height: 1.75rem;
+	font-size: 1.75rem;
+	line-height: 1.75rem;
 }
 
 .profile-name {
-    margin-top: 1rem;
+	margin-top: 1rem;
 }
 .profile-bio {
-    margin-top: .25rem;
+	margin-top: 0.25rem;
 }
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1200px) {
 	.posts-container {
 		gap: 3px;
 		margin: 0;

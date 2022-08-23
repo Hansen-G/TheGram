@@ -8,6 +8,8 @@
 }
 
 .single-post-container {
-	width: 32%;
+	width: 31.908%;
 	object-fit: cover;
+	max-width: 293px;
+	max-height: 293px;
 }

@@ -80,18 +80,7 @@ const Profile = () => {
 									<Post post={image} key={image.id}></Post>
 								);
 							})}
-						{images.length > 0 &&
-							images.map((image) => {
-								return (
-									<Post post={image} key={image.id}></Post>
-								);
-							})}
-						{images.length > 0 &&
-							images.map((image) => {
-								return (
-									<Post post={image} key={image.id}></Post>
-								);
-							})}
+					
 					</div>
 				</div>
 			)}
