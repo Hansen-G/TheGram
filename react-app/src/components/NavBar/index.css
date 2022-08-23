@@ -28,9 +28,22 @@
 }
 .nav-bar-li {
     list-style: none;
-
+    padding-right: 10px;
+    display: flex;
 }
 
 .nav-bar-link {
     text-decoration: none;
+    padding-right: .75rem;
+}
+
+
+.profile-pic-anchor {
+    position: relative;
+}
+
+
+.nav-bar-icons {
+    display: flex;
+    justify-content: space-between;
 }
