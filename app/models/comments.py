@@ -36,6 +36,6 @@ class Comment(db.Model):
             "updatedAt": self.updatedAt,
             "user": self.user.to_dict(),
             "total_comment_likes": len(self.user_comment_likes),
-            "user_comment_likes": self.user_comment_likes
+            "user_comment_likes": [{'id':i.id, 'username':i.username, 'name':i.name, 'profile_img':i.profile_img} for i in self.user_comment_likes]
 
         }

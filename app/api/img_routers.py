@@ -37,7 +37,7 @@ def update_images(id):
             image_to_be_updated.show_stats = form.data['show_stats']
         if form.data['location']:
             image_to_be_updated.location = form.data['location']
-        
+
 
         db.session.commit()
         return jsonify(image_to_be_updated.to_dict())
@@ -86,10 +86,10 @@ def create_images():
         )
         db.session.add(image)
         db.session.commit()
-        
+
         image = image.to_dict()
         image['post_user'] = User.query.get(image['user_id']).to_dict()
-        
+
         return image
 
     else:
@@ -186,7 +186,7 @@ def create_new_comment(image_id):
         return jsonify(new_comment.to_dict())
     elif form.errors:
         return jsonify(form.errors)
-    else: 
+    else:
         result = {
             "message": "Could not make comment",
             "statusCode": 404
@@ -202,7 +202,7 @@ def add_like_to_image(id):
     current_user_id = current_user.id
     for user in image['liked_user_ids']:
         if current_user_id == user['id']:
-            
+
             deleted_like = delete(Imageslikes).where(
                 Imageslikes.c.user_id == current_user_id,
                 Imageslikes.c.image_id == id
@@ -213,5 +213,3 @@ def add_like_to_image(id):
     new_like = Imageslikes.insert().values((current_user_id, id))
     db.engine.execute(new_like)
     return f'like image {id}'
-    
-

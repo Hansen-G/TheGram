@@ -90,7 +90,7 @@ function HomePage() {
                                     <div className='post-function-bar-left'>
                                         {
                                             (image.curent_user_liked) && (
-                                                <i class="fa-solid fa-heart curent_user_liked"></i>
+                                                <i className="fa-solid fa-heart curent_user_liked"></i>
                                             )
                                         }
                                         {
@@ -113,10 +113,10 @@ function HomePage() {
                                     (image['description'].length <= 100 ) && (
                                         <div className='post-description'>
                                             <Link to={`/${image.post_user.id}`}>
-                                                <a className='post-description-user'>{image.post_user.username}</a>
+                                                <p className='post-description-user'>{image.post_user.username}</p>
                                             </Link>
 
-                                            <a className='post-description-detail'> {image.description}</a>
+                                            <p className='post-description-detail'> {image.description}</p>
                                         </div>
                                     )
                                 }
@@ -124,9 +124,9 @@ function HomePage() {
                                     (image['description'].length > 100) && (
                                         <div className='post-description'>
                                             <Link to={`/${image.post_user.id}`}>
-                                                <a className='post-description-user'>{image.post_user.username}</a>
+                                                <p className='post-description-user'>{image.post_user.username}</p>
                                             </Link>
-                                            <a className='post-description-detail'> {cut(image.description)}</a>
+                                            <p className='post-description-detail'> {cut(image.description)}</p>
                                         </div>
                                     )
                                 }

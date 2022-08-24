@@ -88,7 +88,7 @@ function ImageDetails(image) {
                     <div className='post-function-bar-left'>
                         {
                             (image.curent_user_liked) && (
-                                <i class="fa-solid fa-heart curent_user_liked"></i>
+                                <i className="fa-solid fa-heart curent_user_liked"></i>
                             )
                         }
                         {
