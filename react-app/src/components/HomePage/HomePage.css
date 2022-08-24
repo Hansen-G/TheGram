@@ -1,6 +1,8 @@
 .home{
     margin: 0 auto;
     width: 821px;
+    display: flex;
+    justify-content: center;
 }
 
 .home-left{
