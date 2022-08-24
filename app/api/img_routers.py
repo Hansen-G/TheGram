@@ -1,4 +1,4 @@
-from distutils.log import error
+# from distutils.log import error
 from flask import Blueprint, jsonify, session, request, redirect, url_for
 from app.models import User, db, Image, Comment
 from flask_login import current_user, login_user, logout_user, login_required
