@@ -7,7 +7,7 @@ const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [index, setIndex] = useState(0)
-  const [url, setUrl] = useState('https://www.instagram.com/static/images/homepage/screenshots/screenshot4.png/a4fd825e3d49.png')
+  const [url, setUrl] = useState('https://www.instagram.com/static/images/homepage/screenshots/screenshot1.png/fdfe239b7c9f.png')
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
