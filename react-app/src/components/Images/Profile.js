@@ -9,7 +9,7 @@ const Profile = () => {
 	const dispatch = useDispatch();
 	const { userId } = useParams();
 	const [user, setUser] = useState();
-
+	
 	useEffect(() => {
         dispatch(loadImages(userId));
 
