@@ -3,7 +3,7 @@ import { NavLink, Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
 import { loadHomePage } from "../../store/images";
-
+import ImageModal from '../ImageModal/';
 
 import './HomePage.css'
 
@@ -56,10 +56,12 @@ function HomePage() {
     const handleSubmit = async (e) => {
 
     }
+    console.log(imagesArr[0])
     // return null
     return (
         <div className='home'>
 
+            
             <div className='home-left flex'>
                 {imagesArr.length > 0 &&
                     imagesArr.map((image) => (
@@ -74,7 +76,7 @@ function HomePage() {
                                     </Link>
                                     {
                                         (image['location']) && (
-                                            <div>
+                                            <div className='post-location'>
                                                 {image.location}
                                             </div>
                                         )
@@ -99,7 +101,7 @@ function HomePage() {
                                             )
                                         }
 
-                                        <i className="fa-regular fa-comment"></i>
+                                        <ImageModal image={image} icon={<i className="fa-regular fa-comment"></i>} />
                                         <i className="fa-regular fa-paper-plane"></i>
                                     </div>
                                     {/* <div className='post-function-bar-right'>
@@ -131,7 +133,8 @@ function HomePage() {
                                     )
                                 }
                                 <div className='post-all-comments'>
-                                    View all {image.comments.length} comments
+                                    <ImageModal image={image} icon={'View'} />
+                                    
                                 </div>
                                 <div className='post-date'>
                                    {pastDate(image.createdAt)}
