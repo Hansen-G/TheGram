@@ -21,7 +21,7 @@ const NavBar = () => {
 
 	return (
 		<div>
-		<ImageFormModal className="create_new_image_button" action='Create new post' showModal={showModal} setShowModal={setShowModal}/>
+		<ImageFormModal className="create_new_image_button" showModal={showModal} setShowModal={setShowModal}/>
 		<nav className="nav-bar-container">
 			<div className="nav-bar-logo-container">
 				<Link

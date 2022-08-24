@@ -79,7 +79,7 @@ def create_images():
         )
         db.session.add(image)
         db.session.commit()
-        return redirect('/api/images')
+        return image.to_dict()
 
     else:
         return jsonify(form.errors)
