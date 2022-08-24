@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import './ImageForm.css'
 import { CreateImage, UpdateImage } from '../../store/images'
 
-const ImageForm = ({ onClose, imageId, setShowModal, showModal, image}) => {
+const ImageForm = ({ onClose, setShowModal, showModal, image}) => {
     const dispatch = useDispatch()
     const images = useSelector(state => state.images)
     // const image = Object.values(images).filter(image => image.id === imageId)
