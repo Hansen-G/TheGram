@@ -11,3 +11,5 @@ class ImageForm(FlaskForm):
     show_stats = StringField("Show Status", default=True, validators=[DataRequired()])
     location = StringField("Location")
 
+class DeleteImageForm(FlaskForm):
+    pass
