@@ -135,7 +135,7 @@ def get_an_image(id):
 
 
 # Get all images home page for the current user
-@img_routes.route('/')
+@img_routes.route('')
 @login_required
 def get_images_homepage():
     id = current_user.id

@@ -33,7 +33,7 @@ const editImage = (image) => ({
 // get the homepage of the current user
 // and get images by current user in profile page
 export const loadHomePage = (id) => async (dispatch) => {
-	const response = await fetch(`/api/images/`);
+	const response = await fetch(`/api/images`);
 
 	if (response.ok) {
 		const data = await response.json();
