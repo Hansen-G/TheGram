@@ -1,9 +1,12 @@
 # from distutils.log import error
+from datetime import datetime
+from sqlalchemy import delete
 from flask import Blueprint, jsonify, session, request, redirect, url_for
 from app.models import User, db, Image, Comment
 from flask_login import current_user, login_user, logout_user, login_required
-from app.forms import ImageForm
+from app.forms.image_form import ImageForm, DeleteImageForm
 from app.forms.comment_form import CommentForm
+from app.models import Imageslikes
 
 img_routes = Blueprint('images', __name__)
 
@@ -23,6 +26,7 @@ def update_images(id):
         return jsonify(result)
 
     if image_to_be_updated and form.validate_on_submit():
+        # image_to_be_updated.updatedAt = datetime.now()
         if len(form.data['url']) >0:
             image_to_be_updated.url = form.data['url']
         if form.data['description']:
@@ -33,9 +37,10 @@ def update_images(id):
             image_to_be_updated.show_stats = form.data['show_stats']
         if form.data['location']:
             image_to_be_updated.location = form.data['location']
+        
 
         db.session.commit()
-        return jsonify(image_to_be_updated)
+        return jsonify(image_to_be_updated.to_dict())
 
     else:
         return jsonify(form.errors)
@@ -45,6 +50,8 @@ def update_images(id):
 @img_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_images(id):
+    form = DeleteImageForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     image_to_be_deleted = Image.query.get(id)
     if image_to_be_deleted:
         db.session.delete(image_to_be_deleted)
@@ -134,6 +141,9 @@ def get_an_image(id):
     return jsonify(image.to_dict())
 
 
+
+
+
 # Get all images home page for the current user
 @img_routes.route('')
 @login_required
@@ -182,4 +192,26 @@ def create_new_comment(image_id):
             "statusCode": 404
         }
         return jsonify(result)
+
+
+# like and unlike to a image
+@img_routes.route('/<int:id>/likes', methods=['POST'])
+@login_required
+def add_like_to_image(id):
+    image = Image.query.get(id).to_dict()
+    current_user_id = current_user.id
+    for user in image['liked_user_ids']:
+        if current_user_id == user['id']:
+            
+            deleted_like = delete(Imageslikes).where(
+                Imageslikes.c.user_id == current_user_id,
+                Imageslikes.c.image_id == id
+            )
+            db.engine.execute(deleted_like)
+            return f'unlike image {id}'
+
+    new_like = Imageslikes.insert().values((current_user_id, id))
+    db.engine.execute(new_like)
+    return f'like image {id}'
+    
 

@@ -9,10 +9,10 @@ const getImages = (images) => ({
 	images,
 });
 
-const getImage = (image) => ({
-	type: GET_IMAGE,
-	image,
-});
+// const getImage = (image) => ({
+// 	type: GET_IMAGE,
+// 	image,
+// });
 
 const addImage = (image) => ({
 	type: ADD_IMAGE,
