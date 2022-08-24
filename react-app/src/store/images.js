@@ -114,7 +114,8 @@ export default function images(state = initialState, action) {
 			})
             return newState;
 		case ADD_IMAGE:
-			newState = {...state, ...action.image}
+			newState = { ...state }
+			newState[action.image.id] = action.image
 			return newState
 		case EDIT_IMAGE:
 			newState = {...state}

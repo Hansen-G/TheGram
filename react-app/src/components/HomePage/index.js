@@ -11,7 +11,6 @@ function cut(str) {
 }
 
 function pastDate(date) {
-    
     const now = new Date();
     const then = new Date(date);
     const diff = now - then;
@@ -54,11 +53,7 @@ function HomePage() {
     const handleSubmit = async (e) => {
 
     }
-
-
-
-
-
+    // return null
     return (
         <div className='home'>
 
@@ -66,10 +61,9 @@ function HomePage() {
                 {imagesArr.length > 0 &&
                     imagesArr.map((image) => (
                         <div className="card-post-container flex" key={image.id}>
-
                             <div className='post-user-info flex'>
                                 <div className='profile-image-div'>
-                                    <img src={image.post_user.profile_img} className="profile-image"></img>
+                                        <img src={image.post_user.profile_img} className="profile-image"></img>
                                 </div>
                                 <div className='post-user-name-div flex'>
                                     <Link to={`/${image.post_user.id}`}>
