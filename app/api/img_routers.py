@@ -199,6 +199,7 @@ def create_new_comment(image_id):
 @login_required
 def add_like_to_image(id):
     image = Image.query.get(id).to_dict()
+    image['post_user'] = User.query.get(image['user_id']).to_dict()
     current_user_id = current_user.id
     for user in image['liked_user_ids']:
         if current_user_id == user['id']:
@@ -208,8 +209,8 @@ def add_like_to_image(id):
                 Imageslikes.c.image_id == id
             )
             db.engine.execute(deleted_like)
-            return f'unlike image {id}'
+            return jsonify(image)
 
     new_like = Imageslikes.insert().values((current_user_id, id))
     db.engine.execute(new_like)
-    return f'like image {id}'
+    return jsonify(image)
