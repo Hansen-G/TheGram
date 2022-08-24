@@ -90,7 +90,8 @@ const LoginForm = () => {
 									placeholder="Email"
 									value={email}
 									onChange={updateEmail}
-									className="verification-form-input"
+                  className="verification-form-input"
+                  required={true}
 								/>
 							</div>
 							<div>
@@ -101,7 +102,8 @@ const LoginForm = () => {
 									placeholder="Password"
 									value={password}
 									onChange={updatePassword}
-									className="verification-form-input"
+                  className="verification-form-input"
+                  required={true}
 								/>
 							</div>
 							<button
@@ -114,7 +116,8 @@ const LoginForm = () => {
 							>
 								Log In
 							</button>
-						</form>
+            </form>
+            
 						<div className="or-container">
 							<div className="line"></div>
 							<div className="or">OR</div>
