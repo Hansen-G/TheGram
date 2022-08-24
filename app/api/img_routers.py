@@ -79,7 +79,11 @@ def create_images():
         )
         db.session.add(image)
         db.session.commit()
-        return image.to_dict()
+        
+        image = image.to_dict()
+        image['post_user'] = User.query.get(image['user_id']).to_dict()
+        
+        return image
 
     else:
         return jsonify(form.errors)
