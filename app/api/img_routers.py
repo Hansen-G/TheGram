@@ -1,7 +1,9 @@
+# from distutils.log import error
 from flask import Blueprint, jsonify, session, request, redirect, url_for
-from app.models import User, db, Image
+from app.models import User, db, Image, Comment
 from flask_login import current_user, login_user, logout_user, login_required
 from app.forms import ImageForm
+from app.forms.comment_form import CommentForm
 
 img_routes = Blueprint('images', __name__)
 
@@ -12,7 +14,7 @@ def update_images(id):
     form = ImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     image_to_be_updated = Image.query.get(id)
-    # print("!!!!!!!", image_to_be_updated)
+
     if not image_to_be_updated:
         result = {
             "message": "Image couldn't be found",
@@ -21,7 +23,6 @@ def update_images(id):
         return jsonify(result)
 
     if image_to_be_updated and form.validate_on_submit():
-        # print("~~~~~~", form.data['url'])
         if len(form.data['url']) >0:
             image_to_be_updated.url = form.data['url']
         if form.data['description']:
@@ -34,10 +35,11 @@ def update_images(id):
             image_to_be_updated.location = form.data['location']
 
         db.session.commit()
-        return redirect('/api/images')
+        return jsonify(image_to_be_updated)
 
     else:
         return jsonify(form.errors)
+
 
 # delete image
 @img_routes.route('/<int:id>', methods=['DELETE'])
@@ -77,7 +79,11 @@ def create_images():
         )
         db.session.add(image)
         db.session.commit()
-        return redirect('/api/images')
+        
+        image = image.to_dict()
+        image['post_user'] = User.query.get(image['user_id']).to_dict()
+        
+        return image
 
     else:
         return jsonify(form.errors)
@@ -101,10 +107,6 @@ def get_images_by_user_id(id):
     return jsonify(return_JSON)
 
 
-
-
-
-
 # Get all images on the profile page of the current user
 @img_routes.route('/current_user_images', methods=['GET'])
 @login_required
@@ -122,6 +124,15 @@ def get_images():
             else:
                 i['curent_user_liked'] = False
     return jsonify(return_JSON)
+
+
+#Get a singular image
+@img_routes.route('/<id>', methods=['GET'])
+@login_required
+def get_an_image(id):
+    image = Image.query.get(id)
+    return jsonify(image.to_dict())
+
 
 # Get all images home page for the current user
 @img_routes.route('/')
@@ -144,19 +155,31 @@ def get_images_homepage():
                 i['curent_user_liked'] = False
     return jsonify(return_JSON)
 
+#Create a new comment on a post
+@img_routes.route('/<image_id>/comment', methods=['POST'])
+@login_required
+def create_new_comment(image_id):
+    userid = current_user.id
+    form = CommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    data = form.data
+    check_image = Image.query.get(image_id)
 
-# #New route by Yoni
-# @img_routes.route('/<id>', methods=['GET'])
-# @login_required
-# def get_images2(id):
-#     all_images = Image.query.filter(Image.user_id == id).order_by(
-#         Image.createdAt.desc()).all()
-#     return_JSON = ([i.to_dict() for i in all_images])
-#     for i in return_JSON:
-#         for j in i["liked_user_ids"]:
-#             if j["id"] == current_user.id:
-#                 i['curent_user_liked'] = True
-#                 break
-#             else:
-#                 i['curent_user_liked'] = False
-#     return jsonify(return_JSON)
+    if form.validate_on_submit() and check_image:
+        new_comment = Comment(
+            image_id = image_id,
+            user_id = userid,
+            comment = data['comment'],
+        )
+        db.session.add(new_comment)
+        db.session.commit()
+        return jsonify(new_comment.to_dict())
+    elif form.errors:
+        return jsonify(form.errors)
+    else: 
+        result = {
+            "message": "Could not make comment",
+            "statusCode": 404
+        }
+        return jsonify(result)
+
