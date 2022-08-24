@@ -1,0 +1,37 @@
+.master-container{
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+}
+.phone-anchor {
+    position: relative;
+    top: 10%;
+}
+.roulette {
+    position: absolute;
+    z-index: 10;
+    right: 60px;
+    top: 28px;
+}
+.phone {
+    position: relative;
+    margin-top: 10%;
+    /* left: 40%; */
+
+}
+.master-form-container {
+    display: flex;
+    width: 33%;
+    max-width: 350px;
+    height: 20%;
+    padding: 50px 0 50px 0;
+    max-height: 440px;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px rgb(219, 219, 219);
+}
