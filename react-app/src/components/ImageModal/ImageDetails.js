@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
-import { loadHomePage } from "../../store/images";
+import { CreateComment } from '../../store/comments';
 
 import './ImageModal.css'
 
@@ -34,12 +34,25 @@ function pastDate(date) {
     }
 }
 
-function ImageDetails({image}) {
+function ImageDetails({ image, user }) {
+    const dispatch = useDispatch();
     const [comment, setComment] = useState('');
+    useEffect(() => {
+        const newError = [];
+        if (comment.length > 1000) {
+            newError.push('Comment must be less than 1000 characters');
+        }
+    }, [comment]);
 
-    console.log('!!!!!!!!!!!!!!!', image)
-    const handleSubmit = async (e) => {
-
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const newComment = {
+            comment: comment,
+            image_id: image.id,
+            user_id: user.id
+        };
+        dispatch(CreateComment(newComment, image.id));
+        setComment('');
     }
 
     return (

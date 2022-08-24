@@ -32,7 +32,7 @@ const editImage = (image) => ({
 
 // get the homepage of the current user
 // and get images by current user in profile page
-export const loadHomePage = (id) => async (dispatch) => {
+export const loadHomePage = () => async (dispatch) => {
 	const response = await fetch(`/api/images`);
 
 	if (response.ok) {
@@ -113,7 +113,7 @@ export default function images(state = initialState, action) {
 			action.images.forEach(image => {
 				newState[image.id] = image
 			})
-			console.log(newState)
+			// console.log(newState)
             return newState;
 		case ADD_IMAGE:
 			newState = { ...state }

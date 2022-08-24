@@ -4,7 +4,7 @@ import { Modal } from '../../context/Modal';
 import ImageDetails from './ImageDetails';
 
 
-function ImageModal({ image, icon }) {
+function ImageModal({ image, icon, user }) {
     const [showModal, setShowModal] = useState(false);
 
     // function that returns setShwoMOdalfalse and pass as prop
@@ -24,7 +24,7 @@ function ImageModal({ image, icon }) {
                     onClose={() => setShowModal(false)} 
                     className='post-model'
                     >
-                    <ImageDetails setModal={setModal} image={image} className='post-model' />
+                    <ImageDetails setModal={setModal} image={image} user={user} className='post-model' />
                 </Modal>
             )}
         </>
