@@ -1,115 +1,126 @@
-.master-container{
-    height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-
+.master-container {
+	height: 90vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
 }
 .phone-anchor {
-    position: relative;
-    top: 10%;
+	position: relative;
+	top: 10%;
 }
 .roulette {
-    position: absolute;
-    z-index: 10;
-    right: 60px;
-    top: 28px;
+	position: absolute;
+	z-index: 10;
+	right: 60px;
+	top: 28px;
 }
 .phone {
-    position: relative;
-    margin-top: 10%;
-    /* left: 40%; */
-
+	position: relative;
+	margin-top: 10%;
+	/* left: 40%; */
 }
 .master-form-container {
-    display: flex;
-    /* width: 33%; */
-    max-width: 350px;
-    max-height: 440px;
-    justify-content: start;
-    align-items: center;
-    flex-direction: column;
-    background-color: rgb(255, 255, 255);
-    border: solid 1px rgb(219, 219, 219);
-    padding-bottom: 10px;
+	display: flex;
+	/* width: 33%; */
+	max-width: 350px;
+	max-height: 440px;
+	justify-content: start;
+	align-items: center;
+	flex-direction: column;
+	background-color: rgb(255, 255, 255);
+	border: solid 1px rgb(219, 219, 219);
+	padding-bottom: 10px;
 }
 
-
 .verification-form-input {
-    height: 36px;
-    width: 266px;
-    box-sizing: border-box;
-    border-radius: 3px;
-    background-color: #fafafa;
-    fill: #262626;
-    font-size: 14px;
-    line-height: 18px;
-    margin-bottom: 24px;
-    border: solid 1px rgb(219,219,219);
-    color: rgb(38,38,38);
-    font-size: 14px;
+	height: 36px;
+	width: 266px;
+	box-sizing: border-box;
+	border-radius: 3px;
+	background-color: #fafafa;
+	fill: #262626;
+	font-size: 14px;
+	line-height: 18px;
+	margin-bottom: 24px;
+	border: solid 1px rgb(219, 219, 219);
+	color: rgb(38, 38, 38);
+	font-size: 14px;
 }
 
 .submit-btn {
-    all: none;
-    height: 30px;
-    width: 266px;
-    border: none;
-    color: rgb(255, 255, 255);
-    background-color: rgba(0,149,246,0.3);
-    border-radius: 4px;
-    box-sizing: border-box;
-    line-height: 18px;
-    font-weight: 600;
-    font-size: 14px;
+	all: none;
+	height: 30px;
+	width: 266px;
+	border: none;
+	color: rgb(255, 255, 255);
+	/* background-color: rgba(0,149,246,0.3);
+     */
+	background-color: rgb(0, 149, 246);
+	border-radius: 4px;
+	box-sizing: border-box;
+	line-height: 18px;
+	font-weight: 600;
+	font-size: 14px;
 }
 
+.submit-btn:active {
+	background-color: rgb(103, 181, 250);
+}
+
+.submit-btn.disabled {
+	background-color: rgb(192, 223, 253);
+	color: rgb(255, 255, 255);
+}
+
+.demo {
+	margin-top: 10px;
+}
 .lrg-logo-container {
-    margin-bottom: 20px;
-    margin-top: 36px;
+	margin-bottom: 20px;
+	margin-top: 36px;
 }
 
 .or-container {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+	margin-top: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
 }
 
-.line{
-    border: solid .5px rgb(237,237,237);
-    width: 40%;
-    height: .001px;
+.line {
+	border: solid 0.5px rgb(237, 237, 237);
+	width: 40%;
+	height: 0.001px;
 }
 
 .or {
-    font-size: 14px;
-    font-weight: 400;
-    color: #8e8e8e;
+	font-size: 14px;
+	font-weight: 400;
+	color: #8e8e8e;
 }
 
 .switch-method {
-      border: solid 1px rgb(219,219,219);
-      height: 63px;
-      width: 348px;
-      box-sizing: border-box;
-      padding: 0px 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 10px;
-      background-color: rgb(255, 255, 255);
+	border: solid 1px rgb(219, 219, 219);
+	height: 63px;
+	width: 348px;
+	box-sizing: border-box;
+	padding: 0px 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10px;
+	background-color: rgb(255, 255, 255);
 }
 
 .switch-method-content {
-    font-size: 14px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+	font-size: 14px;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 .switch-method-lnk {
-    color: #0095f6;
-    font-weight: 600;
+	color: #0095f6;
+	font-weight: 600;
 }

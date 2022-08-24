@@ -24,9 +24,12 @@ const LoginForm = () => {
 		e.preventDefault();
 		const data = await dispatch(login(email, password));
 		if (data) {
-			console.log("@@@@", data);
 			setErrors(data);
 		}
+	};
+
+	const demoLogin = async () => {
+		await dispatch(login("demo@aa.io", "password"));
 	};
 
 	useEffect(() => {
@@ -101,7 +104,14 @@ const LoginForm = () => {
 									className="verification-form-input"
 								/>
 							</div>
-							<button type="submit" className="submit-btn">
+							<button
+								type="submit"
+								className={`submit-btn ${
+									email.length < 6 || password.length < 6
+										? "disabled"
+										: ""
+								}`}
+							>
 								Log In
 							</button>
 						</form>
@@ -110,6 +120,9 @@ const LoginForm = () => {
 							<div className="or">OR</div>
 							<div className="line"></div>
 						</div>
+						<button className="submit-btn demo" onClick={demoLogin}>
+							Demo
+						</button>
 					</div>
 				</div>
 				<div className="switch-method">
@@ -120,6 +133,11 @@ const LoginForm = () => {
 						</Link>
 					</div>
 				</div>
+				{/* <div className="switch-method">
+					<div className="switch-method-content">
+						
+					</div>
+				</div> */}
 			</div>
 		</div>
 	);
