@@ -74,7 +74,8 @@ const ImageForm = ({ onClose, imageId, setShowModal, showModal, image}) => {
                         setAction("Create new post")}}></i>
                     <div className="form_title">{image ? "Edit info" : "Create new post" }</div>
                     <button className="create_submit_button"
-                        type="submit">
+                        type="submit"
+                        >
                         {image ? "Done" : "Share"}
                     </button>
                 </div>

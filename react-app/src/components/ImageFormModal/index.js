@@ -3,7 +3,7 @@ import {Modal} from '../../context/Modal'
 import ImageForm from './ImageForm'
 import './ImageForm.css'
 
-function ImageFormModal({imageId, showModal, setShowModal, image}) {
+function ImageFormModal({imageId, showModal, setShowModal, image, onClose}) {
     // const [showModal, setShowModal] = useState(true)
 
     return (
@@ -14,7 +14,7 @@ function ImageFormModal({imageId, showModal, setShowModal, image}) {
             {showModal && (
                 // <div>hihihi </div>
                 <Modal onClose={()=> setShowModal(false)}>
-                    <ImageForm imageId={imageId} setShowModal={setShowModal} showModal={showModal} image={image} />
+                    <ImageForm imageId={imageId} setShowModal={setShowModal} showModal={showModal} image={image} onClose={onClose}/>
                 </Modal>
             )}
         </div>
