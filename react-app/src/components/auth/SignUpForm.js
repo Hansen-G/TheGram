@@ -98,7 +98,7 @@ const SignUpForm = () => {
 						<div>
 							{/* <label>User Name</label> */}
 							<input
-								type="email"
+								type="text"
 								name="username"
 								placeholder="Username"
 								onChange={updateUsername}
@@ -122,7 +122,7 @@ const SignUpForm = () => {
 						<div>
 							{/* <label>Email</label> */}
 							<input
-								type="text"
+								type="email"
 								name="email"
 								placeholder="Email"
 								onChange={updateEmail}

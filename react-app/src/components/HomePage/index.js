@@ -48,9 +48,11 @@ function HomePage() {
     if (!images || Object.keys(images).length === 0) {
         return null;
     }
-    const imagesArr = Object.values(images)
-
+    let imagesArr = Object.values(images).sort(function(a, b) {
+        return new Date(b['createdAt']) - new Date(a['createdAt']);
+    })
     console.log(imagesArr)
+
     const handleSubmit = async (e) => {
 
     }
@@ -77,7 +79,7 @@ function HomePage() {
                                             </div>
                                         )
                                     }
-                                       
+
                                 </div>
                             </div>
                             <div className='post-image'>
@@ -96,7 +98,7 @@ function HomePage() {
                                                 <i className="fa-regular fa-heart"></i>
                                             )
                                         }
-                                       
+
                                         <i className="fa-regular fa-comment"></i>
                                         <i className="fa-regular fa-paper-plane"></i>
                                     </div>
@@ -111,12 +113,12 @@ function HomePage() {
                                     (image['description'].length <= 100 ) && (
                                         <div className='post-description'>
                                             <Link to={`/${image.post_user.id}`}>
-                                                <a className='post-description-user'>{image.post_user.username}</a> 
+                                                <a className='post-description-user'>{image.post_user.username}</a>
                                             </Link>
-                                            
+
                                             <a className='post-description-detail'> {image.description}</a>
                                         </div>
-                                    ) 
+                                    )
                                 }
                                 {
                                     (image['description'].length > 100) && (
@@ -126,13 +128,13 @@ function HomePage() {
                                             </Link>
                                             <a className='post-description-detail'> {cut(image.description)}</a>
                                         </div>
-                                    ) 
+                                    )
                                 }
                                 <div className='post-all-comments'>
                                     View all {image.comments.length} comments
                                 </div>
                                 <div className='post-date'>
-                                   {pastDate(image.createdAt)} 
+                                   {pastDate(image.createdAt)}
                                 </div>
                                 <div className='div-line'></div>
                                 <div className='post-add-comment flex'>
@@ -142,11 +144,11 @@ function HomePage() {
                                         <button type="submit" disabled={comment.length === 0} className={comment.length === 0 ? 'disabled post-commit-submit' : 'enabled post-commit-submit'} id='editgroup'>Post</button>
                                     </form>
                                 </div>
-                               
+
                             </div>
-                            
-                            
-                                    
+
+
+
                         </div>
                     ))}
             </div>

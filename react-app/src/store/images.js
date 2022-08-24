@@ -71,10 +71,10 @@ export const CreateImage = (image) => async (dispatch) => {
 		const image = await response.json()
 		dispatch(addImage(image))
 		return image
-	} 
+	}
 }
 
-// update a image 
+// update a image
 export const UpdateImage = (image) => async(dispatch) => {
 	const response = await fetch(`/api/images/${image.id}`, {
 		method: "PUT",
@@ -109,9 +109,11 @@ export default function images(state = initialState, action) {
 	switch (action.type) {
 		case GET_IMAGES:
 			// newState = { ...action.images };
+
 			action.images.forEach(image => {
 				newState[image.id] = image
 			})
+			console.log(newState)
             return newState;
 		case ADD_IMAGE:
 			newState = { ...state }

@@ -1,10 +1,12 @@
+from email.policy import default
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from .following import follows
 from .comments_likes import CommentsLikes
 from .images_likes import Imageslikes
+from sqlalchemy.sql import func
 
 class User(db.Model, UserMixin):
     __tablename__ = "users"
@@ -15,14 +17,14 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     name = db.Column(db.String(64), nullable=False)
-    profile_img = db.Column(db.String(250), nullable=True)
+    profile_img = db.Column(db.String(250), nullable=True, default='https://res.cloudinary.com/hansenguo/image/upload/v1660950302/TheGramme/user_yiqxol.png')
     website = db.Column(db.String(64), nullable=True)
     bio = db.Column(db.String(150), nullable=True)
     phone_number = db.Column(db.Integer, nullable=True)
     gender = db.Column(db.String(50), nullable=True)
     public = db.Column(db.Boolean, nullable=False, default=True)
-    createdAt = db.Column(db.DateTime, nullable=False, default=datetime.now())
-    updatedAt = db.Column(db.DateTime, nullable=False, default=datetime.now())
+    createdAt = db.Column(db.DateTime(timezone=True), nullable=True, server_default=func.now())
+    updatedAt = db.Column(db.DateTime(timezone=True), nullable=True, onupdate=func.now())
 
 
     images = db.relationship("Image", back_populates="user", cascade="all, delete-orphan")
@@ -64,7 +66,7 @@ class User(db.Model, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
-    
+
     def to_dict(self):
         return {
             "id": self.id,
