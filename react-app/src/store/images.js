@@ -129,7 +129,6 @@ export default function images(state = initialState, action) {
 				);
 				newState[image.id]["liked_user_ids"] = likes;
 			})
-			console.log(newState)
             return newState;
 		case ADD_IMAGE:
 			newState = { ...state };

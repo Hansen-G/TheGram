@@ -62,6 +62,9 @@
 	font-weight: 300;
 	font-size: 1.75rem;
 	line-height: 1.75rem;
+	margin-right: 50px;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
 .profile-name {
@@ -70,6 +73,26 @@
 .profile-bio {
 	margin-top: 0.25rem;
 }
+
+.username-and-follow-toggle {
+	display: flex;
+	align-items: center;
+	margin-top: 28px;
+	margin-bottom: 28px;
+}
+
+.toggle-follow {
+	width: 100px;
+}
+
+.toggle-follow.following {
+	background-color: rgb(250, 250, 250);
+	border: solid 1px rgb(234, 234, 234);
+	color: rgb(42, 42, 42);
+	font-weight: 700;
+	width: 72px;
+}
+
 @media screen and (max-width: 1200px) {
 	.posts-container {
 		gap: 3px;

@@ -25,9 +25,13 @@ def toggle_follow(id):
                     follows.c.following_id==to_follow_id
                 )
                 db.engine.execute(unFollow)
-                return f'Unfollowed user {to_follow_id}'
+                updatedUser = User.query.get(current_user_id).to_dict()
+                print('UNFOLLOW',updatedUser)
+                return jsonify(updatedUser['following'])
         newFollow = follows.insert().values(follow)
         db.engine.execute(newFollow)
-        return f'Followed user {to_follow_id}'
+        updatedUser = User.query.get(current_user_id).to_dict()
+        print('FOLLOW',updatedUser['following'])
+        return jsonify(updatedUser['following'])
 
 
