@@ -45,5 +45,5 @@ class Image(db.Model):
             "user_id": self.user_id,
             "comments": [c.to_dict() for c in self.comments],
             "user_image_likes": len(self.user_image_likes),
-            "liked_user_ids": [{'id':i.id, 'name':i.name} for i in self.user_image_likes]
+            "liked_user_ids": [{'id':i.id, 'username':i.username, 'name':i.name, 'profile_img':i.profile_img} for i in self.user_image_likes]
         }

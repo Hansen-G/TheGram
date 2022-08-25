@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, Link, useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { NavLink, Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { loadHomePage } from "../../store/images";
@@ -13,30 +13,30 @@ import './HomePage.css'
 
 
 function cut(str) {
-    return str.substring(0, 100) + '...';
+	return str.substring(0, 100) + "...";
 }
 
 function pastDate(date) {
-    const now = new Date();
-    const then = new Date(date);
-    const diff = now - then;
-    const diffDays = Math.floor(diff / (1000 * 60 * 60 * 24));
-    if (diffDays === 0) {
-        const diffHours = Math.floor(diff / (1000 * 60 * 60));
-        if (diffHours === 0) {
-            const diffMinutes = Math.floor(diff / (1000 * 60));
-            if (diffMinutes === 0) {
-                const diffSeconds = Math.floor(diff / (1000));
-                return `${diffSeconds} seconds ago`;
-            }
-            return `${diffMinutes} minutes ago`;
-        }
-        return `${diffHours} hours ago`;
-    } else if (diffDays === 1) {
-        return '1 day ago';
-    }else {
-        return diffDays + ' days ago';
-    }
+	const now = new Date();
+	const then = new Date(date);
+	const diff = now - then;
+	const diffDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+	if (diffDays === 0) {
+		const diffHours = Math.floor(diff / (1000 * 60 * 60));
+		if (diffHours === 0) {
+			const diffMinutes = Math.floor(diff / (1000 * 60));
+			if (diffMinutes === 0) {
+				const diffSeconds = Math.floor(diff / 1000);
+				return `${diffSeconds} seconds ago`;
+			}
+			return `${diffMinutes} minutes ago`;
+		}
+		return `${diffHours} hours ago`;
+	} else if (diffDays === 1) {
+		return "1 day ago";
+	} else {
+		return diffDays + " days ago";
+	}
 }
 
 function HomePage() {
