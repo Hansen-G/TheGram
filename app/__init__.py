@@ -84,7 +84,7 @@ def react_root(path):
 @app.route('/delete')
 def delete_user():
     user1 = User.query.get(1)
-    print("!!!!!!!!!!!!!", user1)
+    # print("!!!!!!!!!!!!!", user1)
     db.session.delete(user1)
     db.session.commit()
     return 'success'

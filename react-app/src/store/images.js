@@ -4,6 +4,9 @@ const ADD_IMAGE = "session/ADD_IMAGE";
 const DELETE_IMAGE = "session/DELETE_IMAGE";
 const EDIT_IMAGE = "session/EDIT_IMAGE";
 const TOGGLE_LIKE = "session/TOGGLE_LIKE";
+const ADD_COMMENT = "action/ADD_COMMENT";
+const DELETE_COMMENT = "session/DELETE_COMMENT";
+const EDIT_COMMENT = "session/EDIT_COMMENT";
 const getImages = (images) => ({
 	type: GET_IMAGES,
 	images,
@@ -31,6 +34,20 @@ const deleteImage = (id) => ({
 const editImage = (image) => ({
 	type: EDIT_IMAGE,
 	image,
+});
+
+const CreateCommentAction = (comment) => ({
+	type: ADD_COMMENT,
+	comment
+})
+
+const deleteComment = (id) => ({
+	type: DELETE_COMMENT,
+	id,
+});
+const editComment = (comment) => ({
+	type: EDIT_COMMENT,
+	comment,
 });
 
 // get the homepage of the current user
@@ -113,6 +130,48 @@ export const DeleteImage = (id) => async (dispatch) => {
 		return data;
 	}
 };
+// create comment
+export const CreateComment = (comment) => async(dispatch) =>{
+	const response = await fetch (`/api/images/${comment.image_id}/comment`, {
+		method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(comment)
+	})
+	if (response.ok) {
+		const new_comment = await response.json()
+		dispatch(CreateCommentAction(new_comment))
+	}
+}
+
+// edit comment
+export const EditComment = (comment) => async (dispatch) => {
+	const response = await fetch(`/api/comment/${comment.id}`, {
+		method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(comment)
+	})
+	if (response.ok) {
+		const new_comment = await response.json()
+		dispatch(editComment(new_comment))
+	}
+}
+//delete comment 
+export const DeleteComment = (id) => async (dispatch) => {
+	const response = await fetch(`api/comment/${id}`, {
+		method: "Delete",
+	});
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(deleteComment(id));
+		return data;
+	}
+}
+
+
 
 const initialState = {};
 
@@ -143,6 +202,27 @@ export default function images(state = initialState, action) {
 			newState = { ...state };
 			delete newState[action.id];
 			return newState;
+		case ADD_COMMENT:
+			newState = {...state}
+			newState[action.comment.image_id].comments.push(action.comment)
+			return newState
+		case EDIT_COMMENT:
+			newState = {...state}
+			newState[action.comment.image_id].comments.forEach(element => {
+				if (element.id === action.comment.id){
+					element = action.comment
+				}
+			})
+			return newState
+		case DELETE_COMMENT:
+			newState = {...state}
+			// newState[action.comment.image_id].comments.forEach((element, index) => {
+			// 	if (element.id === action.comment.id){
+			// 		comments.splice(index,1)
+			// 	}
+			// })
+			// list.splice( list.indexOf('Blues'), 1 )
+			return newState
 		default:
 			return state;
 	}

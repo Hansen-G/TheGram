@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink, Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ImageModal from "../ImageModal/";
-import { CreateComment } from "../../store/comments";
+import { CreateComment } from "../../store/images";
 import { toggleALike } from "../../store/images";
 
 function cut(str) {
