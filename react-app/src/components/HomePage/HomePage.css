@@ -173,3 +173,8 @@ div, a {
     font-size: 12px;
     color: #262626;
 }
+
+#homepage-post{
+    position: relative;
+    right: 0;
+}

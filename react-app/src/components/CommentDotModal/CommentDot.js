@@ -41,42 +41,48 @@ function CommentDot({ setModal, comment, user }) {
 
     return (
         <div className='dot-modal'>
-            <div className='edit-image dot-bar flex'>
-                <form onSubmit={handleSubmit} action='PUT'>
-                    <label>Edit Comment
-                        <textarea 
-                            placeholder="More than 1000 characters" 
-                            type={'text'} row='6' 
-                            id='dot-edit-comment' 
-                            value={commentToBeEdited} 
+            <div className='edit-comment dot-bar flex' id='edit-comment'>
+                <form onSubmit={handleSubmit} action='PUT' className='dot-edit-form'>
+                    <div className='dot-edit-form-div flex'>
+                        <div>
+                            Edit Comment
+
+                        </div>
+                        <textarea
+                            placeholder="More than 1000 characters"
+                            type={'text'} row='6'
+                            id='dot-edit-comment'
+                            value={commentToBeEdited}
                             onChange={e => setCommentToBeEdited(e.target.value)}>
 
                         </textarea>
-                    </label>
-                    <button
-                        type="submit"
-                        disabled={commentToBeEdited.length === 0}
-                        className={
-                            commentToBeEdited.length === 0
-                                ? "disabled post-commit-submit"
-                                : "enabled post-commit-submit"
-                        }
-                        id="editgroup"
-                    >
-                        Post
-                    </button>
+                        <button
+                            type="submit"
+                            disabled={commentToBeEdited.length === 0}
+                            className={
+                                commentToBeEdited.length === 0
+                                    ? "disabled post-commit-submit"
+                                    : "enabled post-commit-submit"
+                            }
+                            id="edit-comment"
+                        >
+                            Post
+                        </button>
+
+                    </div>
+                   
                 </form>
             </div>
             <div className='div-line' id='model-div-line'></div>
 
-            <div className='delete-image dot-bar flex'>
+            <div className='card delete-image dot-bar flex'>
                 <button 
                     onClick={() => deleteListener(comment.id, comment.image_id)}
                     className='cancel-edit-button'
                 >Delete</button>
             </div>
             <div className='div-line' id='model-div-line'></div>
-            <div className='cancel-image dot-bar flex'>
+            <div className='card cancel-image dot-bar flex'>
                 <button onClick={() => {
                     setModal(false);
                 }}

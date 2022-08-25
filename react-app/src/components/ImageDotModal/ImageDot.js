@@ -28,19 +28,19 @@ function ImageDot({ setModal, image, user }) {
 
     return (
         <div className='dot-modal'>
-            <div className='edit-image dot-bar flex'>
+            <div className='card edit-image dot-bar flex'>
                 Edit Image
             </div>
             <div className='div-line' id='model-div-line'></div>
 
-            <div className='delete-image dot-bar flex'>
+            <div className='card delete-image dot-bar flex'>
                 <button 
                     onClick={() => deleteListener(image.id)}
                     className='cancel-edit-button'
                 >Delete</button>
             </div>
             <div className='div-line' id='model-div-line'></div>
-            <div className='cancel-image dot-bar flex'>
+            <div className='card cancel-image dot-bar flex'>
                 <button onClick={() => {
                     setModal(false);
                 }}

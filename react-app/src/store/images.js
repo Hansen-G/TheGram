@@ -7,6 +7,7 @@ const TOGGLE_LIKE = "session/TOGGLE_LIKE";
 const ADD_COMMENT = "action/ADD_COMMENT";
 const DELETE_COMMENT = "session/DELETE_COMMENT";
 const EDIT_COMMENT = "session/EDIT_COMMENT";
+const LIKE_COMMENT = "session/LIKE_COMMENT";
 const getImages = (images) => ({
 	type: GET_IMAGES,
 	images,
@@ -52,6 +53,14 @@ const editComment = (comment, commentId, imageId) => ({
 	comment,
 	commentId, 
 	imageId
+});
+
+
+const likeComment = (commentId, imageId, comment) => ({
+	type: LIKE_COMMENT,
+	commentId,
+	imageId,
+	comment
 });
 
 // get the homepage of the current user
@@ -124,6 +133,18 @@ export const toggleALike = (imageId) => async (dispatch) => {
 	}
 };
 
+export const toggleACommentLike = (commentId, imageId) => async (dispatch) => {
+	const response = await fetch(`/api/comment/${commentId}/likes`, {
+		method: "POST",
+	});
+	if (response.ok) {
+		const data = await response.json();
+		await dispatch(likeComment(commentId, imageId, data))
+		return 'Success'
+	}
+};
+
+
 export const DeleteImage = (id) => async (dispatch) => {
 	const response = await fetch(`api/images/${id}`, {
 		method: "Delete",
@@ -150,7 +171,7 @@ export const CreateComment = (comment) => async(dispatch) =>{
 }
 
 // edit comment
-export const EditComment = ({ commentId, comment, imageId}) => async (dispatch) => {
+export const EditComment = ({commentId, comment, imageId}) => async (dispatch) => {
 	const response = await fetch(`/api/comment/${commentId}`, {
 		method: "PUT",
         headers: {
@@ -220,6 +241,14 @@ export default function images(state = initialState, action) {
 			newState[action.imageId].comments.forEach((element, index) => {
 				if (element.id === action.commentId) {
 					newState[action.imageId].comments[index].comment = action.comment
+				}
+			})
+			return newState
+		case LIKE_COMMENT:
+			newState = { ...state }
+			newState[action.imageId].comments.forEach((element, index) => {
+				if (element.id === action.commentId) {
+					newState[action.imageId].comments[index] = action.comment
 				}
 			})
 			return newState
