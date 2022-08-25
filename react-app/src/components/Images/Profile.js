@@ -17,7 +17,7 @@ const Profile = () => {
 
 		//Call backend
 		getUser();
-	}, [dispatch]);
+	}, [dispatch, userId]);
 
 	//Fetch user data
 	const getUser = async () => {
