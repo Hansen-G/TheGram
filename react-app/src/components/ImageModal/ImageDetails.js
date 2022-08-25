@@ -86,7 +86,10 @@ function ImageDetails({ image, user }) {
                         }
 
                     </div>
-                    <ImageDotModal image={image} user={user} />
+                    { (image.post_user.id === user.id) && (
+                        <ImageDotModal image={image} user={user} />
+                    )}
+                    
                 </div>
 
                 <div className='div-line' id='model-div-line'></div>
