@@ -203,14 +203,17 @@ def add_like_to_image(id):
     current_user_id = current_user.id
     for user in image['liked_user_ids']:
         if current_user_id == user['id']:
-
             deleted_like = delete(Imageslikes).where(
                 Imageslikes.c.user_id == current_user_id,
                 Imageslikes.c.image_id == id
             )
             db.engine.execute(deleted_like)
-            return jsonify(image)
+            new_image = Image.query.get(id).to_dict()
+            new_image['post_user'] = User.query.get(image['user_id']).to_dict()
+            return jsonify(new_image)
 
     new_like = Imageslikes.insert().values((current_user_id, id))
     db.engine.execute(new_like)
-    return jsonify(image)
+    new_image = Image.query.get(id).to_dict()
+    new_image['post_user'] = User.query.get(image['user_id']).to_dict()
+    return jsonify(new_image)
