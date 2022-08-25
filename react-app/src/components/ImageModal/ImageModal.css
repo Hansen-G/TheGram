@@ -124,3 +124,8 @@ input.middle:focus {
 .curent_user_unliked {
     cursor: pointer;
 }
+
+.post-commit-submit{
+    position: absolute;
+    right: 15px;
+}

@@ -1,26 +1,30 @@
 import React, {useState} from 'react'
 import {Modal} from '../../context/Modal'
 import ImageDot from './ImageDot'
-import './ImageForm.css'
 
-function mageDotModal({imageId, showModal, setShowModal, image}) {
-    // const [showModal, setShowModal] = useState(true)
 
+function ImageDotModal({ image, user }) {
+    const [showModal, setShowModal] = useState(false);
+
+    // function that returns setShwoMOdalfalse and pass as prop
+    const setModal = (show) => setShowModal(show);
     return (
-        <div>
-            {/* <button className='create_a_image_button' >
-                {action}
-            </button> */}
+        <>
+
+            <button className='edit-botton' onClick={() => setShowModal(true)}>
+                <i className="fa-solid fa-ellipsis dot-icon"></i>
+            </button>
             {showModal && (
-                // <div>hihihi </div>
-                <Modal onClose={()=> setShowModal(false)}>
-                    <ImageDot imageId={imageId} setShowModal={setShowModal} showModal={showModal} image={image} />
+                <Modal id='post-model'
+
+                    onClose={() => setShowModal(false)}
+                    className='post-model'
+                >
+                    <ImageDot setModal={setModal} image={image} user={user} className='post-model' />
                 </Modal>
             )}
-        </div>
-    )
+        </>
+    );
 }
 
-
-
-export default mageDotModal
+export default ImageDotModal;

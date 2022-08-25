@@ -1,75 +1,57 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from 'react';
+import { NavLink, Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { useHistory } from 'react-router-dom';
-import './ImageForm.css'
-import { CreateImage, UpdateImage } from '../../store/images'
+import { toggleALike } from "../../store/images";
+import { CreateComment } from '../../store/comments';
+import { DeleteImage } from '../../store/images';
 
-const ImageDot = ({ onClose, imageId, setShowModal, showModal, image}) => {
-    const dispatch = useDispatch()
-    const images = useSelector(state => state.images)
-    // const image = Object.values(images).filter(image => image.id === imageId)
-    // const image = images.imageId
-    // Object.values(spots).filter(spot => spot?.ownerId === user?.id)
-    const user = useSelector(state => state.session.user)
-    const [url, setUrl] = useState()
-    const [description, setDescription] = useState()
-    const [alt_description, setAltDescription] = useState()
-    const [show_stats, setShowStats] = useState(true)
-    const [location, setLocation] = useState()
-    const [action, setAction] = useState()
-    const [errors, setErrors] = useState([])
-    const [showAccessity, setShowAccessity] = useState(false)
 
-    useEffect(() => {
-        if (image) {
-            setUrl(image.url)
-            setDescription(image.description)
-            setShowStats(image.show_stats)
-            
-        }
-    }, []);
+import './ImageDot.css'
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log("******** handle submit")
-        if (!image) {
-            console.log("~~~~~~~~~~~create")
-            const create_payload = {
-                url,
-                description,
-                location,
-                alt_description,
-                show_stats,
+function ImageDot({ setModal, image, user }) {
+    const dispatch = useDispatch();
+    const history = useHistory();
+    
+    const deleteListener = async (imageId) => {
+
+        if (window.confirm('Do you really want to delete this Image? This action can not be undone!')) {
+            const response = await dispatch(DeleteImage(imageId));
+            if (response) {
+                window.alert('Successfully deleted the Image, Click OK to bring you back to the home page');
+                history.push(`/`);
             }
-            dispatch(CreateImage(create_payload))
-            .then(() => onClose())
-            .catch(async (data) => {
-                // const data = await res.json()
-                if (data && data.errors) setErrors(data.errors)
-            })
-        } else if (image) {
-            const update_payload = {
-                id: image.id,
-                description,
-                location,
-                alt_description,
-                show_stats
-            }
-            console.log("~~~~~~~~~~~update")
-            dispatch(UpdateImage(update_payload))
-                .then(() => onClose())
-                .catch(async (data) => {
-                    // const data = await res.json()
-                    if (data && data.errors) setErrors(data.errors)
-            })
         }
-    }
+    };
+    
+    console.log('Here', image)
+
+
     return (
-        <div>
-            Test
+        <div className='dot-modal'>
+            <div className='edit-image dot-bar flex'>
+                Edit Image
+            </div>
+            <div className='div-line' id='model-div-line'></div>
+
+            <div className='delete-image dot-bar flex'>
+                <button 
+                    onClick={() => deleteListener(image.id)}
+                    className='cancel-edit-button'
+                >Delete</button>
+            </div>
+            <div className='div-line' id='model-div-line'></div>
+            <div className='cancel-image dot-bar flex'>
+                <button onClick={() => {
+                    setModal(false);
+                }}
+                className='cancel-edit-button'
+                >Cancel</button>
+            </div>
         </div>
+
     )
 }
+
+
 
 export default ImageDot
