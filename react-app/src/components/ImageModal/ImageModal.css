@@ -1,0 +1,131 @@
+.comments-botton {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+#post-model{
+    width: 70vw;
+}
+#model-content{
+    width: 100px;
+}
+
+.card-model-container {
+    width: 100% !important;
+    max-width: 1400px;
+    height: 800px;
+
+}
+
+.model-image {
+    width: 70%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#model-image-detail{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.model-info{
+    width: 30%;
+    height: 100%;
+    flex-direction: column;
+
+}
+
+.model-user-info {
+    width: 100%;
+    height: 60px;
+    float: left;
+    justify-content: start;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.model-comments{
+    width: 100%;
+}
+
+.model-description-detail{
+    width: 90%;
+    overflow-wrap: anywhere;
+}
+
+#model-div-line{
+    width: 100%;
+
+}
+
+.model-user-info-description {
+    width: 90%;
+    float: left;
+    justify-content: start;
+    align-items: center;
+    padding-left: 10px;
+}
+#model-user-info-description {
+    padding-top: 10px;
+    justify-content: start;
+    align-items: flex-start;
+}
+
+.model-user-name-div{
+    flex-direction: column;
+}
+
+.modal-all-comments{
+    flex-direction: column;
+    align-self: start;
+    overflow: auto;
+    height: 80%;
+}
+
+.modal-date {
+    margin: 8px 13px;
+    color: #8E8E8E;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+.modal-comment-input{
+    border: 0;
+    width: 86%;
+}
+.modal-comment-form{
+    width: 100%;
+}
+
+input.middle:focus {
+    outline-width: 0;
+}
+
+*:focus {
+    outline: none;
+}
+
+.model-description-user{
+    font-size: 14px;
+    color: #262626;
+    font-weight: bold;
+}
+
+.model-description-detail{
+    font-size: 14px;
+    color: #262626;
+}
+
+.curent_user_unliked {
+    cursor: pointer;
+}
+
+.post-commit-submit{
+    position: absolute;
+    right: 15px;
+}

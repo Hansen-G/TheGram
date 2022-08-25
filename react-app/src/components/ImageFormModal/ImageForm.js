@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import './ImageForm.css'
 import { CreateImage, UpdateImage } from '../../store/images'
 
-const ImageForm = ({ onClose, imageId, setShowModal, showModal, image}) => {
+const ImageForm = ({ onClose, setShowModal, showModal, image}) => {
     const dispatch = useDispatch()
     const images = useSelector(state => state.images)
     // const image = Object.values(images).filter(image => image.id === imageId)
@@ -74,7 +74,8 @@ const ImageForm = ({ onClose, imageId, setShowModal, showModal, image}) => {
                         setAction("Create new post")}}></i>
                     <div className="form_title">{image ? "Edit info" : "Create new post" }</div>
                     <button className="create_submit_button"
-                        type="submit">
+                        type="submit"
+                        >
                         {image ? "Done" : "Share"}
                     </button>
                 </div>

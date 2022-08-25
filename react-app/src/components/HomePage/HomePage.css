@@ -1,6 +1,8 @@
 .home{
     margin: 0 auto;
     width: 821px;
+    display: flex;
+    justify-content: center;
 }
 
 .home-left{
@@ -17,7 +19,7 @@
     border-radius: 8px;
     margin: 10px 0;
     background-color: white;
-    
+
 }
 
 .flex{
@@ -27,6 +29,10 @@
 a {
     text-decoration: none;
     color: #262626;
+}
+
+div, a {
+    overflow-wrap: anywhere;
 }
 
 .post-user-info{
@@ -76,11 +82,16 @@ a {
     font-size: 24px;
     padding: 8px;
     margin-left: 5px;
-    
+
 }
 
 .curent_user_liked{
-    color: #F35369
+    color: #F35369;
+    cursor: pointer;
+}
+.curent_user_unliked{
+    cursor: pointer;
+
 }
 
 .image-likes {
@@ -152,4 +163,13 @@ a {
 
 .disabled {
     color: rgb(188, 212, 251)
+}
+
+#post-add-comment{
+    width: 90%;
+}
+
+.post-location{
+    font-size: 12px;
+    color: #262626;
 }
