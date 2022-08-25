@@ -138,7 +138,6 @@ export default function images(state = initialState, action) {
 		case EDIT_IMAGE:
 			newState = { ...state };
 			newState[action.image.id] = action.image;
-			newState[action.image.id]["liked_user_ids"] = {...newState["liked_user_ids"]}
 			return newState;
 		case DELETE_IMAGE:
 			newState = { ...state };

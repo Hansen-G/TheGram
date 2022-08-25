@@ -50,7 +50,7 @@ function HomePageCard({ image, user }) {
 			image_id: image.id,
 			user_id: user.id,
 		};
-		dispatch(CreateComment(newComment, image.id));
+		dispatch(CreateComment(newComment));
 		setComment("");
 	};
 

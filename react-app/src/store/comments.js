@@ -3,43 +3,57 @@ const ADD_COMMENT = "action/ADD_COMMENT";
 const DELETE_COMMENT = "session/DELETE_COMMENT";
 const EDIT_COMMENT = "session/EDIT_COMMENT";
 
-
-
-const addComment = (comment, imageId) => {
-	return {
-		type: ADD_COMMENT,
-		comment,
-		imageId,
-	}
-};
-
+// const addComment = (comment, imageId) => {
+// 	return {
+// 		type: ADD_COMMENT,
+// 		comment,
+// 		imageId,
+// 	}
+// };
 // const deleteComment = (id) => ({
 // 	type: DELETE_COMMENT,
 // 	id,
 // });
-
 // const editComment = (comment) => ({
 // 	type: EDIT_COMMENT,
 // 	comment,
 // });
-
 // create a comment
-export const CreateComment = (comment, imageId) => async (dispatch) => {
-	const response = await fetch(`/api/images/${imageId}/comment`, {
+// export const CreateComment = (comment, imageId) => async (dispatch) => {
+// 	const response = await fetch(`/api/images/${imageId}/comment`, {
+// 		method: "POST",
+// 		headers: {
+// 			'Content-Type': 'application/json'
+// 		},
+// 		body: JSON.stringify(comment)
+// 	})
+// 	if (response.ok) {
+// 		const new_comment = await response.json()
+// 		await dispatch(addComment(new_comment, imageId))
+// 		await dispatch(loadHomePage())
+// 		return new_comment
+// 	} else {
+// 		console.log('error')
+// 	}
+// }
+const CreateCommentAction = (comment) => ({
+	type: ADD_COMMENT,
+	comment
+})
+
+export const CreateComment = (comment) => async(dispatch) =>{
+	const response = await fetch (`/api/images/${comment.image_id}/comment`, {
 		method: "POST",
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(comment)
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(comment)
 	})
 	if (response.ok) {
-		const new_comment = await response.json()
-		await dispatch(addComment(new_comment, imageId))
-		await dispatch(loadHomePage())
-		return new_comment
-	} else {
-		console.log('error')
+		const comment = await response.json()
+		dispatch(CreateCommentAction)
 	}
+
 }
 
 // // update a image
@@ -75,11 +89,11 @@ const initialState = {};
 export default function images(state = initialState, action) {
 	let newState = {};
 	switch (action.type) {
+		
 		case ADD_COMMENT:
 			newState = { ...state };
-
-			console.log('HIIIIIIIIIIIIIIIII')
-			newState[action.imageId].comments.push(action.comment);
+			console.log('HIIIIIIIIIIIIIIIII', newState)
+			newState[action.comment.imageId].comments.push(action.comment);
 			
 			return newState;
 
