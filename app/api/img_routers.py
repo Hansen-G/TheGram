@@ -257,9 +257,5 @@ def add_like_to_image(id):
         new_image['post_user'] = User.query.get(image['user_id']).to_dict()
         return jsonify(new_image)
     else:
-        result = {
-            "message": "cannot like post",
-            "statusCode": 403
-        }
-        return jsonify(result)
+        return jsonify(form.errors)
 

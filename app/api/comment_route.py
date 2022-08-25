@@ -5,6 +5,7 @@ from flask import Blueprint, jsonify, request, redirect, url_for
 from app.models import User, db, Comment
 from flask_login import current_user, login_user, logout_user, login_required
 from app.forms.comment_form import DeleteCommentForm, CommentForm
+from app.forms.image_form import FormValidation
 
 
 comment_routes = Blueprint('comment', __name__)
@@ -71,20 +72,24 @@ def update_comment(id):
 @comment_routes.route('/<int:id>/likes', methods=['POST'])
 @login_required
 def add_like_to_image(id):
-    comment = Comment.query.get(id).to_dict()
-    # print("!!!!!!!!!!!!", comment )
-    current_user_id = current_user.id
-    for user in comment['user_comment_likes']:
-        user = user.to_dict()
-        if current_user_id == user['id']:
-            
-            deleted_like = delete(CommentsLikes).where(
-                CommentsLikes.c.user_id == current_user_id,
-                CommentsLikes.c.comment_id == id
-            )
-            db.engine.execute(deleted_like)
-            return f'unlike comment {id}'
+    form = FormValidation()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        comment = Comment.query.get(id).to_dict()
+        current_user_id = current_user.id
+        for user in comment['user_comment_likes']:
+            user = user.to_dict()
+            if current_user_id == user['id']:
+                
+                deleted_like = delete(CommentsLikes).where(
+                    CommentsLikes.c.user_id == current_user_id,
+                    CommentsLikes.c.comment_id == id
+                )
+                db.engine.execute(deleted_like)
+                return f'unlike comment {id}'
 
-    new_like = CommentsLikes.insert().values((current_user_id, id))
-    db.engine.execute(new_like)
-    return f'like comment {id}'
+        new_like = CommentsLikes.insert().values((current_user_id, id))
+        db.engine.execute(new_like)
+        return f'like comment {id}'
+    else:
+        return jsonify(form.errors)
