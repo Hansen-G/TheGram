@@ -1,80 +1,200 @@
-.image_form_container{
-    /* height: 350px;
+.image_form_container {
+	/* height: 350px;
     width: 500px; */
-    font-size: 16px;
-    height: 745px;
+	font-size: 16px;
+	height: 745px;
 	width: 1042px;
 }
-.right_div_container{
-    width: 30%;
-    height: 90%;
+.right_div_container {
+	width: 30%;
+	height: 90%;
 }
 
-.wrapper{
-    background-color: lightcoral;
-    display: flex;
-    height: 90%;
-    width: 100%;
-}
-.preview_image_place_holder{
-    height: 90%;
-    width: 70%;
-    background-color: black;
-    display: flex;
-    justify-content: center;
+.wrapper {
+	/* background-color: lightcoral; */
+	display: flex;
+	height: 100%;
+	width: 100%;
+	max-height: 100%;
+	display: flex;
+	align-items: center;
 
-   
+	/* padding: 20px; */
 }
-.image_to_update{
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+.preview_image_place_holder {
+	height: 100%;
+	width: 70%;
+	max-height: 100%;
+	background-color: black;
+	display: flex;
+	justify-content: center;
 }
-
-.user_profile_pic{
-
-    height:20px;
-    width:20px;
+.image_to_update {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
 }
 
-.user_profile_container{
-    display: flex;
-    justify-content: flex-start;
+.user_profile_pic {
+	height: 20px;
+	width: 20px;
+	margin-right: 10px;
 }
 
-.button_container{
-    display: flex;
-    justify-content: space-between;
-    border-bottom: solid #EBEDF0 1px;
-}
-.form_title{
-    font-size: 16px;
+.user_profile_container {
+	display: flex;
+	justify-content: flex-start;
+	margin-left: 9px;
 }
 
-.create_submit_button{
-    /* text-decoration: none; */
-    background: none;
+.button_container {
+	display: flex;
+	justify-content: space-between;
+	border-bottom: solid #ebedf0 1px;
+}
+.form_title {
+	font-size: 16px;
+	height: 42px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.create_submit_button {
+	/* text-decoration: none; */
+	background: none;
 	color: inherit;
 	border: none;
 	padding: 0;
 	font: inherit;
 	cursor: pointer;
 	outline: inherit;
-    font-size: 14px;
-    color: #0095F6;
+	font-size: 14px;
+	color: #0095f6;
+	margin-right: 15px;
+	font-weight: 600;
+}
+
+.fa-solid {
+	cursor: pointer;
+}
+
+.accessibility_words {
+	font-size: 12px;
+	color: #8e8e8e;
+	padding: 9px;
+}
+.accessibility_container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.description-text-area {
+	max-width: 100%;
+	width: 100%;
+
+	height: 168px;
+	resize: none;
+	border: none;
+	font-size: 16px;
+	padding: 0px 9px;
+	box-sizing: border-box;
     
 }
 
-.fa-solid{
-    cursor: pointer;
+.description {
+
+    padding-bottom: 20px;
 }
 
-.accessibility_words{
-    font-size: 12px;
-    color: #8e8e8e;
+.add-image-info {
+	display: flex;
+	flex-direction: column;
+	
+	width: 100%;
+	
 }
-.accessibility_container{
+
+.post-text-input {
+	width: 100%;
+	height: 100%;
+	/* padding: 0px; */
+	box-sizing: border-box;
+	border-left: 0px;
+	border-right: 0px;
+	border: 0px;
+	padding: 4px 9px;
+	/* width: 300px; */
+	/* background-color: red; */
+}
+
+.url,
+.location,
+.description,
+.accessibility_container {
+	border-bottom: solid 1px rgb(219,219,219);
+}
+
+
+
+.url,
+.location,
+.accessibility_container {
+	height: 40px;
+}
+
+.accessibility_container {
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+	padding: 0px 9px;
+}
+
+.fa-arrow-left-long {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-left: 15px;
+}
+
+.alt-text {
+	border-top: solid 1px rgb(219,219,219);
+	border-bottom: solid 1px rgb(219,219,219);
+    padding: 4px 9px;
+
+}
+
+
+.image_to_update-mini {
+    height: 48px;
+    width: 48px;
+    
+}
+
+.alt-text-container {
     display: flex;
-    justify-content: space-between;
-
+    box-sizing: border-box;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 100%;
+    /* margin: 15px; */
 }
+
+.post-text-input-alt-text {
+    width: 70%;
+    border-radius: 6px;
+    border: solid 1px rgb(219,219,219);
+    box-sizing: border-box;
+    padding: 4px 9px;
+    height: 48px;
+}
+
+.word-count {
+    color: rgb(219,219,219);
+    position: absolute;
+    right: 15px;
+    bottom: 470px;
+    font-size: 12px;
+    /* margin-top: 20px; */
+}
+
