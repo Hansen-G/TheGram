@@ -173,3 +173,14 @@ div, a {
     font-size: 12px;
     color: #262626;
 }
+
+
+.post-image {
+ 
+}
+
+.post-image-detail {
+    max-height: 500px;
+    max-width: 500px;
+    object-fit: contain;
+}

@@ -40,7 +40,10 @@ def update_images(id):
 
 
         db.session.commit()
-        return jsonify(image_to_be_updated.to_dict())
+
+        image_to_be_updated = image_to_be_updated.to_dict()
+        image_to_be_updated['post_user'] = User.query.get(image_to_be_updated['user_id']).to_dict()
+        return jsonify(image_to_be_updated)
 
     else:
         return jsonify(form.errors)
