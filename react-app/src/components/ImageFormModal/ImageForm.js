@@ -87,8 +87,9 @@ const ImageForm = ({ onClose, setShowModal, showModal, image, setModal}) => {
 
 
                         <div className="preview_image_place_holder">
-                            {image&& 
-                            <img src={image.url} alt='imageto be updated'></img>}
+                            {url&& 
+                            <img className="image_to_update" src={url} alt='imageto be updated'></img>}
+                            
                         </div>
                         <div className="right_div_container">
                             <div className="user_profile_container">
@@ -123,7 +124,7 @@ const ImageForm = ({ onClose, setShowModal, showModal, image, setModal}) => {
                                 <input
                                     value={location}
                                     onChange={e => setLocation(e.target.value)}
-                                    placeholder='Add Location'
+                                    placeholder='Optional (Add Location)'
                                     type="text"
                                     maxLength='250'
                                 />
