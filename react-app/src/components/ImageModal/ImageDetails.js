@@ -130,7 +130,7 @@ function ImageDetails({ image, user }) {
                 <div className='post-function-bar flex'>
                     <div className='post-function-bar-left'>
                     {image.liked_user_ids[user.id] ? (
-							<i class="fa-solid fa-heart curent_user_liked" onClick={() => toggleImageLike(image.id)}></i>
+							<i className="fa-solid fa-heart curent_user_liked" onClick={() => toggleImageLike(image.id)}></i>
 						) : (
 							<i className="fa-regular fa-heart curent_user_unliked" onClick={() => toggleImageLike(image.id)}></i>
 						)}
