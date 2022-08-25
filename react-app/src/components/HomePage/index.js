@@ -9,6 +9,7 @@ import {CreateComment} from '../../store/images';
 import HomePageCard from '../HomePageCard';
 
 import './HomePage.css'
+import FollowUsers from "../FollowUsers";
 
 
 
@@ -43,7 +44,7 @@ function HomePage() {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector(state => state.session.user)
-    
+
 
     useEffect(() => {
         dispatch(loadHomePage(user.id));
@@ -62,7 +63,7 @@ function HomePage() {
     return (
         <div className='home'>
 
-            
+            <FollowUsers />
             <div className='home-left flex'>
                 {imagesArr.length > 0 &&
                     imagesArr.map((image) => (
