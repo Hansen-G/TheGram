@@ -9,7 +9,7 @@ const Profile = () => {
 	const dispatch = useDispatch();
 	const { userId } = useParams();
 	const [user, setUser] = useState();
-	
+
 	useEffect(() => {
         dispatch(loadImages(userId));
 
@@ -55,7 +55,7 @@ const Profile = () => {
 								<div className="inner-user-info-stat">
 									{" "}
 									<span className="bold-text">
-										{"placeholder"}{" "}
+										{Object.values(user.followers).length}{" "}
 									</span>
 									followers
 								</div>
