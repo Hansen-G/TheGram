@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import './ImageForm.css'
 import { CreateImage, UpdateImage } from '../../store/images'
 
-const ImageForm = ({ onClose, setShowModal, showModal, image}) => {
+const ImageForm = ({ onClose, setShowModal, showModal, image, setModal}) => {
     const dispatch = useDispatch()
     const images = useSelector(state => state.images)
     // const image = Object.values(images).filter(image => image.id === imageId)
@@ -54,7 +54,8 @@ const ImageForm = ({ onClose, setShowModal, showModal, image}) => {
                 description,
                 location,
                 alt_description,
-                show_stats
+                show_stats,
+                url,
             }
             console.log("~~~~~~~~~~~update")
             dispatch(UpdateImage(update_payload))
@@ -63,6 +64,8 @@ const ImageForm = ({ onClose, setShowModal, showModal, image}) => {
                     // const data = await res.json()
                     if (data && data.errors) setErrors(data.errors)
             })
+            setShowModal(false)
+            setModal(false)
         }
     }
     return (
@@ -84,8 +87,8 @@ const ImageForm = ({ onClose, setShowModal, showModal, image}) => {
 
 
                         <div className="preview_image_place_holder">
-                            {/* {image&&  */}
-                            {/* <img src={image.url} alt='imageto be updated'></img>} */}
+                            {image&& 
+                            <img src={image.url} alt='imageto be updated'></img>}
                         </div>
                         <div className="right_div_container">
                             <div className="user_profile_container">

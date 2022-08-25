@@ -71,6 +71,7 @@ function ImageDetails({ image, user }) {
             <div className='model-info flex'>
                 <div className='model-user-info flex'>
                     <div className='model-profile-image-div'>
+                        {console.log("user!!!!!!!!!", image)}
                         <img src={image.post_user.profile_img} className="profile-image"></img>
                     </div>
                     <div className='model-user-name-div flex'>

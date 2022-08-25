@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleALike } from "../../store/images";
 import { CreateComment } from '../../store/comments';
 import { DeleteImage } from '../../store/images';
+import ImageFormModal from "../ImageFormModal"
 
 
 import './ImageDot.css'
@@ -11,6 +12,7 @@ import './ImageDot.css'
 function ImageDot({ setModal, image, user }) {
     const dispatch = useDispatch();
     const history = useHistory();
+    const [showModal, setShowModal] = useState(false);
     
     const deleteListener = async (imageId) => {
 
@@ -28,7 +30,8 @@ function ImageDot({ setModal, image, user }) {
 
     return (
         <div className='dot-modal'>
-            <div className='edit-image dot-bar flex'>
+            <ImageFormModal image={image} showModal={showModal} setShowModal= {setShowModal} setModal={setModal}/>
+            <div className='edit-image dot-bar flex' onClick={()=> setShowModal(true)}>
                 Edit Image
             </div>
             <div className='div-line' id='model-div-line'></div>

@@ -21,6 +21,7 @@ function ImageDotModal({ image, user }) {
                     className='post-model'
                 >
                     <ImageDot setModal={setModal} image={image} user={user} className='post-model' />
+                    
                 </Modal>
             )}
         </>
