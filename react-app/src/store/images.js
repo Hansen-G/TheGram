@@ -121,9 +121,13 @@ export default function images(state = initialState, action) {
 	switch (action.type) {
 		case GET_IMAGES:
 			// newState = { ...action.images };
-
 			action.images.forEach(image => {
 				newState[image.id] = image
+				let likes = {};
+				newState[image.id]["liked_user_ids"].forEach(
+					(user) => (likes[user.id] = user)
+				);
+				newState[image.id]["liked_user_ids"] = likes;
 			})
 			console.log(newState)
             return newState;
@@ -134,6 +138,7 @@ export default function images(state = initialState, action) {
 		case EDIT_IMAGE:
 			newState = { ...state };
 			newState[action.image.id] = action.image;
+			newState[action.image.id]["liked_user_ids"] = {...newState["liked_user_ids"]}
 			return newState;
 		case DELETE_IMAGE:
 			newState = { ...state };
