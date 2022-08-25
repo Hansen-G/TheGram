@@ -4,7 +4,7 @@ from sqlalchemy import delete
 from flask import Blueprint, jsonify, session, request, redirect, url_for
 from app.models import User, db, Image, Comment
 from flask_login import current_user, login_user, logout_user, login_required
-from app.forms.image_form import ImageForm, DeleteImageForm
+from app.forms.image_form import ImageForm, DeleteImageForm, FormValidation
 from app.forms.comment_form import CommentForm
 from app.models import Imageslikes
 
@@ -17,17 +17,24 @@ def update_images(id):
     form = ImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     image_to_be_updated = Image.query.get(id)
-
+    userId = current_user.id
     if not image_to_be_updated:
         result = {
             "message": "Image couldn't be found",
             "statusCode": 404
         }
         return jsonify(result)
+    
+    if userId != image_to_be_updated.user_id :
+        result = {
+            "message": "Could not update other's image",
+            "statusCode": 403
+        }
+        return jsonify(result)
+
 
     if image_to_be_updated and form.validate_on_submit():
-        # image_to_be_updated.updatedAt = datetime.now()
-        if len(form.data['url']) >0:
+        if len(form.data['url']) >0 and len(form.data['url']) <250 :
             image_to_be_updated.url = form.data['url']
         if form.data['description']:
             image_to_be_updated.description = form.data['description']
@@ -56,20 +63,36 @@ def delete_images(id):
     form = DeleteImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     image_to_be_deleted = Image.query.get(id)
-    if image_to_be_deleted:
-        db.session.delete(image_to_be_deleted)
-        db.session.commit()
-        result = {
-            "message": "Successfully deleted image"
-        }
-        return jsonify(result)
-    else:
+    userId = current_user.id
+
+
+    if not image_to_be_deleted:
         result = {
             "message": "Image couldn't be found",
             "statusCode": 404
         }
         return jsonify(result)
 
+    elif userId != image_to_be_deleted.user_id :
+        result = {
+            "message": "Could not delete other's image",
+            "statusCode": 403
+        }
+        return jsonify(result)
+    
+    elif form.validate_on_submit():
+            db.session.delete(image_to_be_deleted)
+            db.session.commit()
+            result = {
+                "message": "Successfully deleted image"
+            }
+            return jsonify(result)
+    else:
+        result = {
+            "message": "cannot delete post",
+            "statusCode": 403
+        }
+        return jsonify(result)
 
 # Create new image
 @img_routes.route('/new', methods=['POST'])
@@ -211,22 +234,28 @@ def create_new_comment(image_id):
 @img_routes.route('/<int:id>/likes', methods=['POST'])
 @login_required
 def add_like_to_image(id):
-    image = Image.query.get(id).to_dict()
-    image['post_user'] = User.query.get(image['user_id']).to_dict()
-    current_user_id = current_user.id
-    for user in image['liked_user_ids']:
-        if current_user_id == user['id']:
-            deleted_like = delete(Imageslikes).where(
-                Imageslikes.c.user_id == current_user_id,
-                Imageslikes.c.image_id == id
-            )
-            db.engine.execute(deleted_like)
-            new_image = Image.query.get(id).to_dict()
-            new_image['post_user'] = User.query.get(image['user_id']).to_dict()
-            return jsonify(new_image)
+    form = FormValidation()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        image = Image.query.get(id).to_dict()
+        image['post_user'] = User.query.get(image['user_id']).to_dict()
+        current_user_id = current_user.id
+        for user in image['liked_user_ids']:
+            if current_user_id == user['id']:
+                deleted_like = delete(Imageslikes).where(
+                    Imageslikes.c.user_id == current_user_id,
+                    Imageslikes.c.image_id == id
+                )
+                db.engine.execute(deleted_like)
+                new_image = Image.query.get(id).to_dict()
+                new_image['post_user'] = User.query.get(image['user_id']).to_dict()
+                return jsonify(new_image)
 
-    new_like = Imageslikes.insert().values((current_user_id, id))
-    db.engine.execute(new_like)
-    new_image = Image.query.get(id).to_dict()
-    new_image['post_user'] = User.query.get(image['user_id']).to_dict()
-    return jsonify(new_image)
+        new_like = Imageslikes.insert().values((current_user_id, id))
+        db.engine.execute(new_like)
+        new_image = Image.query.get(id).to_dict()
+        new_image['post_user'] = User.query.get(image['user_id']).to_dict()
+        return jsonify(new_image)
+    else:
+        return jsonify(form.errors)
+
