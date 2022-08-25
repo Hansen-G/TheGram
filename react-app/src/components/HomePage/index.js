@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadHomePage } from "../../store/images";
 import ImageModal from '../ImageModal/';
 
-import CreateComment from '../../store/comments';
+import {CreateComment} from '../../store/images';
 import HomePageCard from '../HomePageCard';
 
 import './HomePage.css'

@@ -165,6 +165,16 @@ def get_images_homepage():
                 i['curent_user_liked'] = False
     return jsonify(return_JSON)
 
+# get all comments by image id 
+@img_routes.route('/<image_id>/comment', methods=['GET'])
+@login_required
+def get_all_comments(image_id):
+    comments = Comment.query.filter(Comment.image_id == image_id)
+    print("!!!!!!", comments)
+    all_comments = ([comment.to_dict() for comment in comments])
+    return jsonify(all_comments)
+
+
 #Create a new comment on a post
 @img_routes.route('/<image_id>/comment', methods=['POST'])
 @login_required
