@@ -13,6 +13,7 @@ import FollowUsers from "../FollowUsers";
 
 
 
+
 function cut(str) {
 	return str.substring(0, 100) + "...";
 }
@@ -54,7 +55,7 @@ function HomePage() {
 
     const images = useSelector((state) => state.images);
     if (!images || Object.keys(images).length === 0) {
-        return null;
+        return <FollowUsers />;
     }
     let imagesArr = Object.values(images).sort(function(a, b) {
         return new Date(b['createdAt']) - new Date(a['createdAt']);
@@ -62,7 +63,6 @@ function HomePage() {
 
     return (
         <div className='home'>
-
             <FollowUsers />
             <div className='home-left flex'>
                 {imagesArr.length > 0 &&

@@ -12,6 +12,7 @@ import Feed from "./components/Images/Feed";
 import Profile from "./components/Images/Profile";
 import HomePage from "./components/HomePage";
 
+
 function App() {
 	const [loaded, setLoaded] = useState(false);
 	const dispatch = useDispatch();
@@ -49,7 +50,6 @@ function App() {
 				</ProtectedRoute> */}
 				<ProtectedRoute path="/" exact={true}>
 					<HomePage />
-					
 				</ProtectedRoute>
 			</Switch>
 		</BrowserRouter>
