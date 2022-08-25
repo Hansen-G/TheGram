@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleALike } from "../../store/images";
 import { CreateComment } from '../../store/comments';
 
+import ImageDotModal from '../ImageDotModal'
+
 import './ImageModal.css'
 
 function cut(str) {
@@ -84,6 +86,7 @@ function ImageDetails({ image, user }) {
                         }
 
                     </div>
+                    <ImageDotModal image={image} user={user} />
                 </div>
 
                 <div className='div-line' id='model-div-line'></div>

@@ -1,0 +1,30 @@
+.edit-botton {
+    position: absolute;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px;
+    
+}
+.dot-icon {
+    font-size: 20px;
+}
+
+.dot-modal{
+    width: 400px;
+}
+
+.dot-bar {
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    font-size: 14px;
+}
+
+.cancel-edit-button{
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px;
+    font-size: 14px;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
