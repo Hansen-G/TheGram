@@ -19,7 +19,7 @@
     border-radius: 8px;
     margin: 10px 0;
     background-color: white;
-    
+
 }
 
 .flex{
@@ -82,11 +82,16 @@ div, a {
     font-size: 24px;
     padding: 8px;
     margin-left: 5px;
-    
+
 }
 
 .curent_user_liked{
-    color: #F35369
+    color: #F35369;
+    cursor: pointer;
+}
+.curent_user_unliked{
+    cursor: pointer;
+
 }
 
 .image-likes {

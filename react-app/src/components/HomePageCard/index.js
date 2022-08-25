@@ -56,7 +56,7 @@ function HomePageCard({ image, user }) {
 
 	const toggleImageLike = (imageId) => {
         dispatch(toggleALike(imageId));
-        console.log('here')
+
 	};
 	return (
 		<div className="card-post-container flex" key={image.id}>
@@ -87,7 +87,7 @@ function HomePageCard({ image, user }) {
 						{image.liked_user_ids[user.id] ? (
 							<i class="fa-solid fa-heart curent_user_liked" onClick={() => toggleImageLike(image.id)}></i>
 						) : (
-							<i className="fa-regular fa-heart" onClick={() => toggleImageLike(image.id)}></i>
+							<i className="fa-regular fa-heart curent_user_unliked" onClick={() => toggleImageLike(image.id)}></i>
 						)}
 
 						<ImageModal
@@ -95,7 +95,7 @@ function HomePageCard({ image, user }) {
 							icon={<i className="fa-regular fa-comment"></i>}
 							user={user}
 						/>
-						<i className="fa-regular fa-paper-plane"></i>
+						{/* <i className="fa-regular fa-paper-plane"></i> */}
 					</div>
 					{/* <div className='post-function-bar-right'>
                                             <i className="fa-regular fa-bookmark"></i>

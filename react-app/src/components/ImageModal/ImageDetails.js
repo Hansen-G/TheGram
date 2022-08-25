@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-
+import { toggleALike } from "../../store/images";
 import { CreateComment } from '../../store/comments';
 
 import './ImageModal.css'
@@ -54,6 +54,11 @@ function ImageDetails({ image, user }) {
         dispatch(CreateComment(newComment, image.id));
         setComment('');
     }
+
+    const toggleImageLike = (imageId) => {
+        dispatch(toggleALike(imageId));
+
+	};
 
     return (
         <div className="card-model-container flex" key={image.id}>
@@ -118,25 +123,20 @@ function ImageDetails({ image, user }) {
 
                 </div>
 
-                
+
 
                 <div className='div-line' id='model-div-line'></div>
 
                 <div className='post-function-bar flex'>
                     <div className='post-function-bar-left'>
-                        {
-                            (image.curent_user_liked) && (
-                                <i className="fa-solid fa-heart curent_user_liked"></i>
-                            )
-                        }
-                        {
-                            (!image.curent_user_liked) && (
-                                <i className="fa-regular fa-heart"></i>
-                            )
-                        }
+                    {image.liked_user_ids[user.id] ? (
+							<i class="fa-solid fa-heart curent_user_liked" onClick={() => toggleImageLike(image.id)}></i>
+						) : (
+							<i className="fa-regular fa-heart curent_user_unliked" onClick={() => toggleImageLike(image.id)}></i>
+						)}
 
-                        <i className="fa-regular fa-comment"></i>
-                        <i className="fa-regular fa-paper-plane"></i>
+                        {/* <i className="fa-regular fa-comment"></i> */}
+                        {/* <i className="fa-regular fa-paper-plane"></i> */}
                     </div>
                     {/* <div className='post-function-bar-right'>
                                         <i className="fa-regular fa-bookmark"></i>
@@ -149,7 +149,7 @@ function ImageDetails({ image, user }) {
                 <div className='modal-date'>
                     {pastDate(image.createdAt)}
                 </div>
-                
+
                 <div className='post-add-comment flex' id='post-add-comment'>
                     <i className="fa-regular fa-face-smile"></i>
                     <form onSubmit={handleSubmit} className='modal-comment-form'>
