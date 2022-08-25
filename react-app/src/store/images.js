@@ -41,9 +41,11 @@ const CreateCommentAction = (comment) => ({
 	comment
 })
 
-const deleteComment = (id) => ({
+const deleteComment = (commentId, imageId) => ({
 	type: DELETE_COMMENT,
-	id,
+	commentId, 
+	imageId
+
 });
 const editComment = (comment) => ({
 	type: EDIT_COMMENT,
@@ -160,13 +162,13 @@ export const EditComment = (comment) => async (dispatch) => {
 	}
 }
 //delete comment 
-export const DeleteComment = (id) => async (dispatch) => {
-	const response = await fetch(`api/comment/${id}`, {
+export const DeleteComment = (commentId, imageId) => async (dispatch) => {
+	const response = await fetch(`api/comment/${commentId}`, {
 		method: "Delete",
 	});
 	if (response.ok) {
 		const data = await response.json();
-		dispatch(deleteComment(id));
+		await dispatch(deleteComment(commentId, imageId));
 		return data;
 	}
 }
@@ -221,11 +223,13 @@ export default function images(state = initialState, action) {
 			return newState
 		case DELETE_COMMENT:
 			newState = {...state}
-			// newState[action.comment.image_id].comments.forEach((element, index) => {
-			// 	if (element.id === action.comment.id){
-			// 		comments.splice(index,1)
-			// 	}
-			// })
+			console.log('!!!!!!!', newState)
+			console.log('!!!!!!!', action.imageId)
+			newState[action.imageId].comments.forEach((element, index) => {
+				if (element.id === action.commentId){
+					newState[action.imageId].comments.splice(index,1)
+				}
+			})
 			// list.splice( list.indexOf('Blues'), 1 )
 			return newState
 		default:

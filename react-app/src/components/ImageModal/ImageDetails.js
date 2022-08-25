@@ -3,7 +3,7 @@ import { NavLink, Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { toggleALike } from "../../store/images";
 import { CreateComment } from '../../store/images';
-
+import CommentDotModal from '../CommentDotModal';
 import ImageDotModal from '../ImageDotModal'
 
 import './ImageModal.css'
@@ -120,6 +120,14 @@ function ImageDetails({ image, user }) {
                                             <a className='model-description-user'>{comment.user.username}</a>
                                         </Link>
                                         <a className='model-description-detail'> {comment.comment}</a>
+                                    </div>
+                                    <div>
+                                        <a className='modal-comment-time'>{pastDate(comment.createdAt)}</a>
+                                        {(comment.user.id === user.id) && (
+                                            < CommentDotModal comment={comment} user={user} />
+                                        )}
+                                            
+                                        
                                     </div>
 
                                 </div>
