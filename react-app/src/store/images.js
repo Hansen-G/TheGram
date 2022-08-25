@@ -216,12 +216,14 @@ export default function images(state = initialState, action) {
 			return newState
 		case DELETE_COMMENT:
 			newState = {...state}
-			// newState[action.comment.image_id].comments.forEach((element, index) => {
-			// 	if (element.id === action.comment.id){
-			// 		comments.splice(index,1)
-			// 	}
-			// })
-			// list.splice( list.indexOf('Blues'), 1 )
+			let num 
+			newState[action.comment.image_id].comments.forEach((element, index) => {
+				if (element.id === action.comment.id){
+					num = index
+				}
+			})
+			console.log("!!!!!!!", num)
+			newState[action.comment.image_id].comments.splice(num,1)
 			return newState
 		default:
 			return state;
