@@ -137,8 +137,14 @@ export default function images(state = initialState, action) {
 			return newState;
 		case EDIT_IMAGE:
 			newState = { ...state };
-			newState[action.image.id] = action.image;
-			// newState[action.image.id]["liked_user_ids"] = {...newState["liked_user_ids"]}
+
+			newState[action.image.id] = action.image
+			let likes = {};
+			newState[action.image.id]["liked_user_ids"].forEach(
+			(user) => (likes[user.id] = user)
+			);
+			newState[action.image.id]["liked_user_ids"] = likes;
+
 			return newState;
 		case DELETE_IMAGE:
 			newState = { ...state };
