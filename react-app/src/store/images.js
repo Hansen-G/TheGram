@@ -47,9 +47,11 @@ const deleteComment = (commentId, imageId) => ({
 	imageId
 
 });
-const editComment = (comment) => ({
+const editComment = (comment, commentId, imageId) => ({
 	type: EDIT_COMMENT,
 	comment,
+	commentId, 
+	imageId
 });
 
 // get the homepage of the current user
@@ -144,21 +146,22 @@ export const CreateComment = (comment) => async(dispatch) =>{
 	if (response.ok) {
 		const new_comment = await response.json()
 		dispatch(CreateCommentAction(new_comment))
-	}
+	} 
 }
 
 // edit comment
-export const EditComment = (comment) => async (dispatch) => {
-	const response = await fetch(`/api/comment/${comment.id}`, {
-		method: "POST",
+export const EditComment = ({ commentId, comment, imageId}) => async (dispatch) => {
+	const response = await fetch(`/api/comment/${commentId}`, {
+		method: "PUT",
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(comment)
+		body: JSON.stringify({comment: comment})
 	})
 	if (response.ok) {
 		const new_comment = await response.json()
-		dispatch(editComment(new_comment))
+		dispatch(editComment(comment, commentId, imageId))
+		return new_comment
 	}
 }
 //delete comment 
@@ -172,7 +175,6 @@ export const DeleteComment = (commentId, imageId) => async (dispatch) => {
 		return data;
 	}
 }
-
 
 
 const initialState = {};
@@ -214,23 +216,20 @@ export default function images(state = initialState, action) {
 			newState[action.comment.image_id].comments.push(action.comment)
 			return newState
 		case EDIT_COMMENT:
-			newState = {...state}
-			newState[action.comment.image_id].comments.forEach(element => {
-				if (element.id === action.comment.id){
-					element = action.comment
+			newState = { ...state }
+			newState[action.imageId].comments.forEach((element, index) => {
+				if (element.id === action.commentId) {
+					newState[action.imageId].comments[index].comment = action.comment
 				}
 			})
 			return newState
 		case DELETE_COMMENT:
 			newState = {...state}
-			console.log('!!!!!!!', newState)
-			console.log('!!!!!!!', action.imageId)
 			newState[action.imageId].comments.forEach((element, index) => {
 				if (element.id === action.commentId){
 					newState[action.imageId].comments.splice(index,1)
 				}
 			})
-			// list.splice( list.indexOf('Blues'), 1 )
 			return newState
 		default:
 			return state;
