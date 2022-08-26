@@ -2,11 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadHomePage } from "../../store/images";
 import HomePageCard from "../HomePageCard";
-
-
-import {CreateComment} from '../../store/images';
-
-
 import './HomePage.css'
 import FollowUsers from "../FollowUsers";
 

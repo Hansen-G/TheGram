@@ -35,16 +35,18 @@ function App() {
 				<Route path="/sign-up" exact={true}>
 					<SignUpForm />
 				</Route>
-				<ProtectedRoute exact={true} path="/users">
-					<UsersList />
-				</ProtectedRoute>
-				<ProtectedRoute exact={true} path="/:userId">
-					<Profile />
-				</ProtectedRoute>
 				<ProtectedRoute path="/" exact={true}>
 					<HomePage />
 				</ProtectedRoute>
-			
+				<ProtectedRoute exact={true} path="/users">
+					<UsersList />
+				</ProtectedRoute>
+				<ProtectedRoute exact={true} to={/^\/\d+/}>
+					<Profile />
+				</ProtectedRoute>
+				{/* <ProtectedRoute exact={true} path={`/${/^\/\d+/}`}>
+					<Profile />
+				</ProtectedRoute> */}
 			</Switch>
 		</BrowserRouter>
 	);

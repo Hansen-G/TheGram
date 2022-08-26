@@ -19,7 +19,7 @@ const FollowUsers = () => {
 			setUsers(fetchedusers);
 		};
 		getData();
-	}, [user]);
+	}, [dispatch, user]);
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
@@ -37,12 +37,9 @@ const FollowUsers = () => {
 	const toggleAUserFollow = async (currentUserId, userToFollowId) => {
 		await dispatch(toggleUserFollow(userToFollowId));
 		await getUser(userId);
-    };
-    
+	};
 
-
-
-    return loaded && Object.values(users).length ? (
+	return loaded && Object.values(users).length ? (
 		<div className="followers-box">
 			<h3>Suggested People to Follow</h3>
 			<div>
@@ -53,6 +50,7 @@ const FollowUsers = () => {
 								<img
 									className="profile-image-follow-box"
 									src={user.profile_img}
+									alt="profile"
 								/>
 								<p className="p-follow-box">{user.username}</p>
 								<button

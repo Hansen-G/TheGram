@@ -35,5 +35,11 @@ def get_some_users():
 @user_routes.route('/<int:id>')
 @login_required
 def user(id):
+    if not isinstance(id, int):
+        return jsonify({'error':'no user found'})
     user = User.query.get(id)
+    if not user:
+        return jsonify({'error':'no user found'})
     return user.to_dict()
+    # user = User.query.get(id)
+    # return user.to_dict()
