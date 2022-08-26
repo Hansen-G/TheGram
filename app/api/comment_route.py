@@ -18,7 +18,7 @@ def delete_comment(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     to_be_deleted = Comment.query.get(id)
     userid = current_user.id
-
+    
     if to_be_deleted and to_be_deleted.user_id == userid and form.validate_on_submit():
         db.session.delete(to_be_deleted)
         db.session.commit()

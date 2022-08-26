@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadHomePage } from "../../store/images";
 import HomePageCard from "../HomePageCard";
 
 
 import {CreateComment} from '../../store/images';
-import HomePageCard from '../HomePageCard';
+
 
 import './HomePage.css'
 import FollowUsers from "../FollowUsers";
@@ -21,9 +21,9 @@ function HomePage() {
 	}, [dispatch, user]);
 
 
-  useEffect(() => {
+	useEffect(() => {
 		const timeout = setTimeout(() => {
-				setLoaded(true);
+			setLoaded(true);
 		}, 250);
 		return () => clearTimeout(timeout)
 	}, [])
@@ -31,9 +31,9 @@ function HomePage() {
 
 
 	const images = useSelector((state) => state.images);
-	if (!images || Object.keys(images).length === 0) {
-		return <FollowUsers />;
-	}
+	// if (!images || Object.keys(images).length === 0) {
+	// 	return <FollowUsers />;
+	// }
 	let imagesArr = Object.values(images).sort(function (a, b) {
 		return new Date(b["createdAt"]) - new Date(a["createdAt"]);
 	});
@@ -52,4 +52,7 @@ function HomePage() {
 					))}
 			</div>
 		</div>
-	);
+	)
+}
+
+export default HomePage

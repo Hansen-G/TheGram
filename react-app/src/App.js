@@ -10,7 +10,6 @@ import { authenticate } from "./store/session";
 import Profile from "./components/Images/Profile";
 import HomePage from "./components/HomePage";
 
-
 function App() {
 	const [loaded, setLoaded] = useState(false);
 	const dispatch = useDispatch();
@@ -29,7 +28,6 @@ function App() {
 	return (
 		<BrowserRouter>
 			<>{user ? <NavBar /> : null}</>
-
 			<Switch>
 				<Route path="/login" exact={true}>
 					<LoginForm />
@@ -37,18 +35,16 @@ function App() {
 				<Route path="/sign-up" exact={true}>
 					<SignUpForm />
 				</Route>
-				<ProtectedRoute path="/users" exact={true}>
+				<ProtectedRoute exact={true} path="/users">
 					<UsersList />
 				</ProtectedRoute>
-				<ProtectedRoute path="/:userId">
+				<ProtectedRoute exact={true} path="/:userId">
 					<Profile />
 				</ProtectedRoute>
-				{/* <ProtectedRoute path="/users/:userId" exact={true}>
-					<User />
-				</ProtectedRoute> */}
 				<ProtectedRoute path="/" exact={true}>
 					<HomePage />
 				</ProtectedRoute>
+			
 			</Switch>
 		</BrowserRouter>
 	);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams , useHistory} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loadImages } from "../../store/images";
 import { toggleUserFollow } from "../../store/session";
@@ -9,13 +9,19 @@ import "./css/Profile.css";
 const Profile = () => {
 	const dispatch = useDispatch();
 	const { userId } = useParams();
+	const history = useHistory()
 	const [user, setUser] = useState();
 	const images = Object.values(useSelector((state) => state.images));
 	const currentUser = useSelector((state) => state.session.user);
 
 	//Fetch user data
 	const getUser = async () => {
+		if (!Number(userId)) {
+			return history.push('/error')
+			// return null
+		}
 		let newuser = await fetch(`/api/users/${userId}`);
+		
 		let data = await newuser.json();
 		setUser(data);
 	};
@@ -40,7 +46,7 @@ const Profile = () => {
 							<img
 								className="profile-image"
 								src={user.profile_img}
-								alt='profile'
+								alt="profile"
 							/>
 						</div>
 						<div className="profile-stats">
@@ -53,9 +59,10 @@ const Profile = () => {
 								) &&
 									(currentUser.following[user.id] ? (
 										<button
-											onClick={() =>
-												toggleAUserFollow(user.id)
-											}
+											onClick={() => {
+											
+												toggleAUserFollow(user.id);
+											}}
 											className="toggle-follow submit-btn following"
 										>
 											<svg
@@ -74,10 +81,7 @@ const Profile = () => {
 									) : (
 										<button
 											onClick={() =>
-												toggleAUserFollow(
-													currentUser.id,
-													user.id
-												)
+												toggleAUserFollow(user.id)
 											}
 											className="toggle-follow submit-btn follow"
 										>
