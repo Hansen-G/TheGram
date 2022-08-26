@@ -1,36 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, Link, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import ImageModal from "../ImageModal/";
 import { CreateComment } from "../../store/images";
 import { toggleALike } from "../../store/images";
-
-function cut(str) {
-	return str.substring(0, 100) + "...";
-}
-
-function pastDate(date) {
-	const now = new Date();
-	const then = new Date(date);
-	const diff = now - then;
-	const diffDays = Math.floor(diff / (1000 * 60 * 60 * 24));
-	if (diffDays === 0) {
-		const diffHours = Math.floor(diff / (1000 * 60 * 60));
-		if (diffHours === 0) {
-			const diffMinutes = Math.floor(diff / (1000 * 60));
-			if (diffMinutes === 0) {
-				const diffSeconds = Math.floor(diff / 1000);
-				return `${diffSeconds} seconds ago`;
-			}
-			return `${diffMinutes} minutes ago`;
-		}
-		return `${diffHours} hours ago`;
-	} else if (diffDays === 1) {
-		return "1 day ago";
-	} else {
-		return diffDays + " days ago";
-	}
-}
+import { cut, pastDate } from "../../util/";
 
 function HomePageCard({ image, user }) {
 	const dispatch = useDispatch();
@@ -55,8 +29,7 @@ function HomePageCard({ image, user }) {
 	};
 
 	const toggleImageLike = (imageId) => {
-        dispatch(toggleALike(imageId));
-
+		dispatch(toggleALike(imageId));
 	};
 	return (
 		<div className="card-post-container flex" key={image.id}>
@@ -65,6 +38,7 @@ function HomePageCard({ image, user }) {
 					<img
 						src={image.post_user.profile_img}
 						className="profile-image"
+						alt="profile"
 					></img>
 				</div>
 				<div className="post-user-name-div flex">
@@ -79,15 +53,25 @@ function HomePageCard({ image, user }) {
 				</div>
 			</div>
 			<div className="post-image">
-				<img src={image.url} className="post-image-detail"></img>
+				<img
+					src={image.url}
+					className="post-image-detail"
+					alt="post"
+				></img>
 			</div>
 			<div className="post-info">
 				<div className="post-function-bar flex">
 					<div className="post-function-bar-left">
 						{image.liked_user_ids[user.id] ? (
-							<i className="fa-solid fa-heart curent_user_liked" onClick={() => toggleImageLike(image.id)}></i>
+							<i
+								className="fa-solid fa-heart curent_user_liked"
+								onClick={() => toggleImageLike(image.id)}
+							></i>
 						) : (
-							<i className="fa-regular fa-heart curent_user_unliked" onClick={() => toggleImageLike(image.id)}></i>
+							<i
+								className="fa-regular fa-heart curent_user_unliked"
+								onClick={() => toggleImageLike(image.id)}
+							></i>
 						)}
 
 						<ImageModal
@@ -107,28 +91,28 @@ function HomePageCard({ image, user }) {
 				{image["description"].length <= 100 && (
 					<div className="post-description">
 						<Link to={`/${image.post_user.id}`}>
-							<a className="post-description-user">
+							<div className="post-description-user">
 								{image.post_user.username}
-							</a>
+							</div>
 						</Link>
 
-						<a className="post-description-detail">
+						<div className="post-description-detail">
 							{" "}
 							{image.description}
-						</a>
+						</div>
 					</div>
 				)}
 				{image["description"].length > 100 && (
 					<div className="post-description">
 						<Link to={`/${image.post_user.id}`}>
-							<a className="post-description-user">
+							<div className="post-description-user">
 								{image.post_user.username}
-							</a>
+							</div>
 						</Link>
-						<a className="post-description-detail">
+						<div className="post-description-detail">
 							{" "}
 							{cut(image.description)} ...
-						</a>
+						</div>
 					</div>
 				)}
 				<div className="post-all-comments">

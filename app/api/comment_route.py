@@ -75,16 +75,16 @@ def add_like_to_image(id):
     comment = Comment.query.get(id).to_dict()
     current_user_id = current_user.id
     for user in comment['user_comment_likes']:
-        # user = user.to_dict()
         if current_user_id == user['id']:
-            
             deleted_like = delete(CommentsLikes).where(
                 CommentsLikes.c.user_id == current_user_id,
                 CommentsLikes.c.comment_id == id
             )
             db.engine.execute(deleted_like)
-            return jsonify(comment)
+            updated_comment = Comment.query.get(id).to_dict()
+            return jsonify(updated_comment)
 
     new_like = CommentsLikes.insert().values((current_user_id, id))
     db.engine.execute(new_like)
-    return jsonify(comment)
+    updated_comment = Comment.query.get(id).to_dict()
+    return jsonify(updated_comment)

@@ -1,9 +1,9 @@
 const GET_IMAGES = "session/GET_IMAGES";
-const GET_IMAGE = "session/GET_IMAGE";
+// const GET_IMAGE = "session/GET_IMAGE";
 const ADD_IMAGE = "session/ADD_IMAGE";
 const DELETE_IMAGE = "session/DELETE_IMAGE";
 const EDIT_IMAGE = "session/EDIT_IMAGE";
-const TOGGLE_LIKE = "session/TOGGLE_LIKE";
+// const TOGGLE_LIKE = "session/TOGGLE_LIKE";
 const ADD_COMMENT = "action/ADD_COMMENT";
 const DELETE_COMMENT = "session/DELETE_COMMENT";
 const EDIT_COMMENT = "session/EDIT_COMMENT";
@@ -17,10 +17,10 @@ const getImages = (images) => ({
 // 	type: GET_IMAGE,
 // 	image,
 // });
-const toggleLike = (id) => ({
-	type: TOGGLE_LIKE,
-	id,
-});
+// const toggleLike = (id) => ({
+// 	type: TOGGLE_LIKE,
+// 	id,
+// });
 
 const addImage = (image) => ({
 	type: ADD_IMAGE,
@@ -39,28 +39,26 @@ const editImage = (image) => ({
 
 const CreateCommentAction = (comment) => ({
 	type: ADD_COMMENT,
-	comment
-})
+	comment,
+});
 
 const deleteComment = (commentId, imageId) => ({
 	type: DELETE_COMMENT,
-	commentId, 
-	imageId
-
+	commentId,
+	imageId,
 });
 const editComment = (comment, commentId, imageId) => ({
 	type: EDIT_COMMENT,
 	comment,
-	commentId, 
-	imageId
+	commentId,
+	imageId,
 });
-
 
 const likeComment = (commentId, imageId, comment) => ({
 	type: LIKE_COMMENT,
 	commentId,
 	imageId,
-	comment
+	comment,
 });
 
 // get the homepage of the current user
@@ -129,7 +127,7 @@ export const toggleALike = (imageId) => async (dispatch) => {
 	});
 	if (response.ok) {
 		const data = await response.json();
-		dispatch(editImage(data))
+		dispatch(editImage(data));
 	}
 };
 
@@ -139,11 +137,10 @@ export const toggleACommentLike = (commentId, imageId) => async (dispatch) => {
 	});
 	if (response.ok) {
 		const data = await response.json();
-		await dispatch(likeComment(commentId, imageId, data))
-		return 'Success'
+		await dispatch(likeComment(commentId, imageId, data));
+		return "Success";
 	}
 };
-
 
 export const DeleteImage = (id) => async (dispatch) => {
 	const response = await fetch(`api/images/${id}`, {
@@ -156,36 +153,38 @@ export const DeleteImage = (id) => async (dispatch) => {
 	}
 };
 // create comment
-export const CreateComment = (comment) => async(dispatch) =>{
-	const response = await fetch (`/api/images/${comment.image_id}/comment`, {
+export const CreateComment = (comment) => async (dispatch) => {
+	const response = await fetch(`/api/images/${comment.image_id}/comment`, {
 		method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(comment)
-	})
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(comment),
+	});
 	if (response.ok) {
-		const new_comment = await response.json()
-		dispatch(CreateCommentAction(new_comment))
-	} 
-}
+		const new_comment = await response.json();
+		dispatch(CreateCommentAction(new_comment));
+	}
+};
 
 // edit comment
-export const EditComment = ({commentId, comment, imageId}) => async (dispatch) => {
+export const EditComment = ({ commentId, comment, imageId }) => async (
+	dispatch
+) => {
 	const response = await fetch(`/api/comment/${commentId}`, {
 		method: "PUT",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-		body: JSON.stringify({comment: comment})
-	})
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ comment: comment }),
+	});
 	if (response.ok) {
-		const new_comment = await response.json()
-		dispatch(editComment(comment, commentId, imageId))
-		return new_comment
+		const new_comment = await response.json();
+		dispatch(editComment(comment, commentId, imageId));
+		return new_comment;
 	}
-}
-//delete comment 
+};
+//delete comment
 export const DeleteComment = (commentId, imageId) => async (dispatch) => {
 	const response = await fetch(`api/comment/${commentId}`, {
 		method: "Delete",
@@ -195,8 +194,7 @@ export const DeleteComment = (commentId, imageId) => async (dispatch) => {
 		await dispatch(deleteComment(commentId, imageId));
 		return data;
 	}
-}
-
+};
 
 const initialState = {};
 
@@ -204,26 +202,25 @@ export default function images(state = initialState, action) {
 	let newState = {};
 	switch (action.type) {
 		case GET_IMAGES:
-			// newState = { ...action.images };
-			action.images.forEach(image => {
-				newState[image.id] = image
+			action.images.forEach((image) => {
+				newState[image.id] = image;
 				let likes = {};
 				newState[image.id]["liked_user_ids"].forEach(
 					(user) => (likes[user.id] = user)
 				);
 				newState[image.id]["liked_user_ids"] = likes;
-			})
-            return newState;
+			});
+			return newState;
 		case ADD_IMAGE:
 			newState = { ...state };
 			newState[action.image.id] = action.image;
 			return newState;
 		case EDIT_IMAGE:
 			newState = { ...state };
-			newState[action.image.id] = action.image
+			newState[action.image.id] = action.image;
 			let likes = {};
 			newState[action.image.id]["liked_user_ids"].forEach(
-			(user) => (likes[user.id] = user)
+				(user) => (likes[user.id] = user)
 			);
 			newState[action.image.id]["liked_user_ids"] = likes;
 			newState[action.image.id] = action.image;
@@ -233,33 +230,34 @@ export default function images(state = initialState, action) {
 			delete newState[action.id];
 			return newState;
 		case ADD_COMMENT:
-			newState = {...state}
-			newState[action.comment.image_id].comments.push(action.comment)
-			return newState
+			newState = { ...state };
+			newState[action.comment.image_id].comments.push(action.comment);
+			return newState;
 		case EDIT_COMMENT:
-			newState = { ...state }
+			newState = { ...state };
 			newState[action.imageId].comments.forEach((element, index) => {
 				if (element.id === action.commentId) {
-					newState[action.imageId].comments[index].comment = action.comment
+					newState[action.imageId].comments[index].comment =
+						action.comment;
 				}
-			})
-			return newState
+			});
+			return newState;
 		case LIKE_COMMENT:
-			newState = { ...state }
+			newState = { ...state };
 			newState[action.imageId].comments.forEach((element, index) => {
 				if (element.id === action.commentId) {
-					newState[action.imageId].comments[index] = action.comment
+					newState[action.imageId].comments[index] = action.comment;
 				}
-			})
-			return newState
+			});
+			return newState;
 		case DELETE_COMMENT:
-			newState = {...state}
+			newState = { ...state };
 			newState[action.imageId].comments.forEach((element, index) => {
-				if (element.id === action.commentId){
-					newState[action.imageId].comments.splice(index,1)
+				if (element.id === action.commentId) {
+					newState[action.imageId].comments.splice(index, 1);
 				}
-			})
-			return newState
+			});
+			return newState;
 		default:
 			return state;
 	}

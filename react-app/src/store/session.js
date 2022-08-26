@@ -127,10 +127,6 @@ export default function reducer(state = initialState, action) {
 				followingList[following.following_id] = following;
 			});
 			newState.user.following = followingList;
-			console.log(
-				"SESSION FOLLOWING in REDUCER",
-				newState.user.following
-			);
 			return newState;
 		case REMOVE_USER:
 			return { user: null };
@@ -138,7 +134,6 @@ export default function reducer(state = initialState, action) {
 		case TOGGLE_FOLLOW:
 			newState = { ...state };
 			console.log('ActionFollowing',action.following);
-			// console.log(state);
 
 			if (action.following.length > 0) {
 				action.following.forEach((following) => {

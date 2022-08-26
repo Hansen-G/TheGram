@@ -12,12 +12,6 @@ const Profile = () => {
 	const [user, setUser] = useState();
 	const images = Object.values(useSelector((state) => state.images));
 	const currentUser = useSelector((state) => state.session.user);
-	useEffect(() => {
-		dispatch(loadImages(userId));
-
-		//Call backend
-		getUser();
-	}, [dispatch, userId]);
 
 	//Fetch user data
 	const getUser = async () => {
@@ -26,16 +20,17 @@ const Profile = () => {
 		setUser(data);
 	};
 
-	const toggleAUserFollow = async (currentUserId, userToFollowId) => {
+	const toggleAUserFollow = async (userToFollowId) => {
 		await dispatch(toggleUserFollow(userToFollowId));
 		await getUser();
 	};
 
-	// console.log("Following", currentUser.following);
-	//Way of accessing current user through session
-	// const user = useSelector((state) => state.session.user);
-	// console.log(currentUser)
-	// console.log(user)
+	useEffect(() => {
+		dispatch(loadImages(userId));
+		//Call backend
+		getUser();
+	}, [dispatch, userId]);
+
 	return (
 		<>
 			{user && (
@@ -45,6 +40,7 @@ const Profile = () => {
 							<img
 								className="profile-image"
 								src={user.profile_img}
+								alt='profile'
 							/>
 						</div>
 						<div className="profile-stats">
@@ -58,10 +54,7 @@ const Profile = () => {
 									(currentUser.following[user.id] ? (
 										<button
 											onClick={() =>
-												toggleAUserFollow(
-													currentUser.id,
-													user.id
-												)
+												toggleAUserFollow(user.id)
 											}
 											className="toggle-follow submit-btn following"
 										>

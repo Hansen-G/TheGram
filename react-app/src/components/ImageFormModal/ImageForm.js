@@ -1,48 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 import "./ImageForm.css";
 import { CreateImage, UpdateImage } from "../../store/images";
-
-const ImageForm = ({ onClose, setShowModal, showModal, image, setModal }) => {
+import { isValidUrl } from "../../util";
+const ImageForm = ({
+	onClose,
+	setShowModal,
+	// showModal,
+	image,
+	setModal,
+}) => {
 	const dispatch = useDispatch();
-	const images = useSelector((state) => state.images);
-	// const image = Object.values(images).filter(image => image.id === imageId)
-	// const image = images.imageId
-	// Object.values(spots).filter(spot => spot?.ownerId === user?.id)
 	const user = useSelector((state) => state.session.user);
 
-	const [description, setDescription] = useState();
-	const [alt_description, setAltDescription] = useState();
+	const [description, setDescription] = useState("");
+	const [alt_description, setAltDescription] = useState("");
 	const [show_stats, setShowStats] = useState(true);
-	const [location, setLocation] = useState();
-	const [action, setAction] = useState();
+	const [location, setLocation] = useState("");
+
 	const [errors, setErrors] = useState([]);
 	const [showAccessity, setShowAccessity] = useState(false);
-	const [url, setUrl] = useState(); //URL we will actually render as an <img/>
+	const [url, setUrl] = useState(""); //URL we will actually render as an <img/>
 	const [validURL, setValidURL] = useState(false); // Boolean that will show if the URL below is actually a valid image url
 
-	// Validate if url is an image function
-	const isValidUrl = (urlString) => {
-		try {
-			return Boolean(new URL(urlString));
-		} catch (e) {
-			return false;
-		}
-	};
-
 	const setURLAndCheckURL = (urlInput) => {
-		const isItUrl = /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(urlInput);
-		if (
-			isItUrl &&
-			isValidUrl(urlInput) &&
-			urlInput.indexOf("File:") === -1
-		) {
-			setValidURL(true);
-		} else {
-			setValidURL(false);
-		}
+		setValidURL(isValidUrl(urlInput));
 		setUrl(urlInput);
 	};
 
@@ -52,13 +34,11 @@ const ImageForm = ({ onClose, setShowModal, showModal, image, setModal }) => {
 			setDescription(image.description);
 			setShowStats(image.show_stats);
 		}
-	}, []);
+	}, [image]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// console.log("******** handle submit");
 		if (!image) {
-			// console.log("~~~~~~~~~~~create");
 			const create_payload = {
 				url,
 				description,
@@ -69,7 +49,6 @@ const ImageForm = ({ onClose, setShowModal, showModal, image, setModal }) => {
 			dispatch(CreateImage(create_payload))
 				.then(() => onClose())
 				.catch(async (data) => {
-					// const data = await res.json()
 					if (data && data.errors) setErrors(data.errors);
 				});
 		} else if (image) {
@@ -81,11 +60,9 @@ const ImageForm = ({ onClose, setShowModal, showModal, image, setModal }) => {
 				show_stats,
 				url,
 			};
-			console.log("~~~~~~~~~~~update");
 			dispatch(UpdateImage(update_payload))
 				.then(() => onClose())
 				.catch(async (data) => {
-					// const data = await res.json()
 					if (data && data.errors) setErrors(data.errors);
 				});
 			setShowModal(false);
@@ -101,7 +78,6 @@ const ImageForm = ({ onClose, setShowModal, showModal, image, setModal }) => {
 						className="fa-solid fa-arrow-left-long"
 						onClick={() => {
 							setShowModal(false);
-							setAction("Create new post");
 						}}
 					></i>
 					<div className="form_title">
@@ -129,7 +105,7 @@ const ImageForm = ({ onClose, setShowModal, showModal, image, setModal }) => {
 									<img
 										className="user_profile_pic"
 										src={user.profile_img}
-										alt="profile image"
+										alt="profile"
 									></img>
 									<div>{user.name}</div>
 								</div>
@@ -149,10 +125,16 @@ const ImageForm = ({ onClose, setShowModal, showModal, image, setModal }) => {
 										placeholder="Write a caption..."
 										maxLength="2200"
 									/>
-									{(description && description.length > 0 ) ?  (
-										<div className="word-count">{description.length} / 2,200</div>
-                                    ) :
-                                    <div className="word-count"> 0 / 2200</div>}
+									{description && description.length > 0 ? (
+										<div className="word-count">
+											{description.length} / 2,200
+										</div>
+									) : (
+										<div className="word-count">
+											{" "}
+											0 / 2200
+										</div>
+									)}
 								</div>
 								<div className="url">
 									<input
