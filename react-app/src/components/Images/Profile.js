@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loadImages } from "../../store/images";
 import { toggleUserFollow } from "../../store/session";
@@ -8,34 +8,46 @@ import "./css/Profile.css";
 
 const Profile = () => {
 	const dispatch = useDispatch();
-	const { userId } = useParams();
+	const history = useHistory();
+	let path = useLocation();
+	let userId = Number(path.pathname.split("/")[1]);
 	const [user, setUser] = useState();
 	const images = Object.values(useSelector((state) => state.images));
 	const currentUser = useSelector((state) => state.session.user);
-	useEffect(() => {
-		dispatch(loadImages(userId));
-
-		//Call backend
-		getUser();
-	}, [dispatch, userId]);
-
 	//Fetch user data
+	// const getUser = async () => {
+	// 	let newuser = await fetch(`/api/users/${userId}`);
+
+	// 	let data = await newuser.json();
+	// 	setUser(data);
+	// };
 	const getUser = async () => {
-		let newuser = await fetch(`/api/users/${userId}`);
-		let data = await newuser.json();
-		setUser(data);
+		if (!Number(userId) || userId === 0) {
+			return history.push("/");
+		}
+		let profileUser = await fetch(`/api/users/${userId}`);
+		const data = await profileUser.json();
+		if (data.error) return history.push("/");
+		else setUser(data);
 	};
 
-	const toggleAUserFollow = async (currentUserId, userToFollowId) => {
+	const toggleAUserFollow = async (userToFollowId) => {
 		await dispatch(toggleUserFollow(userToFollowId));
 		await getUser();
 	};
 
-	// console.log("Following", currentUser.following);
-	//Way of accessing current user through session
-	// const user = useSelector((state) => state.session.user);
-	// console.log(currentUser)
-	// console.log(user)
+	useEffect(() => {
+		if (path.pathname.split("/").length > 2) {
+			return history.push("/");
+		}
+		if (Number(userId)) {
+			dispatch(loadImages(userId));
+		}
+		// dispatch(loadImages(userId));
+		//Call backend
+		getUser();
+	}, [dispatch, userId]);
+
 	return (
 		<>
 			{user && (
@@ -45,6 +57,7 @@ const Profile = () => {
 							<img
 								className="profile-image"
 								src={user.profile_img}
+								alt="profile"
 							/>
 						</div>
 						<div className="profile-stats">
@@ -57,12 +70,9 @@ const Profile = () => {
 								) &&
 									(currentUser.following[user.id] ? (
 										<button
-											onClick={() =>
-												toggleAUserFollow(
-													currentUser.id,
-													user.id
-												)
-											}
+											onClick={() => {
+												toggleAUserFollow(user.id);
+											}}
 											className="toggle-follow submit-btn following"
 										>
 											<svg
@@ -81,10 +91,7 @@ const Profile = () => {
 									) : (
 										<button
 											onClick={() =>
-												toggleAUserFollow(
-													currentUser.id,
-													user.id
-												)
+												toggleAUserFollow(user.id)
 											}
 											className="toggle-follow submit-btn follow"
 										>

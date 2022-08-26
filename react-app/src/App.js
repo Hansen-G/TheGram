@@ -6,9 +6,7 @@ import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/NavBar/index";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
-import User from "./components/User";
 import { authenticate } from "./store/session";
-import Feed from "./components/Images/Feed";
 import Profile from "./components/Images/Profile";
 import HomePage from "./components/HomePage";
 
@@ -30,7 +28,6 @@ function App() {
 	return (
 		<BrowserRouter>
 			<>{user ? <NavBar /> : null}</>
-
 			<Switch>
 				<Route path="/login" exact={true}>
 					<LoginForm />
@@ -38,19 +35,18 @@ function App() {
 				<Route path="/sign-up" exact={true}>
 					<SignUpForm />
 				</Route>
-				<ProtectedRoute path="/users" exact={true}>
-					<UsersList />
-				</ProtectedRoute>
-				<ProtectedRoute path="/:userId">
-					<Profile />
-				</ProtectedRoute>
-				{/* <ProtectedRoute path="/users/:userId" exact={true}>
-					<User />
-				</ProtectedRoute> */}
 				<ProtectedRoute path="/" exact={true}>
 					<HomePage />
-					
 				</ProtectedRoute>
+				<ProtectedRoute exact={true} path="/users">
+					<UsersList />
+				</ProtectedRoute>
+				<ProtectedRoute exact={true} to={/^\/\d+/}>
+					<Profile />
+				</ProtectedRoute>
+				{/* <ProtectedRoute exact={true} path={`/${/^\/\d+/}`}>
+					<Profile />
+				</ProtectedRoute> */}
 			</Switch>
 		</BrowserRouter>
 	);

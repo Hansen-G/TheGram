@@ -9,7 +9,7 @@ const Feed = () => {
 
 	useEffect(() => {
 		dispatch(loadImages(user.id));
-	}, [dispatch]);
+	}, [dispatch, user]);
 
 	const images = Object.values(useSelector((state) => state.images));
 	return (

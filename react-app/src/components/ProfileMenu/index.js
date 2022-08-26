@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
 import "./profilemenu.css";
@@ -7,8 +6,8 @@ function ProfileMenu({ showMenu, userId }) {
 		<div className="profile-menu">
 			{showMenu && (
 				<div>
-                    <Link className="profile-menu-link" to={`/${userId}`}>
-                        <i className="fa-regular fa-circle-user"></i>
+					<Link className="profile-menu-link" to={`/${userId}`}>
+						<i className="fa-regular fa-circle-user"></i>
 						<p className="nav-bar-p ">Profile</p>
 					</Link>
 

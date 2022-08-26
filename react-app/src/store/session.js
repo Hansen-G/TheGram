@@ -102,9 +102,13 @@ export const signUp = (username, email, password, name) => async (dispatch) => {
 
 export const toggleUserFollow = (userToFollowId) => async (dispatch) => {
 	const response = await fetch(
-		`/api/followers/toggle-follow/${userToFollowId}`
+		`/api/followers/toggle-follow/${userToFollowId}`,
+		{
+			method: "POST",
+		}
 	);
-
+	console.log("USER TO FOLLOW ID", userToFollowId);
+	console.log("WE GOT TO LINE 107 IN SESSION in STORE");
 	if (response.ok) {
 		const data = await response.json();
 		console.log("DATA FROM TOGGLEFOLLOW", data);
@@ -127,18 +131,13 @@ export default function reducer(state = initialState, action) {
 				followingList[following.following_id] = following;
 			});
 			newState.user.following = followingList;
-			console.log(
-				"SESSION FOLLOWING in REDUCER",
-				newState.user.following
-			);
 			return newState;
 		case REMOVE_USER:
 			return { user: null };
 
 		case TOGGLE_FOLLOW:
 			newState = { ...state };
-			console.log('ActionFollowing',action.following);
-			// console.log(state);
+			console.log("ActionFollowing", action.following);
 
 			if (action.following.length > 0) {
 				action.following.forEach((following) => {

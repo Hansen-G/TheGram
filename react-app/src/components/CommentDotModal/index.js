@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import {Modal} from '../../context/Modal'
-import ImageDot from './ImageDot'
+import CommentDot from './CommentDot'
 
 
-function ImageDotModal({ image, user }) {
+function CommentDotModal({ comment, user }) {
     const [showModal, setShowModal] = useState(false);
 
     // function that returns setShwoMOdalfalse and pass as prop
@@ -11,8 +11,9 @@ function ImageDotModal({ image, user }) {
     return (
         <>
 
-            <button className='edit-botton' onClick={() => setShowModal(true)}>
-                <i className="fa-solid fa-ellipsis dot-icon"></i>
+            <button className='comment-edit-botton' onClick={() => setShowModal(true)}>
+                <i className="fa-solid fa-ellipsis comment-dot-icon"></i>
+                
             </button>
             {showModal && (
                 <Modal id='post-model'
@@ -20,12 +21,11 @@ function ImageDotModal({ image, user }) {
                     onClose={() => setShowModal(false)}
                     className='post-model'
                 >
-                    <ImageDot setModal={setModal} image={image} user={user} className='post-model' />
-                    
+                    <CommentDot setModal={setModal} comment={comment} user={user} className='post-model' />
                 </Modal>
             )}
         </>
     );
 }
 
-export default ImageDotModal;
+export default CommentDotModal;

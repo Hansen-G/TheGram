@@ -5,6 +5,7 @@ from flask import Blueprint, jsonify, request, redirect, url_for
 from app.models import User, db, Comment
 from flask_login import current_user, login_user, logout_user, login_required
 from app.forms.comment_form import DeleteCommentForm, CommentForm
+from app.forms.image_form import FormValidation
 
 
 comment_routes = Blueprint('comment', __name__)
@@ -17,7 +18,7 @@ def delete_comment(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     to_be_deleted = Comment.query.get(id)
     userid = current_user.id
-
+    
     if to_be_deleted and to_be_deleted.user_id == userid and form.validate_on_submit():
         db.session.delete(to_be_deleted)
         db.session.commit()
@@ -72,19 +73,18 @@ def update_comment(id):
 @login_required
 def add_like_to_image(id):
     comment = Comment.query.get(id).to_dict()
-    # print("!!!!!!!!!!!!", comment )
     current_user_id = current_user.id
     for user in comment['user_comment_likes']:
-        user = user.to_dict()
         if current_user_id == user['id']:
-            
             deleted_like = delete(CommentsLikes).where(
                 CommentsLikes.c.user_id == current_user_id,
                 CommentsLikes.c.comment_id == id
             )
             db.engine.execute(deleted_like)
-            return f'unlike comment {id}'
+            updated_comment = Comment.query.get(id).to_dict()
+            return jsonify(updated_comment)
 
     new_like = CommentsLikes.insert().values((current_user_id, id))
     db.engine.execute(new_like)
-    return f'like comment {id}'
+    updated_comment = Comment.query.get(id).to_dict()
+    return jsonify(updated_comment)

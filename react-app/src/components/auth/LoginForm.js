@@ -3,23 +3,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { login } from "../../store/session";
 import "./LoginSignupForm.css";
+
 const LoginForm = () => {
 	const [errors, setErrors] = useState([]);
 	const [email, setEmail] = useState("");
 	const [index, setIndex] = useState(0);
 	const [url, setUrl] = useState(
-		"https://www.instagram.com/static/images/homepage/screenshots/screenshot1.png/fdfe239b7c9f.png"
+		"https://www.instagram.com/static/images/homepage/screenshots/screenshot2.png/4d62acb667fb.png"
 	);
 	const [password, setPassword] = useState("");
 	const user = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 
-	const imageArr = [
-		"https://www.instagram.com/static/images/homepage/screenshots/screenshot4.png/a4fd825e3d49.png",
-		"https://www.instagram.com/static/images/homepage/screenshots/screenshot3.png/94edb770accf.png",
-		"https://www.instagram.com/static/images/homepage/screenshots/screenshot2.png/4d62acb667fb.png",
-		"https://www.instagram.com/static/images/homepage/screenshots/screenshot1.png/fdfe239b7c9f.png",
-	];
 	const onLogin = async (e) => {
 		e.preventDefault();
 		const data = await dispatch(login(email, password));
@@ -33,19 +28,19 @@ const LoginForm = () => {
 	};
 
 	useEffect(() => {
-		let clean = setInterval(() => {
-			console.log("roulette fire off", index);
-			if (index === 3) {
-				setIndex(0);
-			} else {
-				setIndex((index) => index + 1);
-			}
-			console.log(imageArr[index]);
-			setUrl(imageArr[index]);
-			return url;
+		const imageArr = [
+			"https://www.instagram.com/static/images/homepage/screenshots/screenshot4.png/a4fd825e3d49.png",
+			"https://www.instagram.com/static/images/homepage/screenshots/screenshot3.png/94edb770accf.png",
+			"https://www.instagram.com/static/images/homepage/screenshots/screenshot2.png/4d62acb667fb.png",
+			// "https://www.instagram.com/static/images/homepage/screenshots/screenshot1.png/fdfe239b7c9f.png", // Has instagram logo
+		];
+		let roulette = setInterval(() => {
+			if (index === 2) setIndex(0);
+			else setIndex((index) => index + 1);
+			return setUrl(imageArr[index]);
 		}, 5000);
-		return () => clearInterval(clean);
-	}, [index]);
+		return () => clearInterval(roulette);
+	}, [index, url]);
 
 	const updateEmail = (e) => {
 		setEmail(e.target.value);
@@ -63,8 +58,11 @@ const LoginForm = () => {
 		<div className="master-container">
 			<div className="phone-anchor">
 				<div className="phone">
-					<img className="roulette" src={url} />
-					<img src="https://www.instagram.com/static/images/homepage/phones/home-phones.png/1dc085cdb87d.png" />
+					<img className="roulette" src={url} alt="roulette" />
+					<img
+						src="https://www.instagram.com/static/images/homepage/phones/home-phones.png/1dc085cdb87d.png"
+						alt="phone"
+					/>
 				</div>
 			</div>
 			<div>
@@ -73,6 +71,7 @@ const LoginForm = () => {
 						<img
 							className=""
 							src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png"
+							alt="logo"
 						/>
 					</div>
 					<div>
@@ -90,8 +89,8 @@ const LoginForm = () => {
 									placeholder="Email"
 									value={email}
 									onChange={updateEmail}
-                  className="verification-form-input"
-                  required={true}
+									className="verification-form-input"
+									required={true}
 								/>
 							</div>
 							<div>
@@ -102,8 +101,8 @@ const LoginForm = () => {
 									placeholder="Password"
 									value={password}
 									onChange={updatePassword}
-                  className="verification-form-input"
-                  required={true}
+									className="verification-form-input"
+									required={true}
 								/>
 							</div>
 							<button
@@ -116,8 +115,8 @@ const LoginForm = () => {
 							>
 								Log In
 							</button>
-            </form>
-            
+						</form>
+
 						<div className="or-container">
 							<div className="line"></div>
 							<div className="or">OR</div>

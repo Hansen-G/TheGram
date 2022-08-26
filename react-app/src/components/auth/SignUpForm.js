@@ -13,32 +13,26 @@ const SignUpForm = () => {
 	const [name, setName] = useState("");
 	const [index, setIndex] = useState(0);
 	const [url, setUrl] = useState(
-		"https://www.instagram.com/static/images/homepage/screenshots/screenshot1.png/fdfe239b7c9f.png"
+		"https://www.instagram.com/static/images/homepage/screenshots/screenshot2.png/4d62acb667fb.png"
 	);
 	const user = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 
-	const imageArr = [
-		"https://www.instagram.com/static/images/homepage/screenshots/screenshot4.png/a4fd825e3d49.png",
-		"https://www.instagram.com/static/images/homepage/screenshots/screenshot3.png/94edb770accf.png",
-		"https://www.instagram.com/static/images/homepage/screenshots/screenshot2.png/4d62acb667fb.png",
-		"https://www.instagram.com/static/images/homepage/screenshots/screenshot1.png/fdfe239b7c9f.png",
-	];
-
 	useEffect(() => {
-		let clean = setInterval(() => {
-			console.log("roulette fire off", index);
-			if (index === 3) {
-				setIndex(0);
-			} else {
-				setIndex((index) => index + 1);
-			}
-			console.log(imageArr[index]);
-			setUrl(imageArr[index]);
-			return url;
+		const imageArr = [
+			"https://www.instagram.com/static/images/homepage/screenshots/screenshot4.png/a4fd825e3d49.png",
+			"https://www.instagram.com/static/images/homepage/screenshots/screenshot3.png/94edb770accf.png",
+			"https://www.instagram.com/static/images/homepage/screenshots/screenshot2.png/4d62acb667fb.png",
+			// "https://www.instagram.com/static/images/homepage/screenshots/screenshot1.png/fdfe239b7c9f.png", // Has instagram logo
+		];
+		let roulette = setInterval(() => {
+			if (index === 2) setIndex(0);
+			else setIndex((index) => index + 1);
+			return setUrl(imageArr[index]);
 		}, 5000);
-		return () => clearInterval(clean);
-	}, [index]);
+		return () => clearInterval(roulette);
+	}, [index, url]);
+
 	const onSignUp = async (e) => {
 		e.preventDefault();
 		if (password === repeatPassword) {
@@ -79,14 +73,20 @@ const SignUpForm = () => {
 		<div className="master-container">
 			<div className="phone-anchor">
 				<div className="phone">
-					<img className="roulette" src={url} />
-					<img src="https://www.instagram.com/static/images/homepage/phones/home-phones.png/1dc085cdb87d.png" />
+					<img className="roulette" src={url} alt="roulette" />
+					<img
+						src="https://www.instagram.com/static/images/homepage/phones/home-phones.png/1dc085cdb87d.png"
+						alt="phone"
+					/>
 				</div>
 			</div>
 
 			<div className="master-form-container">
 				<div className="lrg-logo-container">
-					<img src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" />
+					<img
+						src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png"
+						alt="logo"
+					/>
 				</div>
 				<div>
 					<form onSubmit={onSignUp}>
@@ -155,10 +155,12 @@ const SignUpForm = () => {
 								className="verification-form-input"
 							></input>
 						</div>
-						<button type="submit" className="submit-btn">Sign Up</button>
+						<button type="submit" className="submit-btn">
+							Sign Up
+						</button>
 					</form>
-        </div>
-        <div className="switch-method">
+				</div>
+				<div className="switch-method">
 					<div className="switch-method-content">
 						Already have an account?{" "}
 						<Link to={"/login"} className="switch-method-lnk">
