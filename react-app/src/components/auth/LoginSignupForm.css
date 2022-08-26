@@ -17,20 +17,20 @@
 }
 .phone {
 	position: relative;
-	margin-top: 10%;
+	margin-top: -13%;
 	/* left: 40%; */
 }
 .master-form-container {
 	display: flex;
 	/* width: 33%; */
 	max-width: 350px;
-	max-height: 440px;
+	min-height: 500px;
 	justify-content: flex-start;
 	align-items: center;
 	flex-direction: column;
 	background-color: rgb(255, 255, 255);
 	border: solid 1px rgb(219, 219, 219);
-	padding-bottom: 10px;
+	/* padding-bottom: 10px; */
 }
 
 .verification-form-input {
@@ -110,7 +110,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 10px;
+	margin-top: 30px;
 	background-color: rgb(255, 255, 255);
 }
 
@@ -123,4 +123,31 @@
 .switch-method-lnk {
 	color: #0095f6;
 	font-weight: 600;
+}
+
+.signup-error-text {
+	max-height: fit-content;
+	color: red;
+	width: 200px;
+
+	/* overflow-wrap:normal; */
+	/* display: flex; */
+	/* align-items: center; */
+	justify-content: left;
+	margin: 2% 0 2% 0;
+	text-transform: capitalize;
+}
+.login-error-text {
+	background-color: blue;
+	color: red;
+	display: flex;
+	align-items: center;
+	justify-content: left;
+	margin: 2%;
+	text-transform: capitalize;
+}
+
+.error-field {
+	justify-content: left;
+	width: 130%;
 }

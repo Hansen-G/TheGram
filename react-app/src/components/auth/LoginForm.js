@@ -78,7 +78,7 @@ const LoginForm = () => {
 						<form onSubmit={onLogin}>
 							<div>
 								{errors.map((error, ind) => (
-									<div key={ind}>{error}</div>
+									<div className='login-error-text' key={ind}>{error}</div>
 								))}
 							</div>
 							<div>
@@ -107,12 +107,14 @@ const LoginForm = () => {
 							</div>
 							<button
 								type="submit"
-								className={`submit-btn ${
-									email.length < 6 || password.length < 6
+								className={`submit-btn
+								${
+									email.length < 1  || password.length < 1
 										? "disabled"
 										: ""
-								}`}
-								disabled={email.length < 6 || password.length < 6}
+								}
+								`}
+								disabled={email.length < 1 || password.length < 1}
 							>
 								Log In
 							</button>

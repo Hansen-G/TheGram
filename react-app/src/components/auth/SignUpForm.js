@@ -4,6 +4,7 @@ import { Redirect, Link } from "react-router-dom";
 import { signUp } from "../../store/session";
 
 import "./LoginSignupForm.css";
+
 const SignUpForm = () => {
 	const [errors, setErrors] = useState([]);
 	const [username, setUsername] = useState("");
@@ -118,9 +119,9 @@ const SignUpForm = () => {
 				</div>
 				<div>
 					<form onSubmit={onSignUp}>
-						<div>
+						<div className='signup-error-text'>
 							{errors.map((error, ind) => (
-								<div key={ind}>{error}</div>
+								<div className="error-field" key={ind}>{error}</div>
 
 							))}
 						</div>
