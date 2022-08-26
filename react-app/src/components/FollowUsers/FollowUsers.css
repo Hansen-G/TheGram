@@ -85,3 +85,26 @@
     font-size: 14px;
     cursor: pointer;
 }
+
+.home-user-card-username{
+    font-size: 14px;
+    color: #262626;
+    font-weight: bold;
+}
+
+.home-user-card-name-place {
+    font-size: 14px;
+    color: #8E8E8E;
+}
+
+.copy-right{
+    flex-direction: column;
+    font-size: 12px;
+    color: #C7C7C7;
+    margin-top: 30px;
+}
+
+.copy-right a {
+    font-size: 12px;
+    color: #C7C7C7;
+}

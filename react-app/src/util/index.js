@@ -4,24 +4,24 @@ export const cut = (str) => {
 
 export const pastDate = (date) => {
 	const now = new Date();
-	const then = new Date(date);
-	const diff = now - then;
-	const diffDays = Math.floor(diff / (1000 * 60 * 60 * 24));
-	if (diffDays === 0) {
-		const diffHours = Math.floor(diff / (1000 * 60 * 60));
-		if (diffHours === 0) {
-			const diffMinutes = Math.floor(diff / (1000 * 60));
-			if (diffMinutes === 0) {
-				const diffSeconds = Math.floor(diff / 1000);
+	const past = new Date(date);
+	const different = now - past;
+	const differentDays = Math.floor(different / (1000 * 60 * 60 * 24));
+	if (differentDays === 0) {
+		const diferentHours = Math.floor(different / (1000 * 60 * 60));
+		if (diferentHours === 0) {
+			const diferentMinutes = Math.floor(different / (1000 * 60));
+			if (diferentMinutes === 0) {
+				const diffSeconds = Math.floor(different / 1000);
 				return `${diffSeconds} seconds ago`;
 			}
-			return `${diffMinutes} minutes ago`;
+			return `${diferentMinutes} minutes ago`;
 		}
-		return `${diffHours} hours ago`;
-	} else if (diffDays === 1) {
+		return `${diferentHours} hours ago`;
+	} else if (differentDays === 1) {
 		return "1 day ago";
 	} else {
-		return diffDays + " days ago";
+		return differentDays + " days ago";
 	}
 };
 

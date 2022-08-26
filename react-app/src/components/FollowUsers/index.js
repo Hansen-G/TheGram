@@ -59,8 +59,8 @@ const FollowUsers = ({ passuser }) => {
 					></img>
 				</div>
 				<div className="home-user-card-name">
-					<div>{passuser.username}</div>
-					<div>{passuser.name}</div>
+					<div className="home-user-card-username">{passuser.username}</div>
+					<div className="home-user-card-name-place">{passuser.name}</div>
 				</div>
 			</div>
 			<p className="home-suggestion">Suggestions For You</p>
@@ -68,21 +68,18 @@ const FollowUsers = ({ passuser }) => {
 				{users.length > 0
 					? users.map((user) => (
 							<div className="follow-card" key={user.id}>
-								{/* {console.log(user)} */}
 							<Link to={`/${user.id}`}>
 								<img
 									className="profile-image-follow-box"
 									src={user.profile_img}
 								/>
 							</Link>
-								
-								<Link to={`/${user.id}`}>
-									<div className="p-follow-box">
-										<div>{user.username}</div>
-										<div className="home-suggest-for-you">Suggested for you</div>
-									</div>
-								</Link>
-								
+							<Link to={`/${user.id}`}>
+								<div className="p-follow-box">
+									<div className="home-user-card-username">{user.username}</div>
+									<div className="home-suggest-for-you">Suggested for you</div>
+								</div>
+							</Link>
 								<button
 									className="follow-box-button"
 									onClick={() => {
@@ -98,11 +95,40 @@ const FollowUsers = ({ passuser }) => {
 					  ))
 					: null}
 			</div>
+			<div className="copy-right flex">
+				© 2022 THEGRAMME FROM
+				<a href="https://github.com/huifeng248" className="copy-right-name">Abby Feng</a>
+				<a href="https://github.com/nullgar" className="copy-right-name">Jonatan Aguilar</a>
+				<a href="https://github.com/yonilurie" className="copy-right-name">Yoni Lurie</a>
+				<a href="https://github.com/Hansen-G" className="copy-right-name">Hansen Guo</a>
+			</div>
 		</div>
 	) : (
 		loaded && (
-			<div className="no-users-follow-card">
-				<h3>No Suggested People to Follow</h3>
+			<div className="followers-box">
+				<div className="home-user-card flex">
+					<div className="home-user-card-img-div">
+
+						<img
+							src={passuser.profile_img}
+							className="home-user-card-img"
+							alt="profile"
+						></img>
+					</div>
+					<div className="home-user-card-name">
+						<div className="home-user-card-username">{passuser.username}</div>
+						<div className="home-user-card-name-place">{passuser.name}</div>
+					</div>
+				</div>
+				<p className="home-suggestion">No suggestion for you now</p>
+				<p className="home-suggestion">Please check it later...</p>
+				<div className="copy-right flex">
+					© 2022 THEGRAMME FROM 
+						<a href="https://github.com/huifeng248" className="copy-right-name">Abby Feng</a>
+						<a href="https://github.com/nullgar" className="copy-right-name">Jonatan Aguilar</a>
+						<a href="https://github.com/yonilurie" className="copy-right-name">Yoni Lurie</a>
+						<a href="https://github.com/Hansen-G" className="copy-right-name">Hansen Guo</a>
+				</div>
 			</div>
 		)
 	);
