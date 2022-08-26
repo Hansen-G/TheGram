@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadHomePage } from "../../store/images";
 import { toggleUserFollow } from "../../store/session";
 import "./FollowUsers.css";
-const FollowUsers = () => {
+import { Link } from "react-router-dom";
+
+
+const FollowUsers = ({ passuser }) => {
 	const dispatch = useDispatch();
 	const [users, setUsers] = useState({});
 	const [user, setUser] = useState();
@@ -44,17 +47,42 @@ const FollowUsers = () => {
 
     return loaded && Object.values(users).length ? (
 		<div className="followers-box">
-			<h3>Suggested People to Follow</h3>
+
+
+			<div className="home-user-card flex">
+				<div className="home-user-card-img-div">
+					
+					<img
+						src={passuser.profile_img}
+							className="home-user-card-img"
+						alt="profile"
+					></img>
+				</div>
+				<div className="home-user-card-name">
+					<div>{passuser.username}</div>
+					<div>{passuser.name}</div>
+				</div>
+			</div>
+			<p className="home-suggestion">Suggestions For You</p>
 			<div>
 				{users.length > 0
 					? users.map((user) => (
 							<div className="follow-card" key={user.id}>
 								{/* {console.log(user)} */}
+							<Link to={`/${user.id}`}>
 								<img
 									className="profile-image-follow-box"
 									src={user.profile_img}
 								/>
-								<p className="p-follow-box">{user.username}</p>
+							</Link>
+								
+								<Link to={`/${user.id}`}>
+									<div className="p-follow-box">
+										<div>{user.username}</div>
+										<div className="home-suggest-for-you">Suggested for you</div>
+									</div>
+								</Link>
+								
 								<button
 									className="follow-box-button"
 									onClick={() => {
