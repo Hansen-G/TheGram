@@ -25,7 +25,6 @@ const ImageForm = ({
 	const [trySubmit, setTrySubmit] = useState(false);
 	const setURLAndCheckURL = async (urlInput) => {
 		const res = await isValidUrl(urlInput, setErrors, errors);
-		console.log(res)
 		setValidURL(res);
 		setUrl(urlInput);
 	};

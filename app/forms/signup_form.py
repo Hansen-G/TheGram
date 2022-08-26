@@ -24,7 +24,6 @@ def username_exists(form, field):
 def check_username_length(form, field):
     #Checking length of username
     username = field.data
-    print(len(username))
     if len(username) < 4:
         raise ValidationError('Username needs to be longer than 4 characters!.')
     if len(username) > 40:

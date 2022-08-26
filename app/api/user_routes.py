@@ -4,8 +4,6 @@ from app.models import User
 
 user_routes = Blueprint('users', __name__)
 
-
-
 @user_routes.route('/')
 @login_required
 def users():
@@ -22,14 +20,9 @@ def get_some_users():
     users = User.query.all()
     not_followed_users_list = []
     for user in users:
-        # print('users--------------------', user.to_dict())
         user = user.to_dict()
         if user['id'] not in following_list:
             not_followed_users_list.append(user)
-
-    # print('----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------',not_followed_users_list)
-
-
     return jsonify(not_followed_users_list)
 
 @user_routes.route('/<int:id>')

@@ -107,11 +107,8 @@ export const toggleUserFollow = (userToFollowId) => async (dispatch) => {
 			method: "POST",
 		}
 	);
-	console.log("USER TO FOLLOW ID", userToFollowId);
-	console.log("WE GOT TO LINE 107 IN SESSION in STORE");
 	if (response.ok) {
 		const data = await response.json();
-		console.log("DATA FROM TOGGLEFOLLOW", data);
 		dispatch(toggleFollow(data));
 	}
 };
@@ -137,7 +134,6 @@ export default function reducer(state = initialState, action) {
 
 		case TOGGLE_FOLLOW:
 			newState = { ...state };
-			console.log("ActionFollowing", action.following);
 
 			if (action.following.length > 0) {
 				action.following.forEach((following) => {

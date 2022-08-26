@@ -60,7 +60,6 @@ export const isValidUrl = async (urlString, setErrors, error) => {
 			return false;
 		};
 		checkImageRequest.onload = function () {
-			console.log(checkImageRequest.status);
 			if (checkImageRequest.status !== 200) {
 				return false;
 			}

@@ -46,7 +46,7 @@ const FollowUsers = () => {
 				{users.length > 0
 					? users.map((user) => (
 							<div className="follow-card" key={user.id}>
-								{/* {console.log(user)} */}
+						
 								<img
 									className="profile-image-follow-box"
 									src={user.profile_img}
