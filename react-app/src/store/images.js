@@ -7,6 +7,7 @@ const TOGGLE_LIKE = "session/TOGGLE_LIKE";
 const ADD_COMMENT = "action/ADD_COMMENT";
 const DELETE_COMMENT = "session/DELETE_COMMENT";
 const EDIT_COMMENT = "session/EDIT_COMMENT";
+const LIKE_COMMENT = "session/LIKE_COMMENT";
 const getImages = (images) => ({
 	type: GET_IMAGES,
 	images,
@@ -41,13 +42,25 @@ const CreateCommentAction = (comment) => ({
 	comment
 })
 
-const deleteComment = (id) => ({
+const deleteComment = (commentId, imageId) => ({
 	type: DELETE_COMMENT,
-	id,
+	commentId, 
+	imageId
+
 });
-const editComment = (comment) => ({
+const editComment = (comment, commentId, imageId) => ({
 	type: EDIT_COMMENT,
 	comment,
+	commentId, 
+	imageId
+});
+
+
+const likeComment = (commentId, imageId, comment) => ({
+	type: LIKE_COMMENT,
+	commentId,
+	imageId,
+	comment
 });
 
 // get the homepage of the current user
@@ -120,6 +133,18 @@ export const toggleALike = (imageId) => async (dispatch) => {
 	}
 };
 
+export const toggleACommentLike = (commentId, imageId) => async (dispatch) => {
+	const response = await fetch(`/api/comment/${commentId}/likes`, {
+		method: "POST",
+	});
+	if (response.ok) {
+		const data = await response.json();
+		await dispatch(likeComment(commentId, imageId, data))
+		return 'Success'
+	}
+};
+
+
 export const DeleteImage = (id) => async (dispatch) => {
 	const response = await fetch(`api/images/${id}`, {
 		method: "Delete",
@@ -142,35 +167,35 @@ export const CreateComment = (comment) => async(dispatch) =>{
 	if (response.ok) {
 		const new_comment = await response.json()
 		dispatch(CreateCommentAction(new_comment))
-	}
+	} 
 }
 
 // edit comment
-export const EditComment = (comment) => async (dispatch) => {
-	const response = await fetch(`/api/comment/${comment.id}`, {
-		method: "POST",
+export const EditComment = ({commentId, comment, imageId}) => async (dispatch) => {
+	const response = await fetch(`/api/comment/${commentId}`, {
+		method: "PUT",
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(comment)
+		body: JSON.stringify({comment: comment})
 	})
 	if (response.ok) {
 		const new_comment = await response.json()
-		dispatch(editComment(new_comment))
+		dispatch(editComment(comment, commentId, imageId))
+		return new_comment
 	}
 }
 //delete comment 
-export const DeleteComment = (id) => async (dispatch) => {
-	const response = await fetch(`api/comment/${id}`, {
+export const DeleteComment = (commentId, imageId) => async (dispatch) => {
+	const response = await fetch(`api/comment/${commentId}`, {
 		method: "Delete",
 	});
 	if (response.ok) {
 		const data = await response.json();
-		dispatch(deleteComment(id));
+		await dispatch(deleteComment(commentId, imageId));
 		return data;
 	}
 }
-
 
 
 const initialState = {};
@@ -212,21 +237,28 @@ export default function images(state = initialState, action) {
 			newState[action.comment.image_id].comments.push(action.comment)
 			return newState
 		case EDIT_COMMENT:
-			newState = {...state}
-			newState[action.comment.image_id].comments.forEach(element => {
-				if (element.id === action.comment.id){
-					element = action.comment
+			newState = { ...state }
+			newState[action.imageId].comments.forEach((element, index) => {
+				if (element.id === action.commentId) {
+					newState[action.imageId].comments[index].comment = action.comment
+				}
+			})
+			return newState
+		case LIKE_COMMENT:
+			newState = { ...state }
+			newState[action.imageId].comments.forEach((element, index) => {
+				if (element.id === action.commentId) {
+					newState[action.imageId].comments[index] = action.comment
 				}
 			})
 			return newState
 		case DELETE_COMMENT:
 			newState = {...state}
-			// newState[action.comment.image_id].comments.forEach((element, index) => {
-			// 	if (element.id === action.comment.id){
-			// 		comments.splice(index,1)
-			// 	}
-			// })
-			// list.splice( list.indexOf('Blues'), 1 )
+			newState[action.imageId].comments.forEach((element, index) => {
+				if (element.id === action.commentId){
+					newState[action.imageId].comments.splice(index,1)
+				}
+			})
 			return newState
 		default:
 			return state;

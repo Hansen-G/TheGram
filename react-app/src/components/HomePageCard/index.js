@@ -127,7 +127,7 @@ function HomePageCard({ image, user }) {
 						</Link>
 						<a className="post-description-detail">
 							{" "}
-							{cut(image.description)}
+							{cut(image.description)} ...
 						</a>
 					</div>
 				)}
@@ -154,7 +154,7 @@ function HomePageCard({ image, user }) {
 									? "disabled post-commit-submit"
 									: "enabled post-commit-submit"
 							}
-							id="editgroup"
+							id="homepage-post"
 						>
 							Post
 						</button>

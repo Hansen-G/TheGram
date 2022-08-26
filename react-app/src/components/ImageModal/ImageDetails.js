@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { toggleALike } from "../../store/images";
+import { toggleALike, toggleACommentLike } from "../../store/images";
 import { CreateComment } from '../../store/images';
-
+import CommentDotModal from '../CommentDotModal';
 import ImageDotModal from '../ImageDotModal'
 
 import './ImageModal.css'
@@ -36,6 +36,19 @@ function pastDate(date) {
     }
 }
 
+function checkLike (arr, int) {
+    if(!arr || !arr.length) {
+        return false
+    } else {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].id === int){
+                return true
+            }
+        }
+        return false
+    }
+}
+
 function ImageDetails({ image, user }) {
     const dispatch = useDispatch();
     const [comment, setComment] = useState('');
@@ -44,7 +57,7 @@ function ImageDetails({ image, user }) {
         if (comment.length > 1000) {
             newError.push('Comment must be less than 1000 characters');
         }
-    }, [comment]);
+    }, [comment, image]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -57,11 +70,19 @@ function ImageDetails({ image, user }) {
         setComment('');
     }
 
-    const toggleImageLike = (imageId) => {
-        dispatch(toggleALike(imageId));
-
+    const toggleImageLike = async (imageId) => {
+        await dispatch(toggleALike(imageId));
 	};
 
+    const toggleCommentLike = async (commentId, imageId) => {
+        await dispatch(toggleACommentLike(commentId, imageId));
+    };
+
+    const commentArr = image['comments'].sort((function (a, b) {
+        return new Date(b['createdAt']) - new Date(a['createdAt']);
+    }))
+
+    console.log(commentArr)
     return (
         <div className="card-model-container flex" key={image.id}>
 
@@ -79,7 +100,7 @@ function ImageDetails({ image, user }) {
                         </Link>
                         {
                             (image['location']) && (
-                                <div className='post-location'>
+                                <div className='post-location' id='modal-post-location'>
                                     {image.location}
                                 </div>
                             )
@@ -109,19 +130,38 @@ function ImageDetails({ image, user }) {
                         </div>
                     </div>
                     {
-                        (image['comments']) && image['comments'].map((comment) => (
+                        (commentArr) && commentArr.map((comment) => (
                             <div className='model-user-info-description flex' id='model-user-info-description'>
                                 <div className='model-profile-image-div'>
                                     <img src={comment.user.profile_img} className="profile-image"></img>
                                 </div>
-                                <div className='model-user-name-div flex'>
+                                <div className='model-user-name-div flex' id='comment-each'>
                                     <div className='model-comments'>
                                         <Link to={`/${comment.user.id}`}>
                                             <a className='model-description-user'>{comment.user.username}</a>
                                         </Link>
                                         <a className='model-description-detail'> {comment.comment}</a>
                                     </div>
+                                    <div>
+                                        <a className='modal-comment-time'>{pastDate(comment.createdAt)}</a>
+                                        {(comment.user.id === user.id) && (
+                                            < CommentDotModal comment={comment} user={user} />
+                                        )}
+                                    </div>
+                                </div>
+                                <div className='post-function-bar-left'>
+                                    {console.log(checkLike(comment.user_comment_likes, user.id))}
+                                    {checkLike(comment.user_comment_likes, user.id)
+                                     ? (
+                                        <i className="fa-solid fa-heart curent_user_liked" id='comment-like-icon' 
+                                        onClick={() => toggleCommentLike(comment.id, image.id)}></i>
+                                    ) : (
+                                        <i className="fa-regular fa-heart curent_user_unliked" id='comment-like-icon' 
+                                        onClick={() => toggleCommentLike(comment.id, image.id)}></i>
+                                    )}
 
+                                    {/* <i className="fa-regular fa-comment"></i> */}
+                                    {/* <i className="fa-regular fa-paper-plane"></i> */}
                                 </div>
                             </div>
                         ))
