@@ -205,7 +205,7 @@ const SignUpForm = () => {
 						</button>
 					</form>
 				</div>
-				<div className="switch-method">
+				<div className="switch-method-sign-up">
 					<div className="switch-method-content">
 						Already have an account?{" "}
 						<Link to={"/login"} className="switch-method-lnk">
