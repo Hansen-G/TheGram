@@ -46,7 +46,6 @@ const Profile = () => {
 		}
 		// dispatch(loadImages(userId));
 		//Call backend
-		
 	}, [dispatch, userId]);
 
 	return (
@@ -132,7 +131,7 @@ const Profile = () => {
 					</div>
 					<div className="posts-container">
 						{images.length > 0 &&
-							images.map((image) => {
+							images.reverse().map((image) => {
 								return (
 									<Post post={image} key={image.id}></Post>
 								);
