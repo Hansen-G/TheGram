@@ -102,6 +102,7 @@ const FollowUsers = ({ passuser }) => {
 			</div>
 			<div className="copy-right flex">
 				© 2022 THEGRAMME FROM
+				<a href="https://github.com/Hansen-G/TheGramme" className="copy-right-name">About</a>
 				<a href="https://github.com/huifeng248" className="copy-right-name">Abby Feng</a>
 				<a href="https://github.com/nullgar" className="copy-right-name">Jonatan Aguilar</a>
 				<a href="https://github.com/yonilurie" className="copy-right-name">Yoni Lurie</a>
@@ -134,6 +135,7 @@ const FollowUsers = ({ passuser }) => {
 				<p className="home-suggestion">Please check it later...</p>
 				<div className="copy-right flex">
 					© 2022 THEGRAMME FROM 
+						<a href="https://github.com/Hansen-G/TheGramme" className="copy-right-name">About</a>
 						<a href="https://github.com/huifeng248" className="copy-right-name">Abby Feng</a>
 						<a href="https://github.com/nullgar" className="copy-right-name">Jonatan Aguilar</a>
 						<a href="https://github.com/yonilurie" className="copy-right-name">Yoni Lurie</a>
