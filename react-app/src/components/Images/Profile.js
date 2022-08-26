@@ -77,7 +77,7 @@ const Profile = () => {
 										>
 											<svg
 												aria-label="Following"
-												className="_ab6-"
+												className="ab6-"
 												color="#262626"
 												fill="#262626"
 												height="15"
@@ -131,7 +131,7 @@ const Profile = () => {
 					</div>
 					<div className="posts-container">
 						{images.length > 0 &&
-							images.map((image) => {
+							images.reverse().map((image) => {
 								return (
 									<Post post={image} key={image.id}></Post>
 								);

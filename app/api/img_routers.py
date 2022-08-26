@@ -196,7 +196,6 @@ def get_images_homepage():
 @login_required
 def get_all_comments(image_id):
     comments = Comment.query.filter(Comment.image_id == image_id)
-    print("!!!!!!", comments)
     all_comments = ([comment.to_dict() for comment in comments])
     return jsonify(all_comments)
 

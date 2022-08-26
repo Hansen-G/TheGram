@@ -22,22 +22,49 @@ const ImageForm = ({
 	const [showAccessity, setShowAccessity] = useState(false);
 	const [url, setUrl] = useState(""); //URL we will actually render as an <img/>
 	const [validURL, setValidURL] = useState(false); // Boolean that will show if the URL below is actually a valid image url
-
-	const setURLAndCheckURL = (urlInput) => {
-		setValidURL(isValidUrl(urlInput));
+	const [trySubmit, setTrySubmit] = useState(false);
+	const setURLAndCheckURL = async (urlInput) => {
+		const res = await isValidUrl(urlInput, setErrors, errors);
+		setValidURL(res);
 		setUrl(urlInput);
 	};
 
 	useEffect(() => {
 		if (image) {
-			setUrl(image.url);
+			setURLAndCheckURL(image.url);
 			setDescription(image.description);
 			setShowStats(image.show_stats);
 		}
 	}, [image]);
 
-	const handleSubmit = (e) => {
+	useEffect(() => {
+		setErrors([]);
+	}, [validURL]);
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
+		const submitErrors = [];
+
+		if (!validURL) {
+			submitErrors.push(
+				"Invalid URL: Please enter a valid URL ending in - jpg/jpeg/png/webp/avif/gif/svg"
+			);
+		}
+		if (url.includes("File:")) {
+			submitErrors.push(
+				'Invalid URL: URL must not include "File:", Please use original image address'
+			);
+		}
+		if (url.length > 250) {
+			submitErrors.push(
+				"Invalid URL: URL must not be longer than 250 characters"
+			);
+		}
+		if (submitErrors.length > 0) {
+			return setErrors(submitErrors);
+		} else {
+			setErrors(submitErrors);
+		}
 		if (!image) {
 			const create_payload = {
 				url,
@@ -83,7 +110,11 @@ const ImageForm = ({
 					<div className="form_title">
 						{image ? "Edit info" : "Create new post"}
 					</div>
-					<button className="create_submit_button" type="submit">
+					<button
+						className="create_submit_button"
+						type="submit"
+						disabled={errors.length > 0}
+					>
 						{image ? "Done" : "Share"}
 					</button>
 				</div>
@@ -109,11 +140,6 @@ const ImageForm = ({
 									></img>
 									<div>{user.name}</div>
 								</div>
-								<ul>
-									{errors.map((error, index) => (
-										<li key={index}>{error}</li>
-									))}
-								</ul>
 
 								<div className="description">
 									<textarea
@@ -122,7 +148,7 @@ const ImageForm = ({
 										onChange={(e) =>
 											setDescription(e.target.value)
 										}
-										placeholder="Write a caption..."
+										placeholder="Optional (Write a caption)"
 										maxLength="2200"
 									/>
 									{description && description.length > 0 ? (
@@ -220,6 +246,13 @@ const ImageForm = ({
 												)}
 											</div>
 										</div>
+									)}
+									{errors.length > 0 && (
+										<ul>
+											{errors.map((error, index) => (
+												<li key={index}>{error}</li>
+											))}
+										</ul>
 									)}
 								</div>
 							</div>

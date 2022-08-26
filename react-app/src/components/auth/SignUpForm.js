@@ -4,6 +4,7 @@ import { Redirect, Link } from "react-router-dom";
 import { signUp } from "../../store/session";
 
 import "./LoginSignupForm.css";
+
 const SignUpForm = () => {
 	const [errors, setErrors] = useState([]);
 	const [username, setUsername] = useState("");
@@ -35,15 +36,43 @@ const SignUpForm = () => {
 
 	const onSignUp = async (e) => {
 		e.preventDefault();
-		if (password === repeatPassword) {
-			const data = await dispatch(
-				signUp(username, email, password, name)
-			);
-			if (data) {
-				setErrors(data);
-			}
+		const error = []
+
+		if (password !== repeatPassword) {
+			error.push('Confirm Password field must be the same as the Password field')
+			setErrors(error)
+		} else if (password.length < 6 || password.length > 64 ) {
+			error.push('Password must be between 6 and 64 characters!')
+			setErrors(errors)
+		} else if (repeatPassword.length < 6 || repeatPassword.length > 64) {
+			error.push('Confirm Password must be between 6 and 64 characters!')
+			setErrors(errors)
+		} else if (username.length < 4 || username.length > 40) {
+			error.push('Username must be between 4 and 40 characters!')
+			setErrors(error)
+		} else if (name.length < 2 || name.length > 64) {
+			error.push('Name must be between 2 and 64 characters!')
+			setErrors(error)
+
 		}
+		else {
+				const data = await dispatch(
+					signUp(username, email, password, name)
+				);
+				if (data) {
+					setErrors(data);
+				}
+			}
 	};
+
+
+
+
+
+
+
+
+
 
 	const updateUsername = (e) => {
 		setUsername(e.target.value);
@@ -90,9 +119,10 @@ const SignUpForm = () => {
 				</div>
 				<div>
 					<form onSubmit={onSignUp}>
-						<div>
+						<div className='signup-error-text'>
 							{errors.map((error, ind) => (
-								<div key={ind}>{error}</div>
+								<div className="error-field" key={ind}>{error}</div>
+
 							))}
 						</div>
 						<div>
@@ -139,8 +169,10 @@ const SignUpForm = () => {
 								placeholder="Password"
 								onChange={updatePassword}
 								value={password}
+								minLength='6'
 								className="verification-form-input"
 								required={true}
+
 							></input>
 						</div>
 						<div>
@@ -155,12 +187,25 @@ const SignUpForm = () => {
 								className="verification-form-input"
 							></input>
 						</div>
-						<button type="submit" className="submit-btn">
-							Sign Up
+						<button type="submit"
+							disabled={
+								password.length < 1 || password.length === 0 ||
+								repeatPassword.length < 1 || repeatPassword.length === 0 ||
+								username.length < 1 || name.length < 1 || email.length < 1
+							}
+							className={`submit-btn ${
+								password.length < 1 || password.length === 0 ||
+								repeatPassword.length < 1 || repeatPassword.length === 0 ||
+								username.length < 1 || name.length < 1 || email.length < 1
+									? "disabled"
+									: ""
+							}`}
+							>
+								Sign Up
 						</button>
 					</form>
 				</div>
-				<div className="switch-method">
+				<div className="switch-method-sign-up">
 					<div className="switch-method-content">
 						Already have an account?{" "}
 						<Link to={"/login"} className="switch-method-lnk">

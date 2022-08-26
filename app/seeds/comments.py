@@ -3,13 +3,6 @@ from .users import user1, user2, user3
 from .images import image1,image2,image3
 
 
-image1 = Image(
-    url='https://a0.muscache.com/im/pictures/619ab404-7a6c-4425-a79c-9459b1c00b1b.jpg?im_w=1200',
-    description='nice place',
-    show_stats=True,
-    user_id=1,
-    user_image_likes=[user1, user2]
-    )
 comment1 = Comment(
     image_id=1,
     user_id=1,
