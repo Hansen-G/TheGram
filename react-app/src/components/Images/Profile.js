@@ -42,10 +42,10 @@ const Profile = () => {
 		}
 		if (Number(userId)) {
 			dispatch(loadImages(userId));
+			getUser();
 		}
 		// dispatch(loadImages(userId));
 		//Call backend
-		getUser();
 	}, [dispatch, userId]);
 
 	return (
@@ -77,7 +77,7 @@ const Profile = () => {
 										>
 											<svg
 												aria-label="Following"
-												class="_ab6-"
+												className="_ab6-"
 												color="#262626"
 												fill="#262626"
 												height="15"
