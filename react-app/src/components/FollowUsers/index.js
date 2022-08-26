@@ -51,16 +51,21 @@ const FollowUsers = ({ passuser }) => {
 
 			<div className="home-user-card flex">
 				<div className="home-user-card-img-div">
-					
-					<img
-						src={passuser.profile_img}
+					<Link to={`/${passuser.id}`}>
+						<img
+							src={passuser.profile_img}
 							className="home-user-card-img"
-						alt="profile"
-					></img>
+							alt="profile"
+						></img>
+					</Link>
+					
 				</div>
 				<div className="home-user-card-name">
-					<div className="home-user-card-username">{passuser.username}</div>
-					<div className="home-user-card-name-place">{passuser.name}</div>
+					<Link to={`/${passuser.id}`}>
+						<div className="home-user-card-username">{passuser.username}</div>
+						<div className="home-user-card-name-place">{passuser.name}</div>
+					</Link>
+					
 				</div>
 			</div>
 			<p className="home-suggestion">Suggestions For You</p>
@@ -106,20 +111,25 @@ const FollowUsers = ({ passuser }) => {
 	) : (
 		loaded && (
 			<div className="followers-box">
-				<div className="home-user-card flex">
-					<div className="home-user-card-img-div">
+					<div className="home-user-card flex">
+						<div className="home-user-card-img-div">
+							<Link to={`/${passuser.id}`}>
+								<img
+									src={passuser.profile_img}
+									className="home-user-card-img"
+									alt="profile"
+								></img>
+							</Link>
 
-						<img
-							src={passuser.profile_img}
-							className="home-user-card-img"
-							alt="profile"
-						></img>
+						</div>
+						<div className="home-user-card-name">
+							<Link to={`/${passuser.id}`}>
+								<div className="home-user-card-username">{passuser.username}</div>
+								<div className="home-user-card-name-place">{passuser.name}</div>
+							</Link>
+
+						</div>
 					</div>
-					<div className="home-user-card-name">
-						<div className="home-user-card-username">{passuser.username}</div>
-						<div className="home-user-card-name-place">{passuser.name}</div>
-					</div>
-				</div>
 				<p className="home-suggestion">No suggestion for you now</p>
 				<p className="home-suggestion">Please check it later...</p>
 				<div className="copy-right flex">

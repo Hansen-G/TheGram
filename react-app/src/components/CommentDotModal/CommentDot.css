@@ -51,20 +51,31 @@ div {
 
 
 #edit-comment {
-    height: 200px
+    height: 300px;
 }
 
 .dot-edit-form-div {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    
+    height: 250px;
 }
 
-#edit-comment {
-    bottom: 20px;
+#edit-comment-post {
+    bottom: 120px;
     right: 180px;
+    height: 20px;
 }
 
+#dot-edit-comment{
+    max-height: 180px;
+    max-width: 300px;
+}
 
+.edit-error{
+    font-size: 14px;
+    color: #6E6E6E;
+}
 
 .card {
     
