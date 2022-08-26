@@ -3,19 +3,36 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadHomePage } from "../../store/images";
 import HomePageCard from "../HomePageCard";
 
-import "./HomePage.css";
+
+import {CreateComment} from '../../store/images';
+import HomePageCard from '../HomePageCard';
+
+import './HomePage.css'
+import FollowUsers from "../FollowUsers";
+
 
 function HomePage() {
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.session.user);
-
+	const [loaded, setLoaded] = useState(false)
+	
 	useEffect(() => {
 		dispatch(loadHomePage(user.id));
 	}, [dispatch, user]);
 
+
+  useEffect(() => {
+		const timeout = setTimeout(() => {
+				setLoaded(true);
+		}, 250);
+		return () => clearTimeout(timeout)
+	}, [])
+
+
+
 	const images = useSelector((state) => state.images);
 	if (!images || Object.keys(images).length === 0) {
-		return null;
+		return <FollowUsers />;
 	}
 	let imagesArr = Object.values(images).sort(function (a, b) {
 		return new Date(b["createdAt"]) - new Date(a["createdAt"]);
@@ -23,8 +40,9 @@ function HomePage() {
 
 	return (
 		<div className="home">
+			<FollowUsers />
 			<div className="home-left flex">
-				{imagesArr.length > 0 &&
+				{loaded && imagesArr.length > 0 &&
 					imagesArr.map((image) => (
 						<HomePageCard
 							key={image.id}
@@ -35,6 +53,3 @@ function HomePage() {
 			</div>
 		</div>
 	);
-}
-
-export default HomePage;
