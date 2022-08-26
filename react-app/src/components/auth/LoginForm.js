@@ -112,6 +112,7 @@ const LoginForm = () => {
 										? "disabled"
 										: ""
 								}`}
+								disabled={email.length < 6 || password.length < 6}
 							>
 								Log In
 							</button>
@@ -137,7 +138,7 @@ const LoginForm = () => {
 				</div>
 				{/* <div className="switch-method">
 					<div className="switch-method-content">
-						
+
 					</div>
 				</div> */}
 			</div>
