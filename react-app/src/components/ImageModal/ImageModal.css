@@ -16,6 +16,7 @@
     width: 100% !important;
     max-width: 1400px;
     height: 800px;
+    min-width: 1000px;
 
 }
 
