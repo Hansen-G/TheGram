@@ -38,20 +38,21 @@
     left: 10px;
 }
 .profile-image-follow-box {
-    width: 30%;
+    width: 50px;
     border-radius: 50px;
     border: black solid 1px;
 }
 .p-follow-box{
     display: inline;
+    inline-size: 150px;
     color: black;
     margin: 10px;
     text-overflow: clip;
 }
-.follow-button {
+.follow-box-button {
     all: none;
     height: 30px;
-    width: 266px;
+    width: 100px;
     border: none;
     color: rgb(255, 255, 255);
     /* background-color: rgba(0,149,246,0.3); */

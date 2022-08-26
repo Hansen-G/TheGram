@@ -8,6 +8,7 @@ const FollowUsers = () => {
     const state = useSelector(state => state)
     const [users, setUsers] = useState({})
     const [user, setUser] = useState()
+    const [loaded, setLoaded] = useState(false)
     const currentUser = useSelector((state) => state.session.user);
     const userId = currentUser.id
 
@@ -15,16 +16,25 @@ const FollowUsers = () => {
     // console.log(Object.values(currentUser.following).length === 0)
 
     useEffect(() => {
-        (async () => {
+        const getData = async () => {
             const res = await fetch(`/api/users/get-users`);
             const fetchedusers = await res.json();
-            await dispatch(loadHomePage(userId))
+            dispatch(loadHomePage(userId))
             setUsers(fetchedusers)
-        })();
-        return
+
+        }
+        getData()
 
     }, [user])
-    console.log('test!!!!!!!!!!!!!!',currentUser)
+
+
+    useEffect(() => {
+         const timeout = setTimeout(() => {
+                 setLoaded(true);
+         }, 250);
+         return () => clearTimeout(timeout)
+     }, [])
+
     //Fetch user data
 	const getUser = async () => {
 		let newuser = await fetch(`/api/users/${userId}`);
@@ -38,7 +48,7 @@ const FollowUsers = () => {
 	};
     return (
 
-        users && Object.values(currentUser.following).length && Object.values(users).length != 0 ?
+        loaded && Object.values(users).length ?
         <div className='followers-box'>
 
         <h3>Suggested People to Follow</h3>
@@ -47,7 +57,7 @@ const FollowUsers = () => {
                 {/* {console.log(user)} */}
                 <img className='profile-image-follow-box' src={user.profile_img} />
                 <p className='p-follow-box'>{user.username}</p>
-                <button className='follow-button' onClick={() => {
+                <button className='follow-box-button' onClick={() => {
                     toggleAUserFollow(
                         currentUser.id,
 						user.id
@@ -59,7 +69,7 @@ const FollowUsers = () => {
 
         )): null}</div>
         </div>
-            : <div className='no-users-follow-card' ><h3>No Suggested People to Follow</h3></div>
+            : loaded && <div className='no-users-follow-card' ><h3>No Suggested People to Follow</h3></div>
     )
 }
 

@@ -45,12 +45,20 @@ function HomePage() {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector(state => state.session.user)
-
+    const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
-        dispatch(loadHomePage(user.id));
+
+       dispatch(loadHomePage())
+
     }, [dispatch]);
 
+    useEffect(() => {
+		const timeout = setTimeout(() => {
+				setLoaded(true);
+		}, 250);
+		return () => clearTimeout(timeout)
+	}, [])
 
 
     const images = useSelector((state) => state.images);
@@ -65,7 +73,7 @@ function HomePage() {
         <div className='home'>
             <FollowUsers />
             <div className='home-left flex'>
-                {imagesArr.length > 0 &&
+                {loaded && imagesArr.length > 0 &&
                     imagesArr.map((image) => (
                         <HomePageCard key={image.id} image={image} user={user} />
                     ))}
