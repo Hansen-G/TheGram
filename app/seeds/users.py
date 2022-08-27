@@ -11,7 +11,7 @@ user1 = User(
     profile_img='https://res.cloudinary.com/hansenguo/image/upload/v1660950302/TheGramme/user_yiqxol.png', 
     website='https://www.google.com', 
     bio='I am a demo user', 
-    phone_number=12345678, 
+    # phone_number=12345678, 
     gender='Male', 
     public=True
     )
@@ -23,7 +23,7 @@ user2 = User(
     profile_img='https://res.cloudinary.com/hansenguo/image/upload/v1660950302/TheGramme/user_yiqxol.png', 
     website='https://www.google.com', 
     bio='I am a demo user2', 
-    phone_number=4256666666, 
+    # phone_number=4256666666, 
     gender='Male', 
     public=True,
     followers= [user1]
@@ -37,7 +37,7 @@ user3 = User(
     profile_img='https://res.cloudinary.com/hansenguo/image/upload/v1660950302/TheGramme/user_yiqxol.png', 
     website='https://www.google.com', 
     bio='🐍🐍🐍 Love Python, Especially for backend web development!', 
-    phone_number=2065555555, 
+    # phone_number=2065555555, 
     gender='Male', 
     public=False,
     followers=[user2, user1]
@@ -50,7 +50,7 @@ user4 = User(
     profile_img='https://res.cloudinary.com/hansenguo/image/upload/v1660950302/TheGramme/user_yiqxol.png', 
     website='https://www.google.com', 
     bio='My name is Steven, follow me for some great content', 
-    phone_number=9999999999, 
+    # phone_number=9999999999, 
     gender='Male', 
     public=False,
     followers=[user2, user1]
@@ -63,7 +63,7 @@ user5 = User(
     profile_img='https://res.cloudinary.com/hansenguo/image/upload/v1660950302/TheGramme/user_yiqxol.png', 
     website='https://www.google.com', 
     bio='My name is Sarah. I love Javascript and Frontend web development. ⚛️ React > *', 
-    phone_number=1111111111, 
+    # phone_number=1111111111, 
     gender='Female', 
     public=False,
     followers=[user2, user1]
@@ -76,7 +76,7 @@ user6 = User(
     profile_img='https://avatars.githubusercontent.com/u/92499732?v=4', 
     website='https://github.com/yonilurie', 
     bio='Yoni', 
-    phone_number=1212121212, 
+    # phone_number=1212121212, 
     gender='Male', 
     public=False,
     followers=[user5, user3, user2]
@@ -89,7 +89,7 @@ user7 = User(
     profile_img='https://avatars.githubusercontent.com/u/77709211?v=4', 
     website='https://github.com/Hansen-G', 
     bio='Hansen', 
-    phone_number=2121212121, 
+    # phone_number=2121212121, 
     gender='Male', 
     public=False,
     followers=[user4, user6]
@@ -102,7 +102,7 @@ user8 = User(
     profile_img='https://avatars.githubusercontent.com/u/91226395?v=4', 
     website='https://github.com/huifeng248', 
     bio='Abby', 
-    phone_number=3232323232, 
+    # phone_number=3232323232, 
     gender='Female', 
     public=False,
     followers=[user1, user7, user6, user5]
@@ -115,7 +115,7 @@ user9 = User(
     profile_img='https://avatars.githubusercontent.com/u/61948122?v=4', 
     website='https://github.com/nullgar', 
     bio='Jonatan', 
-    phone_number=3232323232, 
+    # phone_number=3232323232, 
     gender='Male', 
     public=False,
     followers=[user5,user6,user7]
@@ -128,7 +128,7 @@ user10 = User(
     profile_img='https://res.cloudinary.com/hansenguo/image/upload/v1660950302/TheGramme/user_yiqxol.png', 
     website='https://www.google.com', 
     bio='Follow for cute animals!', 
-    phone_number=4141414141, 
+    # phone_number=4141414141, 
     gender='Female', 
     public=False,
     followers=[user1,user2,user3,user4,user5,user6,user7,user8,user9]
@@ -156,8 +156,7 @@ def seed_users():
     # db.session.add(user8)
     # db.session.add(user9)
     # db.session.add(user10)
-
-    db.session.commit()
+    # db.session.commit()
 
 
 # Uses a raw SQL query to TRUNCATE the users table.
