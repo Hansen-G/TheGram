@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     name = db.Column(db.String(64), nullable=False)
-    profile_img = db.Column(db.String(250), nullable=True, default='https://res.cloudinary.com/hansenguo/image/upload/v1660950302/TheGramme/user_yiqxol.png')
+    profile_img = db.Column(db.String(1000), nullable=True, default='https://res.cloudinary.com/hansenguo/image/upload/v1660950302/TheGramme/user_yiqxol.png')
     website = db.Column(db.String(64), nullable=True)
     bio = db.Column(db.String(150), nullable=True)
     phone_number = db.Column(db.Integer, nullable=True)

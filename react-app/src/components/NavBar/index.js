@@ -34,7 +34,7 @@ const NavBar = () => {
 					>
 						<img
 							alt="Instagram logo"
-							src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/512px-Instagram_logo.svg.png"
+							src="https://res.cloudinary.com/hansenguo/image/upload/v1661536371/TheGramme/logo1_oxkgrb.png"
 							className="logo"
 						/>
 					</Link>
@@ -56,9 +56,7 @@ const NavBar = () => {
 									onClick={() => setShowModal(!showModal)}
 								></i>
 							</NavLink>
-							<NavLink to="/" className="nav-bar-link">
-								<i className="fa-regular fa-heart icon"></i>
-							</NavLink>
+							
 							<div
 								onClick={() => setShowMenu(!showMenu)}
 								className="profile-pic-anchor"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { EditComment, DeleteComment } from "../../store/images";
 
@@ -7,6 +7,15 @@ import "./CommentDot.css";
 function CommentDot({ setModal, comment, user }) {
 	const dispatch = useDispatch();
 	const [commentToBeEdited, setCommentToBeEdited] = useState(comment.comment);
+	const [errors, setErrors] = useState([]);
+	const [check, setCheck] = useState(true)
+
+	useEffect(() => {
+		const newError = [];
+		if (commentToBeEdited.length > 1000) newError.push("Comment must be 1000 characters or less");
+		if (!commentToBeEdited) newError.push("Please input your comment");
+		setErrors(newError)
+	}, [commentToBeEdited])
 
 	const deleteListener = async (commentId, imageId) => {
 		if (
@@ -44,24 +53,34 @@ function CommentDot({ setModal, comment, user }) {
 					<div className="dot-edit-form-div flex">
 						<div>Edit Comment</div>
 						<textarea
-							placeholder="More than 1000 characters"
+							placeholder="No more than 1000 characters"
 							type={"text"}
-							row="6"
+							maxLength="1000"
+							row="10"
 							id="dot-edit-comment"
 							value={commentToBeEdited}
 							onChange={(e) =>
 								setCommentToBeEdited(e.target.value)
 							}
 						></textarea>
+
+
+
+						<div className="edit-error">
+							{ (errors) }
+						</div>
+
+						
+
 						<button
 							type="submit"
-							disabled={commentToBeEdited.length === 0}
+							disabled={commentToBeEdited.length === 0 || errors.length}
 							className={
-								commentToBeEdited.length === 0
+								commentToBeEdited.length === 0 || errors.length
 									? "disabled post-commit-submit"
 									: "enabled post-commit-submit"
 							}
-							id="edit-comment"
+							id="edit-comment-post"
 						>
 							Post
 						</button>
