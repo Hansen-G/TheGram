@@ -1,161 +1,159 @@
 .comments-botton {
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
+	background-color: rgba(0, 0, 0, 0);
+	border: none;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
 }
-#post-model{
-    width: 70vw;
+#post-model {
+	width: 70vw;
 }
-#model-content{
-    width: 100px;
+#model-content {
+	width: 100px;
 }
 
 .card-model-container {
-    width: 100% !important;
-    max-width: 1400px;
-    height: 800px;
-
+	width: 100% !important;
+	height: 800px;
+    /* Lines I added below for changing image max size on smaller display */
+	max-width: 1000px;
+	max-height: 90vh;
 }
 
 .model-image {
-    height: 100%;
-    background-color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 600px;
-
+	height: 100%;
+	background-color: black;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 600px;
 }
 
-#model-image-detail{
-    width: 100%;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+#model-image-detail {
+	width: 100%;
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
 }
 
-.model-info{
-    width: 40%;
-    height: 100%;
-    flex-direction: column;
-    min-width: 300px;
-
+.model-info {
+	width: 40%;
+	height: 100%;
+	flex-direction: column;
+	min-width: 300px;
 }
 
 .model-user-info {
-    width: 95%;
-    height: 60px;
-    float: left;
-    justify-content: start;
-    align-items: center;
-    padding-left: 10px;
+	width: 95%;
+	height: 60px;
+	float: left;
+	justify-content: start;
+	align-items: center;
+	padding-left: 10px;
 }
 
-.model-comments{
-    width: 100%;
+.model-comments {
+	width: 100%;
 }
 
-.model-description-detail{
-    width: 90%;
-    overflow-wrap: anywhere;
+.model-description-detail {
+	width: 90%;
+	overflow-wrap: anywhere;
 }
 
-#model-div-line{
-    width: 100%;
-
+#model-div-line {
+	width: 100%;
 }
 
 .model-user-info-description {
-    width: 95%;
-    float: left;
-    justify-content: start;
-    align-items: center;
-    padding-left: 10px;
+	width: 95%;
+	float: left;
+	justify-content: start;
+	align-items: center;
+	padding-left: 10px;
 }
 #model-user-info-description {
-    padding-top: 10px;
-    justify-content: start;
-    align-items: flex-start;
+	padding-top: 10px;
+	justify-content: start;
+	align-items: flex-start;
 }
 
-.model-user-name-div{
-    flex-direction: column;
+.model-user-name-div {
+	flex-direction: column;
 }
 
-.modal-all-comments{
-    flex-direction: column;
-    align-self: start;
-    overflow: auto;
-    height: 80%;
-    width: 100%;
+.modal-all-comments {
+	flex-direction: column;
+	align-self: start;
+	overflow: auto;
+	height: 80%;
+	width: 100%;
 }
 
 .modal-date {
-    margin: 8px 13px;
-    color: #8E8E8E;
-    font-size: 10px;
-    text-transform: uppercase;
+	margin: 8px 13px;
+	color: #8e8e8e;
+	font-size: 10px;
+	text-transform: uppercase;
 }
-.modal-comment-input{
-    border: 0;
-    width: 86%;
+.modal-comment-input {
+	border: 0;
+	width: 86%;
 }
-.modal-comment-form{
-    width: 100%;
+.modal-comment-form {
+	width: 100%;
 }
 
 input.middle:focus {
-    outline-width: 0;
+	outline-width: 0;
 }
 
 *:focus {
-    outline: none;
+	outline: none;
 }
 
-.model-description-user{
-    font-size: 14px;
-    color: #262626;
-    font-weight: bold;
+.model-description-user {
+	font-size: 14px;
+	color: #262626;
+	font-weight: bold;
 }
 
-.model-description-detail{
-    font-size: 14px;
-    color: #262626;
+.model-description-detail {
+	font-size: 14px;
+	color: #262626;
 }
 
 .curent_user_unliked {
-    cursor: pointer;
+	cursor: pointer;
 }
 
-.post-commit-submit{
-    position: absolute;
-    right: 15px;
+.post-commit-submit {
+	position: absolute;
+	right: 15px;
 }
 
-.modal-comment-time{
-    color: #8E8E8E;
-    font-size: 10px;
-    text-transform: uppercase;
+.modal-comment-time {
+	color: #8e8e8e;
+	font-size: 10px;
+	text-transform: uppercase;
 }
 
-#comment-like-icon{
-    font-size: 10px;
+#comment-like-icon {
+	font-size: 10px;
 
-    margin-left: auto;
-    margin-right: 0;
+	margin-left: auto;
+	margin-right: 0;
 }
 
-#model-user-info-description{
-    float: right;
+#model-user-info-description {
+	float: right;
 }
 
 #comment-each {
-    width: 120%;
-    margin: auto 0 auto auto;
+	width: 120%;
+	margin: auto 0 auto auto;
 }
 
-.modal-post-location{
-    width: 90%;
+.modal-post-location {
+	width: 90%;
 }

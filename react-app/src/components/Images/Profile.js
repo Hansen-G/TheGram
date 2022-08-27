@@ -57,7 +57,7 @@ const Profile = () => {
 					<div className="user-info">
 						<div className="profile-image-container">
 							<img
-								className="profile-image"
+								className="profile-image-bio"
 								src={user.profile_img}
 								alt="profile"
 							/>
