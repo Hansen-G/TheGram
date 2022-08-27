@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 3471a59c0d36
+Revision ID: fafa7a75d250
 Revises: 
-Create Date: 2022-08-26 17:02:00.444226
+Create Date: 2022-08-26 17:14:46.438660
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3471a59c0d36'
+revision = 'fafa7a75d250'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,7 +24,7 @@ def upgrade():
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('name', sa.String(length=64), nullable=False),
-    sa.Column('profile_img', sa.String(length=250), nullable=True),
+    sa.Column('profile_img', sa.String(length=1000), nullable=True),
     sa.Column('website', sa.String(length=64), nullable=True),
     sa.Column('bio', sa.String(length=150), nullable=True),
     sa.Column('phone_number', sa.Integer(), nullable=True),
@@ -45,7 +45,7 @@ def upgrade():
     )
     op.create_table('images',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('url', sa.String(length=250), nullable=False),
+    sa.Column('url', sa.String(length=1000), nullable=False),
     sa.Column('description', sa.String(length=2200), nullable=True),
     sa.Column('alt_description', sa.String(length=2200), nullable=True),
     sa.Column('show_stats', sa.Boolean(), nullable=False),

@@ -55,9 +55,9 @@ const ImageForm = ({
 				'Invalid URL: URL must not include "File:", Please use original image address'
 			);
 		}
-		if (url.length > 250) {
+		if (url.length > 1000) {
 			submitErrors.push(
-				"Invalid URL: URL must not be longer than 250 characters"
+				"Invalid URL: URL must not be longer than 1000 characters"
 			);
 		}
 		if (submitErrors.length > 0) {
@@ -170,7 +170,7 @@ const ImageForm = ({
 										}
 										placeholder="Image URL"
 										type="url"
-										maxLength="250"
+										maxLength="1000"
 										required
 										className="post-text-input"
 									/>
