@@ -141,6 +141,7 @@
 	font-weight: 600;
 }
 
+
 .signup-error-text {
 	max-height: fit-content;
 	color: red;
@@ -166,4 +167,10 @@
 .error-field {
 	justify-content: left;
 	width: 130%;
+}
+
+
+.login-logo{
+	width: 175px;
+	
 }
