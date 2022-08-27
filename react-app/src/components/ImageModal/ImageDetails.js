@@ -125,11 +125,13 @@ function ImageDetails({ image, user }) {
 								key={comment.id}
 							>
 								<div className="model-profile-image-div">
-									<img
-										src={comment.user.profile_img}
-										className="profile-image"
-										alt="profile"
-									></img>
+									<Link to={`/${comment.user.id}`}>
+										<img
+											src={comment.user.profile_img}
+											className="profile-image"
+											alt="profile"
+										></img>
+									</Link>
 								</div>
 								<div
 									className="model-user-name-div flex"
