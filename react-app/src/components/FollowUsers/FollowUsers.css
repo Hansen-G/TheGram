@@ -1,110 +1,135 @@
 .followers-box {
-    padding-left: 20px;
-    margin: 2%;
-    flex-flow: column;
-    width: 320px;
-    height: max-content;
-    align-items: center;
+	padding-left: 20px;
+	margin: 2%;
+	flex-flow: column;
+	width: 320px;
+	height: max-content;
+	align-items: center;
 }
 
-.home-user-card{
-    justify-content: flex-start;
-    align-items: center;
+.home-user-card {
+	justify-content: flex-start;
+	align-items: center;
 }
 
 .home-user-card-img {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
+	width: 56px;
+	height: 56px;
+	border-radius: 50%;
 }
 
-.home-suggestion{
-    font-size: 14px;
-    color: #8E8E8E;
+.home-suggestion {
+	font-size: 14px;
+	color: #8e8e8e;
 }
 
-.home-user-card-name{
-    padding-left: 20px;
+.home-user-card-name {
+	padding-left: 20px;
 }
 
 .home-user-card-img-div {
-    width: 56px;
-    height: 56px;
+	width: 56px;
+	height: 56px;
 }
 
 .follow-card {
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    margin-bottom: 30px;
-    height: auto;
-    border-radius: 10px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	margin-bottom: 30px;
+	height: auto;
+	border-radius: 10px;
 }
 
 .no-users-follow-card {
-    border: rgba(219, 219, 219) 1px solid;
-    margin: 3%;
-    padding: 2%;
-    max-height: 10vh;
-    padding: 2%;
-    position: absolute;
-    left: 10px;
+	border: rgba(219, 219, 219) 1px solid;
+	margin: 3%;
+	padding: 2%;
+	max-height: 10vh;
+	padding: 2%;
+	position: absolute;
+	left: 10px;
 }
 
 .profile-image-follow-box {
-    width: 32px;
-    height: 32px;
-    border-radius: 50px;
+	width: 32px;
+	height: 32px;
+	border-radius: 50px;
 }
 
-.p-follow-box{
-    width: 200px;
-    inline-size: 170px;
-    color: black;
-    margin: 0 10px;
-    text-overflow: clip;   
+.p-follow-box {
+	width: 200px;
+	inline-size: 170px;
+	color: black;
+	margin: 0 10px;
+	text-overflow: clip;
 }
 
-.home-suggest-for-you{
-    font-size: 12px;
-    color: #8E8E8E;
-    margin-top: 4px;
+.home-suggest-for-you {
+	font-size: 12px;
+	color: #8e8e8e;
+	margin-top: 4px;
 }
 
 .follow-box-button {
-    all: none;
-    height: 30px;
-    width: 70px;
-    border: none;
-    color: rgb(0, 149, 246);
-    background-color: #EFEFEF;
-    border-radius: 4px;
-    box-sizing: border-box;
-    line-height: 18px;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
+	all: none;
+	height: 30px;
+	width: 70px;
+	border: none;
+	color: rgb(0, 149, 246);
+	background-color: #efefef;
+	border-radius: 4px;
+	box-sizing: border-box;
+	line-height: 18px;
+	font-weight: 600;
+	font-size: 14px;
+	cursor: pointer;
 }
 
-.home-user-card-username{
-    font-size: 14px;
-    color: #262626;
-    font-weight: bold;
+.home-user-card-username {
+	font-size: 14px;
+	color: #262626;
+	font-weight: bold;
 }
 
 .home-user-card-name-place {
-    font-size: 14px;
-    color: #8E8E8E;
+	font-size: 14px;
+	color: #8e8e8e;
 }
 
-.copy-right{
-    flex-direction: column;
-    font-size: 12px;
-    color: #C7C7C7;
-    margin-top: 30px;
+.copy-right {
+	flex-direction: column;
+	font-size: 12px;
+	color: #c7c7c7;
+	margin-top: 30px;
 }
 
 .copy-right a {
-    font-size: 12px;
-    color: #C7C7C7;
+	font-size: 12px;
+	color: #c7c7c7;
+}
+
+.contact-container {
+	height: 30px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.contact-container > a {
+	font-size: 16px;
+}
+
+.fa-brands {
+	height: 16px;
+	font-size: 14px;
+}
+
+.copy-right-name {
+	margin-right: 5px;
+	font-weight: 600;
+	font-size: 14px;
+}
+
+.contact-link {
+	margin-right: 5px;
 }

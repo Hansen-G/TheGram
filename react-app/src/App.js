@@ -5,7 +5,6 @@ import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/NavBar/index";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import UsersList from "./components/UsersList";
 import { authenticate } from "./store/session";
 import Profile from "./components/Images/Profile";
 import HomePage from "./components/HomePage";
@@ -38,15 +37,9 @@ function App() {
 				<ProtectedRoute path="/" exact={true}>
 					<HomePage />
 				</ProtectedRoute>
-				{/* <ProtectedRoute exact={true} path="/users">
-					<UsersList />
-				</ProtectedRoute> */}
 				<ProtectedRoute exact={true} to={/^\/\d+/}>
 					<Profile />
 				</ProtectedRoute>
-				{/* <ProtectedRoute exact={true} path={`/${/^\/\d+/}`}>
-					<Profile />
-				</ProtectedRoute> */}
 			</Switch>
 		</BrowserRouter>
 	);

@@ -12,4 +12,5 @@
 	object-fit: cover;
 	max-width: 293px;
 	max-height: 293px;
+	cursor: pointer;
 }

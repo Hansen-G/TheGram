@@ -62,18 +62,19 @@ function ImageDetails({ image, user }) {
 			<div className="model-info flex">
 				<div className="model-user-info flex">
 					<div className="model-profile-image-div">
-						<img
-							src={image.post_user.profile_img}
-							className="profile-image"
-							alt="profile"
-						></img>
+						<Link to={`/${image.post_user.id}`}>
+							<img
+								src={image.post_user.profile_img}
+								className="profile-image"
+								alt="profile"
+							></img>
+						</Link>
 					</div>
 					<div className="model-user-name-div flex">
-						<Link to={`/${image.post_user.id}`}>
-							<div className="model-user-name-div-username model-description-user">
-								{image.post_user.username}
-							</div>
-						</Link>
+						<div className="model-user-name-div-username model-description-user">
+							{image.post_user.username}
+						</div>
+
 						{image["location"] && (
 							<div
 								className="post-location"
@@ -222,7 +223,11 @@ function ImageDetails({ image, user }) {
 				<div className="modal-date">{pastDate(image.createdAt)}</div>
 
 				<div className="post-add-comment flex" id="post-add-comment">
-					<i className="fa-regular fa-face-smile"></i>
+					{/* <i className="fa-regular fa-face-smile"></i> */}
+					<i
+						className="fa-solid fa-angle-right"
+						id="card-comment-icon"
+					></i>
 					<form
 						onSubmit={handleSubmit}
 						className="modal-comment-form"

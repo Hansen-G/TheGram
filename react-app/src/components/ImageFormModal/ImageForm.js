@@ -111,7 +111,7 @@ const ImageForm = ({
 						{image ? "Edit info" : "Create new post"}
 					</div>
 					<button
-						className="create_submit_button"
+						className={`create_submit_button ${errors.length > 0 ? 'disabled' : ''}`}
 						type="submit"
 						disabled={errors.length > 0}
 					>

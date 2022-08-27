@@ -5,7 +5,6 @@ import { toggleUserFollow } from "../../store/session";
 import "./FollowUsers.css";
 import { Link } from "react-router-dom";
 
-
 const FollowUsers = ({ passuser }) => {
 	const dispatch = useDispatch();
 	const [users, setUsers] = useState({});
@@ -42,76 +41,10 @@ const FollowUsers = ({ passuser }) => {
 		await getUser(userId);
 	};
 
-	return loaded && Object.values(users).length ? (
+	return (
 		<div className="followers-box">
-
-
-			<div className="home-user-card flex">
-				<div className="home-user-card-img-div">
-					<Link to={`/${passuser.id}`}>
-						<img
-							src={passuser.profile_img}
-							className="home-user-card-img"
-							alt="profile"
-						></img>
-					</Link>
-					
-				</div>
-				<div className="home-user-card-name">
-					<Link to={`/${passuser.id}`}>
-						<div className="home-user-card-username">{passuser.username}</div>
-						<div className="home-user-card-name-place">{passuser.name}</div>
-					</Link>
-					
-				</div>
-			</div>
-			<p className="home-suggestion">Suggestions For You</p>
-			<div>
-				{users.length > 0
-					? users.map((user) => (
-							<div className="follow-card" key={user.id}>
-
-							<Link to={`/${user.id}`}>
-
-								<img
-									className="profile-image-follow-box"
-									src={user.profile_img}
-									alt="profile"
-								/>
-							</Link>
-							<Link to={`/${user.id}`}>
-								<div className="p-follow-box">
-									<div className="home-user-card-username">{user.username}</div>
-									<div className="home-suggest-for-you">Suggested for you</div>
-								</div>
-							</Link>
-								<button
-									className="follow-box-button"
-									onClick={() => {
-										toggleAUserFollow(
-											currentUser.id,
-											user.id
-										);
-									}}
-								>
-									Follow
-								</button>
-							</div>
-					  ))
-					: null}
-			</div>
-			<div className="copy-right flex">
-				© 2022 THEGRAMME FROM
-				<a href="https://github.com/Hansen-G/TheGramme" className="copy-right-name">About</a>
-				<a href="https://github.com/huifeng248" className="copy-right-name">Abby Feng</a>
-				<a href="https://github.com/nullgar" className="copy-right-name">Jonatan Aguilar</a>
-				<a href="https://github.com/yonilurie" className="copy-right-name">Yoni Lurie</a>
-				<a href="https://github.com/Hansen-G" className="copy-right-name">Hansen Guo</a>
-			</div>
-		</div>
-	) : (
-		loaded && (
-			<div className="followers-box">
+			{loaded && Object.values(users).length ? (
+				<>
 					<div className="home-user-card flex">
 						<div className="home-user-card-img-div">
 							<Link to={`/${passuser.id}`}>
@@ -121,28 +54,169 @@ const FollowUsers = ({ passuser }) => {
 									alt="profile"
 								></img>
 							</Link>
-
 						</div>
 						<div className="home-user-card-name">
 							<Link to={`/${passuser.id}`}>
-								<div className="home-user-card-username">{passuser.username}</div>
-								<div className="home-user-card-name-place">{passuser.name}</div>
+								<div className="home-user-card-username">
+									{passuser.username}
+								</div>
+								<div className="home-user-card-name-place">
+									{passuser.name}
+								</div>
 							</Link>
-
 						</div>
 					</div>
-				<p className="home-suggestion">No suggestion for you now</p>
-				<p className="home-suggestion">Please check it later...</p>
-				<div className="copy-right flex">
-					© 2022 THEGRAMME FROM 
-						<a href="https://github.com/Hansen-G/TheGramme" className="copy-right-name">About</a>
-						<a href="https://github.com/huifeng248" className="copy-right-name">Abby Feng</a>
-						<a href="https://github.com/nullgar" className="copy-right-name">Jonatan Aguilar</a>
-						<a href="https://github.com/yonilurie" className="copy-right-name">Yoni Lurie</a>
-						<a href="https://github.com/Hansen-G" className="copy-right-name">Hansen Guo</a>
+					<p className="home-suggestion">Suggestions For You</p>
+					<div>
+						{users.length > 0
+							? users.map((user) => (
+									<div className="follow-card" key={user.id}>
+										<Link to={`/${user.id}`}>
+											<img
+												className="profile-image-follow-box"
+												src={user.profile_img}
+												alt="profile"
+											/>
+										</Link>
+										<Link to={`/${user.id}`}>
+											<div className="p-follow-box">
+												<div className="home-user-card-username">
+													{user.username}
+												</div>
+												<div className="home-suggest-for-you">
+													Suggested for you
+												</div>
+											</div>
+										</Link>
+										<button
+											className="follow-box-button"
+											onClick={() => {
+												toggleAUserFollow(
+													currentUser.id,
+													user.id
+												);
+											}}
+										>
+											Follow
+										</button>
+									</div>
+							  ))
+							: null}
+					</div>
+				</>
+			) : (
+				loaded && (
+					<>
+						<div className="home-user-card flex">
+							<div className="home-user-card-img-div">
+								<Link to={`/${passuser.id}`}>
+									<img
+										src={passuser.profile_img}
+										className="home-user-card-img"
+										alt="profile"
+									></img>
+								</Link>
+							</div>
+							<div className="home-user-card-name">
+								<Link to={`/${passuser.id}`}>
+									<div className="home-user-card-username">
+										{passuser.username}
+									</div>
+									<div className="home-user-card-name-place">
+										{passuser.name}
+									</div>
+								</Link>
+							</div>
+						</div>
+						<p className="home-suggestion">
+							No More users to follow
+						</p>
+					</>
+				)
+			)}
+			<div className="copy-right flex">
+				© 2022 THEGRAMME
+				<a
+					href="https://github.com/Hansen-G/TheGramme"
+					className="copy-right-name"
+				>
+					The Development Team
+				</a>
+				<div className="contact-container">
+					<h2
+						href="https://github.com/huifeng248"
+						className="copy-right-name"
+					>
+						Abby Feng
+					</h2>
+					<a
+						href="https://www.linkedin.com/in/hui-abby-feng-cpa/"
+						className="contact-link"
+					>
+						<i class="fa-brands fa-linkedin"></i>
+					</a>
+
+					<a
+						href="https://github.com/huifeng248"
+						className="contact-link"
+					>
+						<i class="fa-brands fa-square-github"></i>
+					</a>
+				</div>
+				<div className="contact-container">
+					<h2
+						href="https://github.com/nullgar"
+						className="copy-right-name"
+					>
+						Jonatan Aguilar
+					</h2>
+					<a
+						href="https://www.linkedin.com/in/jon-aguilar/"
+						className="contact-link"
+					>
+						<i class="fa-brands fa-linkedin"></i>
+					</a>
+
+					<a
+						href="https://github.com/nullgar"
+						className="contact-link"
+					>
+						<i class="fa-brands fa-square-github"></i>
+					</a>
+				</div>
+				<div className="contact-container">
+					<h2 className="copy-right-name">Yoni Lurie</h2>
+					<a
+						href="https://www.linkedin.com/in/yonatan-lurie-464266203/"
+						className="contact-link"
+					>
+						<i class="fa-brands fa-linkedin"></i>
+					</a>
+					<a
+						href="https://github.com/yonilurie"
+						className="contact-link"
+					>
+						<i class="fa-brands fa-square-github"></i>
+					</a>
+				</div>
+				<div className="contact-container">
+					<h2 className="copy-right-name">Hansen Guo</h2>
+					<a
+						href="https://www.linkedin.com/in/hansen-guo/"
+						className="contact-link"
+					>
+						<i class="fa-brands fa-linkedin"></i>
+					</a>
+
+					<a
+						href="https://github.com/Hansen-G"
+						className="contact-link"
+					>
+						<i class="fa-brands fa-square-github"></i>
+					</a>
 				</div>
 			</div>
-		)
+		</div>
 	);
 };
 
