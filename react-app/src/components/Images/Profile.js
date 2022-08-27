@@ -43,6 +43,8 @@ const Profile = () => {
 		if (Number(userId)) {
 			dispatch(loadImages(userId));
 			getUser();
+		} else {
+			return history.push("/");
 		}
 		// dispatch(loadImages(userId));
 		//Call backend

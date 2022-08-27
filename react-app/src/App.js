@@ -38,9 +38,9 @@ function App() {
 				<ProtectedRoute path="/" exact={true}>
 					<HomePage />
 				</ProtectedRoute>
-				<ProtectedRoute exact={true} path="/users">
+				{/* <ProtectedRoute exact={true} path="/users">
 					<UsersList />
-				</ProtectedRoute>
+				</ProtectedRoute> */}
 				<ProtectedRoute exact={true} to={/^\/\d+/}>
 					<Profile />
 				</ProtectedRoute>
