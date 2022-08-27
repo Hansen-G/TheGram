@@ -121,8 +121,9 @@ function HomePageCard({ image, user }) {
 				<div className="post-date">{pastDate(image.createdAt)}</div>
 				<div className="div-line"></div>
 				<div className="post-add-comment flex">
-					<i className="fa-regular fa-face-smile"></i>
-					<form onSubmit={handleSubmit}>
+					
+					<form onSubmit={handleSubmit} className='flex card-post'>
+						<i class="fa-solid fa-angle-right" id='card-comment-icon'></i>
 						<input
 							type="text"
 							placeholder="Add a comment..."

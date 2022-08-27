@@ -113,7 +113,8 @@ const SignUpForm = () => {
 			<div className="master-form-container">
 				<div className="lrg-logo-container">
 					<img
-						src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png"
+						className="login-logo"
+						src="https://res.cloudinary.com/hansenguo/image/upload/v1661536371/TheGramme/logo1_oxkgrb.png"
 						alt="logo"
 					/>
 				</div>
