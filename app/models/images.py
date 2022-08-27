@@ -12,7 +12,7 @@ class Image(db.Model):
     tzinfo = timezone(timedelta(hours=timezone_offset))
 
     id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
-    url = db.Column(db.String(250), nullable=False)
+    url = db.Column(db.String(1000), nullable=False)
     description = db.Column(db.String(2200), nullable=True)
     alt_description = db.Column(db.String(2200), nullable=True)
     show_stats = db.Column(db.Boolean, nullable=False, default=True)
