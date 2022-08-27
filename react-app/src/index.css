@@ -7,4 +7,6 @@
 html {
     background-color: rgb(250,250,250);
     position: relative;
+    height: 100vh;
+    margin-bottom: 40px;
 }

@@ -135,7 +135,7 @@ const FollowUsers = ({ passuser }) => {
 				)
 			)}
 			<div className="copy-right flex">
-				© 2022 THEGRAMME
+				2022 THEGRAMME
 				<a
 					href="https://github.com/Hansen-G/TheGramme"
 					className="copy-right-name"

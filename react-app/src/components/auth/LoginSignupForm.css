@@ -1,9 +1,10 @@
 .master-container {
-	height: 90vh;
+	height: 98vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
+	margin-bottom: 20px;
 }
 .phone-anchor {
 	position: relative;
