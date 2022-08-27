@@ -198,3 +198,8 @@
 .disabled {
 	color: rgb(219, 219, 219);
 }
+
+
+.image-post-error {
+	color: red;
+}
