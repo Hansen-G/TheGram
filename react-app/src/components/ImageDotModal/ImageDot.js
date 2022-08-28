@@ -44,6 +44,7 @@ function ImageDot({
 			<div
 				className="card edit-image dot-bar flex"
 				onClick={() => setShowModal(true)}
+				style={{cursor:'pointer'} }
 			>
 				Edit Image
 			</div>

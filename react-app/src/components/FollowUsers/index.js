@@ -153,14 +153,14 @@ const FollowUsers = ({ passuser }) => {
 						href="https://www.linkedin.com/in/hui-abby-feng-cpa/"
 						className="contact-link"
 					>
-						<i class="fa-brands fa-linkedin"></i>
+						<i className="fa-brands fa-linkedin"></i>
 					</a>
 
 					<a
 						href="https://github.com/huifeng248"
 						className="contact-link"
 					>
-						<i class="fa-brands fa-square-github"></i>
+						<i className="fa-brands fa-square-github"></i>
 					</a>
 				</div>
 				<div className="contact-container">
@@ -174,14 +174,14 @@ const FollowUsers = ({ passuser }) => {
 						href="https://www.linkedin.com/in/jon-aguilar/"
 						className="contact-link"
 					>
-						<i class="fa-brands fa-linkedin"></i>
+						<i className="fa-brands fa-linkedin"></i>
 					</a>
 
 					<a
 						href="https://github.com/nullgar"
 						className="contact-link"
 					>
-						<i class="fa-brands fa-square-github"></i>
+						<i className="fa-brands fa-square-github"></i>
 					</a>
 				</div>
 				<div className="contact-container">
@@ -190,13 +190,13 @@ const FollowUsers = ({ passuser }) => {
 						href="https://www.linkedin.com/in/yonatan-lurie-464266203/"
 						className="contact-link"
 					>
-						<i class="fa-brands fa-linkedin"></i>
+						<i className="fa-brands fa-linkedin"></i>
 					</a>
 					<a
 						href="https://github.com/yonilurie"
 						className="contact-link"
 					>
-						<i class="fa-brands fa-square-github"></i>
+						<i className="fa-brands fa-square-github"></i>
 					</a>
 				</div>
 				<div className="contact-container">
@@ -205,14 +205,14 @@ const FollowUsers = ({ passuser }) => {
 						href="https://www.linkedin.com/in/hansen-guo/"
 						className="contact-link"
 					>
-						<i class="fa-brands fa-linkedin"></i>
+						<i className="fa-brands fa-linkedin"></i>
 					</a>
 
 					<a
 						href="https://github.com/Hansen-G"
 						className="contact-link"
 					>
-						<i class="fa-brands fa-square-github"></i>
+						<i className="fa-brands fa-square-github"></i>
 					</a>
 				</div>
 			</div>
