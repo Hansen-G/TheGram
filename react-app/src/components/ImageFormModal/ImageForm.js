@@ -111,7 +111,9 @@ const ImageForm = ({
 						{image ? "Edit info" : "Create new post"}
 					</div>
 					<button
-						className="create_submit_button"
+						className={`create_submit_button ${
+							errors.length > 0 ? "disabled" : ""
+						}`}
 						type="submit"
 						disabled={errors.length > 0}
 					>
@@ -250,7 +252,12 @@ const ImageForm = ({
 									{errors.length > 0 && (
 										<ul>
 											{errors.map((error, index) => (
-												<li key={index}>{error}</li>
+												<li
+													key={index}
+													className="image-post-error"
+												>
+													{error}{" "}
+												</li>
 											))}
 										</ul>
 									)}

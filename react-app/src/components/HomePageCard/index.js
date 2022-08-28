@@ -35,11 +35,13 @@ function HomePageCard({ image, user }) {
 		<div className="card-post-container flex" key={image.id}>
 			<div className="post-user-info flex">
 				<div className="profile-image-div">
-					<img
-						src={image.post_user.profile_img}
-						className="profile-image"
-						alt="profile"
-					></img>
+					<Link to={`/${image.post_user.id}`}>
+						<img
+							src={image.post_user.profile_img}
+							className="profile-image"
+							alt="profile"
+						></img>
+					</Link>
 				</div>
 				<div className="post-user-name-div flex">
 					<Link to={`/${image.post_user.id}`}>
@@ -121,9 +123,11 @@ function HomePageCard({ image, user }) {
 				<div className="post-date">{pastDate(image.createdAt)}</div>
 				<div className="div-line"></div>
 				<div className="post-add-comment flex">
-					
-					<form onSubmit={handleSubmit} className='flex card-post'>
-						<i class="fa-solid fa-angle-right" id='card-comment-icon'></i>
+					<form onSubmit={handleSubmit} className="flex card-post">
+						<i
+							className="fa-solid fa-angle-right"
+							id="card-comment-icon"
+						></i>
 						<input
 							type="text"
 							placeholder="Add a comment..."

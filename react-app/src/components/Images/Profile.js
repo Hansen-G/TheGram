@@ -14,6 +14,7 @@ const Profile = () => {
 	const [user, setUser] = useState();
 	const images = Object.values(useSelector((state) => state.images));
 	const currentUser = useSelector((state) => state.session.user);
+	const [loaded, setLoaded] = useState(false);
 	//Fetch user data
 	// const getUser = async () => {
 	// 	let newuser = await fetch(`/api/users/${userId}`);
@@ -46,10 +47,17 @@ const Profile = () => {
 		} else {
 			return history.push("/");
 		}
+		window.scrollTo(0,0)
 		// dispatch(loadImages(userId));
 		//Call backend
 	}, [dispatch, userId]);
 
+	useEffect(() => {
+		const timeout = setTimeout(() => {
+			setLoaded(true);
+		}, 250);
+		return () => clearTimeout(timeout);
+	}, []);
 	return (
 		<>
 			{user && (
@@ -57,7 +65,7 @@ const Profile = () => {
 					<div className="user-info">
 						<div className="profile-image-container">
 							<img
-								className="profile-image"
+								className="profile-image-bio"
 								src={user.profile_img}
 								alt="profile"
 							/>
@@ -132,7 +140,8 @@ const Profile = () => {
 						</div>
 					</div>
 					<div className="posts-container">
-						{images.length > 0 &&
+						{loaded &&
+							images.length > 0 &&
 							images.reverse().map((image) => {
 								return (
 									<Post post={image} key={image.id}></Post>
