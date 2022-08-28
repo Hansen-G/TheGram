@@ -63,6 +63,7 @@ function HomePageCard({ image, user }) {
 			</div>
 			<div className="post-info">
 				<div className="post-function-bar flex">
+					
 					<div className="post-function-bar-left">
 						{image.liked_user_ids[user.id] ? (
 							<i

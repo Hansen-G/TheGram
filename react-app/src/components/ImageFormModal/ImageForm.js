@@ -33,6 +33,7 @@ const ImageForm = ({
 		if (image) {
 			setURLAndCheckURL(image.url);
 			setDescription(image.description);
+			setLocation(image.location)
 			setShowStats(image.show_stats);
 		}
 	}, [image]);
@@ -47,7 +48,7 @@ const ImageForm = ({
 
 		if (!validURL) {
 			submitErrors.push(
-				"Invalid URL: Please enter a valid URL ending in - jpg/jpeg/png/webp/avif/gif/svg"
+				"Invalid URL: Please enter a valid URL ending in - jpg/jpeg/png/webp/avif/gif/svg. Also please make sure this image CORS policy compliant. Image can be blocked by CORS policy due to: No 'Access-Control-Allow-Origin' header being present on the requested resource."
 			);
 		}
 		if (url.includes("File:")) {

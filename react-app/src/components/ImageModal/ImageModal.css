@@ -157,3 +157,18 @@ input.middle:focus {
 .modal-post-location {
 	width: 90%;
 }
+
+
+#comment-like-icon {
+text-align: center;
+} 
+
+
+.comment-and-likes {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 12px;
+	width: fit-content;
+	
+}

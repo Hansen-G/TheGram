@@ -97,11 +97,13 @@ function ImageDetails({ image, user }) {
 						id="model-user-info-description"
 					>
 						<div className="model-profile-image-div">
-							<img
-								src={image.post_user.profile_img}
-								className="profile-image"
-								alt="profile"
-							></img>
+							<Link to={`/${image.post_user.id}`}>
+								<img
+									src={image.post_user.profile_img}
+									className="profile-image"
+									alt="profile"
+								></img>
+							</Link>
 						</div>
 						<div className="model-user-name-div flex">
 							<div className="model-comments">
@@ -161,6 +163,7 @@ function ImageDetails({ image, user }) {
 									</div>
 								</div>
 								<div className="post-function-bar-left">
+									<div></div>
 									{checkLike(
 										comment.user_comment_likes,
 										user.id
