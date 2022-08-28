@@ -47,6 +47,7 @@ const Profile = () => {
 		} else {
 			return history.push("/");
 		}
+		window.scrollTo(0,0)
 		// dispatch(loadImages(userId));
 		//Call backend
 	}, [dispatch, userId]);
