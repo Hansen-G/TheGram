@@ -82,6 +82,7 @@
 }
 
 .toggle-follow {
+	cursor: pointer;
 	width: 100px;
 }
 
