@@ -137,6 +137,7 @@ const SignUpForm = () => {
 								className="verification-form-input"
 								required={true}
 								minLength='4'
+								maxLength='40'
 							></input>
 						</div>
 						<div>
@@ -150,6 +151,7 @@ const SignUpForm = () => {
 								className="verification-form-input"
 								required={true}
 								minLength='2'
+								maxLength='64'
 							></input>
 						</div>
 						<div>
