@@ -57,8 +57,8 @@
 }
 
 .model-description-detail {
-	width: 90%;
 	overflow-wrap: anywhere;
+	width: 100%;
 }
 
 #model-div-line {
@@ -121,6 +121,7 @@ input.middle:focus {
 .model-description-detail {
 	font-size: 14px;
 	color: #262626;
+	width: 100%;
 }
 
 .curent_user_unliked {
