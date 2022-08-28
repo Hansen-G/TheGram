@@ -1,3 +1,12 @@
+## Discussion of both challenges faced and the way the team solved them
+Each member in our team has a very different working and learning style, and we are able to handling that by working dynamically together through a combination of pair programming and solo programming. When we run into some difficult technically questions, we regroup and tackle that together. Because each one contributes different perspectives for problem solving, we were able to debug much faster and prevent less errors.
+Besides that, each one's codling style is very different as well, and we respect that. We try to avoid duplication of work and merge conflict through detail task assignment and planning. We grouped at the beginning of the day to communicate what's would be the focuses of the day and who is on top of them, and also gathered at the end of the day to catch up what's completed during the day. Also we meet as need in case any adjustment is needed.
+
+
+## Code snippets
+### Roulette on HomePage
+![](https://lh4.googleusercontent.com/35VJQJCV7nawGeZ-eyit2qtzI3ksHjrlgDeTdEOdbAccon_PtFYkpIgzxGLPaEo0BC2POgo5knswnK4LnfRsRyuqCL3II-Aa-36lCGIeX7CL6UQZKJdJpz2grzMf3o26cB4qAywCw4t5Bw7gQufRTYY) (edited)
+
 # How to Install Application via Command Line
 Go to [Repo](https://github.com/Hansen-G/TheGramme)
  1. Copy Code Link
