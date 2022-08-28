@@ -8,7 +8,7 @@ function CommentDot({ setModal, comment, user }) {
 	const dispatch = useDispatch();
 	const [commentToBeEdited, setCommentToBeEdited] = useState(comment.comment);
 	const [errors, setErrors] = useState([]);
-	const [check, setCheck] = useState(true)
+
 
 	useEffect(() => {
 		const newError = [];

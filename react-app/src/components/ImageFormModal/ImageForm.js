@@ -22,7 +22,6 @@ const ImageForm = ({
 	const [showAccessity, setShowAccessity] = useState(false);
 	const [url, setUrl] = useState(""); //URL we will actually render as an <img/>
 	const [validURL, setValidURL] = useState(false); // Boolean that will show if the URL below is actually a valid image url
-	const [trySubmit, setTrySubmit] = useState(false);
 	const setURLAndCheckURL = async (urlInput) => {
 		const res = await isValidUrl(urlInput, setErrors, errors);
 		setValidURL(res);
