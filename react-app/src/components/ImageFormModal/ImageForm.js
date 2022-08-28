@@ -33,6 +33,7 @@ const ImageForm = ({
 		if (image) {
 			setURLAndCheckURL(image.url);
 			setDescription(image.description);
+			setLocation(image.location)
 			setShowStats(image.show_stats);
 		}
 	}, [image]);

@@ -177,7 +177,7 @@ function ImageDetails({ image, user }) {
 													image.id
 												)
 											}
-										>{comment.user_comment_likes.length}</i>
+										></i>
 									) : (
 										<i
 											className="fa-regular fa-heart curent_user_unliked"

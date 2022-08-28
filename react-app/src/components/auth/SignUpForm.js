@@ -136,6 +136,7 @@ const SignUpForm = () => {
 								value={username}
 								className="verification-form-input"
 								required={true}
+								minLength='4'
 							></input>
 						</div>
 						<div>
@@ -148,6 +149,7 @@ const SignUpForm = () => {
 								value={name}
 								className="verification-form-input"
 								required={true}
+								minLength='2'
 							></input>
 						</div>
 						<div>
