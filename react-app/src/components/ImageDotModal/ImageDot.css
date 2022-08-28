@@ -11,6 +11,7 @@
 
 .dot-modal{
     width: 400px;
+    cursor: pointer;
 }
 
 .dot-bar {
@@ -18,6 +19,7 @@
     align-items: center;
     height: 50px;
     font-size: 14px;
+    cursor: pointer;
 }
 
 .cancel-edit-button{
@@ -26,5 +28,9 @@
     font-size: 14px;
     width: 100%;
     height: 100%;
+    cursor: pointer;
+}
+
+.edit-image {
     cursor: pointer;
 }
