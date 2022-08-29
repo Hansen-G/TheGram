@@ -258,6 +258,7 @@ function ImageDetails({ image, user }) {
 							value={comment}
 							onChange={(e) => {
 								setComment(e.target.value)
+								setErrors([])
 							}}
 							className="modal-comment-input"
 							minLength="1"

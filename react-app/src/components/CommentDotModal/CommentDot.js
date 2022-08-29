@@ -68,6 +68,7 @@ function CommentDot({ setModal, comment, user }) {
 						<textarea
 							placeholder="No more than 1000 characters"
 							type={"text"}
+							minLength="1"
 							maxLength="1000"
 							row="10"
 							id="dot-edit-comment"
