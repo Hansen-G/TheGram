@@ -24,22 +24,34 @@ function checkLike(arr, int) {
 function ImageDetails({ image, user }) {
 	const dispatch = useDispatch();
 	const [comment, setComment] = useState("");
+	const [errors, setErrors] = useState([]);
 	useEffect(() => {
 		const newError = [];
 		if (comment.length > 1000) {
 			newError.push("Comment must be less than 1000 characters");
 		}
-	}, [comment, image]);
+	}, [image]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const newComment = {
-			comment: comment,
-			image_id: image.id,
-			user_id: user.id,
-		};
-		dispatch(CreateComment(newComment));
-		setComment("");
+		const error = []
+		if (comment.trimEnd().length === 0) {
+			error.push("please enter a valid comment")
+			setErrors(error)
+		} else if (comment.length > 1000){
+			error.push("Comment must be less than 1000 characters")
+			setErrors(error)
+		} else {
+
+			e.preventDefault();
+			const newComment = {
+				comment: comment,
+				image_id: image.id,
+				user_id: user.id,
+			};
+			dispatch(CreateComment(newComment));
+			setComment("");
+		}
 	};
 
 	const toggleImageLike = async (imageId) => {
@@ -163,37 +175,40 @@ function ImageDetails({ image, user }) {
 									</div>
 								</div>
 								<div className="post-function-bar-left">
-									<div></div>
-									{checkLike(
-										comment.user_comment_likes,
-										user.id
-									) ? (
-										<i
-											className="fa-solid fa-heart curent_user_liked"
-											id="comment-like-icon"
-											onClick={() =>
-												toggleCommentLike(
-													comment.id,
-													image.id
-												)
-											}
-										></i>
-									) : (
-										<i
-											className="fa-regular fa-heart curent_user_unliked"
-											id="comment-like-icon"
-											onClick={() =>
-												toggleCommentLike(
-													comment.id,
-													image.id
-												)
-											}
-										></i>
-									)}
-
-									{/* <i className="fa-regular fa-comment"></i> */}
-									{/* <i className="fa-regular fa-paper-plane"></i> */}
-								</div>
+                                    {checkLike(
+                                        comment.user_comment_likes,
+                                        user.id
+                                    ) ? (
+                                        <div style={{display: "flex", fontSize: "12px", alignItems: "center"}}>
+                                            <div
+                                                style={{width: "fitContent",whiteSpace: "nowrap"}}>
+                                                    {comment.user_comment_likes.length > 0 ?
+                                                        comment.user_comment_likes.length : null}
+                                            </div>
+                                            <i
+                                                className="fa-solid fa-heart curent_user_liked"
+                                                id="comment-like-icon"
+                                                onClick={() => toggleCommentLike(comment.id, image.id)}
+                                            ></i>
+                                        </div>
+                                    ) : (
+                                        <div style={{display: "flex", fontSize: "12px", alignItems: "center"}}>
+                                            <div
+                                                style={{width: "fitContent",whiteSpace: "nowrap"}}>
+                                                    {comment.user_comment_likes.length > 0 ?
+                                                        comment.user_comment_likes.length: null}
+                                            </div>
+                                            <i
+                                                className="fa-regular fa-heart curent_user_unliked"
+                                                id="comment-like-icon"
+                                                onClick={() => toggleCommentLike(comment.id, image.id)
+                                                }
+                                            ></i>
+                                        </div>
+                                    )}
+                                    {/* <i className="fa-regular fa-comment"></i> */}
+                                    {/* <i className="fa-regular fa-paper-plane"></i> */}
+                                </div>
 							</div>
 						))}
 				</div>
@@ -241,14 +256,18 @@ function ImageDetails({ image, user }) {
 							type="text"
 							placeholder="Add a comment..."
 							value={comment}
-							onChange={(e) => setComment(e.target.value)}
+							onChange={(e) => {
+								setComment(e.target.value)
+							}}
 							className="modal-comment-input"
+							minLength="1"
+							maxLength="1000"
 						></input>
 						<button
 							type="submit"
-							disabled={comment.length === 0}
+							disabled={comment.length === 0 || errors.length > 0}
 							className={
-								comment.length === 0
+								comment.trimEnd().length === 0
 									? "disabled post-commit-submit"
 									: "enabled post-commit-submit"
 							}

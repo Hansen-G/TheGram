@@ -33,6 +33,7 @@ export const isValidUrl = async (urlString, setErrors, error) => {
 
 	try {
 		let fetchImage = await fetch(urlString);
+		if (fetchImage.status !== 200) return false
 	} catch (e) {
 		setErrors(error => error.push(['Cannot get url']))
 		return false;

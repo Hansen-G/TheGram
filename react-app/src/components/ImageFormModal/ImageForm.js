@@ -55,6 +55,11 @@ const ImageForm = ({
 				'Invalid URL: URL must not include "File:", Please use original image address'
 			);
 		}
+		if (url.includes(' ')) {
+			submitErrors.push(
+				'Image cannot have an empty space in the url!'
+			)
+		}
 		if (url.length > 1000) {
 			submitErrors.push(
 				"Invalid URL: URL must not be longer than 1000 characters"
@@ -167,8 +172,9 @@ const ImageForm = ({
 								<div className="url">
 									<input
 										value={url}
-										onChange={(e) =>
+										onChange={(e) => {
 											setURLAndCheckURL(e.target.value)
+											}
 										}
 										placeholder="Image URL"
 										type="url"
