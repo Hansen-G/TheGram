@@ -174,7 +174,6 @@ const ImageForm = ({
 										value={url}
 										onChange={(e) => {
 											setURLAndCheckURL(e.target.value)
-											setErrors([])
 											}
 										}
 										placeholder="Image URL"
