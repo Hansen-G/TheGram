@@ -9,12 +9,14 @@ import { cut, pastDate } from "../../util/";
 function HomePageCard({ image, user }) {
 	const dispatch = useDispatch();
 	const [comment, setComment] = useState("");
+	const [errors, setErrors] = useState([]);
 
 	useEffect(() => {
 		const newError = [];
 		if (comment.length > 1000) {
 			newError.push("Comment must be less than 1000 characters");
 		}
+		setErrors(newError)
 	}, [comment]);
 
 	const handleSubmit = (e) => {
@@ -138,9 +140,9 @@ function HomePageCard({ image, user }) {
 						></input>
 						<button
 							type="submit"
-							disabled={comment.length === 0}
+							disabled={comment.length === 0 || errors.length}
 							className={
-								comment.length === 0
+								comment.length === 0 || errors.length
 									? "disabled post-commit-submit"
 									: "enabled post-commit-submit"
 							}
