@@ -128,6 +128,12 @@ const SignUpForm = () => {
 						</div>
 						<div>
 							{/* <label>User Name</label> */}
+								<div
+									className="modal-input-label"
+									hidden={!username}
+								>
+									Username
+								</div>
 							<input
 								type="text"
 								name="username"
@@ -142,6 +148,12 @@ const SignUpForm = () => {
 						</div>
 						<div>
 							{/* <label>Name</label> */}
+							<div
+									className="modal-input-label"
+									hidden={!name}
+								>
+									Name
+								</div>
 							<input
 								type="text"
 								name="name"
@@ -156,6 +168,12 @@ const SignUpForm = () => {
 						</div>
 						<div>
 							{/* <label>Email</label> */}
+							<div
+									className="modal-input-label"
+									hidden={!email}
+								>
+									Email
+								</div>
 							<input
 								type="email"
 								name="email"
@@ -168,6 +186,12 @@ const SignUpForm = () => {
 						</div>
 						<div>
 							{/* <label>Password</label> */}
+							<div
+									className="modal-input-label"
+									hidden={!password}
+								>
+									Password
+								</div>
 							<input
 								type="password"
 								name="password"
@@ -181,6 +205,12 @@ const SignUpForm = () => {
 							></input>
 						</div>
 						<div>
+							<div
+									className="modal-input-label"
+									hidden={!repeatPassword}
+								>
+									Repeat Password
+								</div>
 							{/* <label>Repeat Password</label> */}
 							<input
 								type="password"
