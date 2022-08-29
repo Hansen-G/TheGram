@@ -77,12 +77,20 @@ const LoginForm = () => {
 					<div>
 						<form onSubmit={onLogin}>
 							<div>
-								{errors.map((error, ind) => (
-									<div className='login-error-text' key={ind}>{error}</div>
-								))}
+								{errors.length > 0 &&  (
+									<div className="login-error-text">
+										Invalid Credentials
+									</div>
+								)}
 							</div>
 							<div>
 								{/* <label htmlFor='email'>Email</label> */}
+								<div
+									className="modal-input-label"
+									hidden={!email}
+								>
+									Email
+								</div>
 								<input
 									name="email"
 									type="email"
@@ -91,10 +99,17 @@ const LoginForm = () => {
 									onChange={updateEmail}
 									className="verification-form-input"
 									required={true}
+									maxLength='255'
 								/>
 							</div>
 							<div>
 								{/* <label htmlFor='password'>Password</label> */}
+								<div
+									className="modal-input-label"
+									hidden={!password}
+								>
+									Password
+								</div>
 								<input
 									name="password"
 									type="password"
@@ -108,13 +123,11 @@ const LoginForm = () => {
 							<button
 								type="submit"
 								className={`submit-btn
-								${
-									email.length < 1  || password.length < 1
-										? "disabled"
-										: ""
-								}
+								${email.length < 1 || password.length < 1 ? "disabled" : ""}
 								`}
-								disabled={email.length < 1 || password.length < 1}
+								disabled={
+									email.length < 1 || password.length < 1
+								}
 							>
 								Log In
 							</button>

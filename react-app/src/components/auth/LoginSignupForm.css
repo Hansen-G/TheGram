@@ -35,7 +35,7 @@
 }
 
 .verification-form-input {
-	height: 36px;
+	height: 40px;
 	width: 266px;
 	box-sizing: border-box;
 	border-radius: 3px;
@@ -47,6 +47,9 @@
 	border: solid 1px rgb(219, 219, 219);
 	color: rgb(38, 38, 38);
 	font-size: 14px;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-bottom: 6px;
 }
 
 .submit-btn {
@@ -175,4 +178,15 @@
 .login-logo{
 	width: 175px;
 	
+}
+
+
+.modal-input-label {
+	font-size: 0.5rem;
+	position: absolute;
+	z-index: 2;
+	padding: 0.3rem;
+	/* margin-top: 0.1rem; */
+	margin-left: 0.3rem;
+	color: rgb(117, 117, 117);
 }
