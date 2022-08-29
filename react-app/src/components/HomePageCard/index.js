@@ -146,6 +146,7 @@ function HomePageCard({ image, user }) {
 							type="text"
 							placeholder="Add a comment..."
 							value={comment}
+							minLength='1'
 							maxLength="1000"
 							onChange={(e) => {
 								setComment(e.target.value)
