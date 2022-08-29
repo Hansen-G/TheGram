@@ -60,7 +60,7 @@ const Profile = () => {
 	}, []);
 	return (
 		<>
-			{user && (
+			{loaded && user && (
 				<div className="profile-master-div">
 					<div className="user-info">
 						<div className="profile-image-container">
