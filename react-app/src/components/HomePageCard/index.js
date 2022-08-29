@@ -9,23 +9,37 @@ import { cut, pastDate } from "../../util/";
 function HomePageCard({ image, user }) {
 	const dispatch = useDispatch();
 	const [comment, setComment] = useState("");
+	const [errors, setErrors] = useState([]);
 
-	useEffect(() => {
-		const newError = [];
-		if (comment.length > 1000) {
-			newError.push("Comment must be less than 1000 characters");
-		}
-	}, [comment]);
+	// useEffect(() => {
+	// 	const newError = [];
+	// 	if (comment.length > 1000) {
+	// 		newError.push("Comment must be less than 1000 characters");
+	// 	}
+	// }, [comment]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const newComment = {
-			comment: comment,
-			image_id: image.id,
-			user_id: user.id,
-		};
-		dispatch(CreateComment(newComment));
-		setComment("");
+
+		const error = []
+		if (comment === " ") {
+			error.push("please enter a valid comment")
+			setErrors(error)
+			console.log("@@@@@@@@@", errors)
+		} else if (comment.length > 1000){
+			error.push("Comment must be less than 1000 characters")
+			setErrors(error)
+		} 
+		else {
+			const newComment = {
+				comment: comment,
+				image_id: image.id,
+				user_id: user.id,
+			};
+			dispatch(CreateComment(newComment));
+			setComment("");
+		}
+
 	};
 
 	const toggleImageLike = (imageId) => {
@@ -133,19 +147,21 @@ function HomePageCard({ image, user }) {
 							type="text"
 							placeholder="Add a comment..."
 							value={comment}
+							maxLength="1000"
 							onChange={(e) => setComment(e.target.value)}
 							className="post-comment-input"
 						></input>
 						<button
 							type="submit"
-							disabled={comment.length === 0}
+							disabled={comment.length === 0 || errors.length > 0}
 							className={
-								comment.length === 0
+								comment.length === 0 || errors.length > 0
 									? "disabled post-commit-submit"
 									: "enabled post-commit-submit"
 							}
 							id="homepage-post"
 						>
+							{console.log("!!!!!!!!!!", errors,"#####")}
 							Post
 						</button>
 					</form>
