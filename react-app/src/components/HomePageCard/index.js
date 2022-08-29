@@ -155,7 +155,7 @@ function HomePageCard({ image, user }) {
 							type="submit"
 							disabled={comment.length === 0 || errors.length > 0}
 							className={
-								comment.length === 0 || errors.length > 0
+								comment.trimEnd().length === 0
 									? "disabled post-commit-submit"
 									: "enabled post-commit-submit"
 							}
