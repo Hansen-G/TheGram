@@ -91,7 +91,7 @@ function CommentDot({ setModal, comment, user }) {
 							type="submit"
 							disabled={commentToBeEdited.length === 0 || errors.length}
 							className={
-								commentToBeEdited.length === 0 || errors.length
+								commentToBeEdited.trimEnd().length === 0
 									? "disabled post-commit-submit"
 									: "enabled post-commit-submit"
 							}
