@@ -175,37 +175,40 @@ function ImageDetails({ image, user }) {
 									</div>
 								</div>
 								<div className="post-function-bar-left">
-									<div></div>
-									{checkLike(
-										comment.user_comment_likes,
-										user.id
-									) ? (
-										<i
-											className="fa-solid fa-heart curent_user_liked"
-											id="comment-like-icon"
-											onClick={() =>
-												toggleCommentLike(
-													comment.id,
-													image.id
-												)
-											}
-										></i>
-									) : (
-										<i
-											className="fa-regular fa-heart curent_user_unliked"
-											id="comment-like-icon"
-											onClick={() =>
-												toggleCommentLike(
-													comment.id,
-													image.id
-												)
-											}
-										></i>
-									)}
-
-									{/* <i className="fa-regular fa-comment"></i> */}
-									{/* <i className="fa-regular fa-paper-plane"></i> */}
-								</div>
+                                    {checkLike(
+                                        comment.user_comment_likes,
+                                        user.id
+                                    ) ? (
+                                        <div style={{display: "flex", fontSize: "12px", alignItems: "center"}}>
+                                            <div
+                                                style={{width: "fitContent",whiteSpace: "nowrap"}}>
+                                                    {comment.user_comment_likes.length > 0 ?
+                                                        comment.user_comment_likes.length : null}
+                                            </div>
+                                            <i
+                                                className="fa-solid fa-heart curent_user_liked"
+                                                id="comment-like-icon"
+                                                onClick={() => toggleCommentLike(comment.id, image.id)}
+                                            ></i>
+                                        </div>
+                                    ) : (
+                                        <div style={{display: "flex", fontSize: "12px", alignItems: "center"}}>
+                                            <div
+                                                style={{width: "fitContent",whiteSpace: "nowrap"}}>
+                                                    {comment.user_comment_likes.length > 0 ?
+                                                        comment.user_comment_likes.length: null}
+                                            </div>
+                                            <i
+                                                className="fa-regular fa-heart curent_user_unliked"
+                                                id="comment-like-icon"
+                                                onClick={() => toggleCommentLike(comment.id, image.id)
+                                                }
+                                            ></i>
+                                        </div>
+                                    )}
+                                    {/* <i className="fa-regular fa-comment"></i> */}
+                                    {/* <i className="fa-regular fa-paper-plane"></i> */}
+                                </div>
 							</div>
 						))}
 				</div>
