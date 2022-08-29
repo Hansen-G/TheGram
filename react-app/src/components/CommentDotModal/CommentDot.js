@@ -37,11 +37,11 @@ function CommentDot({ setModal, comment, user }) {
 		if (commentToBeEdited.trimEnd().length === 0) {
 			error.push("please enter a valid comment")
 			setErrors(error)
-			console.log("@@@@@@@@@", errors)
+
 		} else if (commentToBeEdited.length > 1000){
 			error.push("Comment must be less than 1000 characters")
 			setErrors(error)
-		} 
+		}
 		else {
 			const editedComment = {
 				comment: commentToBeEdited,
@@ -85,7 +85,7 @@ function CommentDot({ setModal, comment, user }) {
 							{ (errors) }
 						</div>
 
-						
+
 
 						<button
 							type="submit"

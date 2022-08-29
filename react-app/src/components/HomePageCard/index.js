@@ -25,11 +25,10 @@ function HomePageCard({ image, user }) {
 		if (comment.trimEnd().length === 0) {
 			error.push("please enter a valid comment")
 			setErrors(error)
-			console.log("@@@@@@@@@", errors)
 		} else if (comment.length > 1000){
 			error.push("Comment must be less than 1000 characters")
 			setErrors(error)
-		} 
+		}
 		else {
 			const newComment = {
 				comment: comment,
@@ -77,7 +76,7 @@ function HomePageCard({ image, user }) {
 			</div>
 			<div className="post-info">
 				<div className="post-function-bar flex">
-					
+
 					<div className="post-function-bar-left">
 						{image.liked_user_ids[user.id] ? (
 							<i
@@ -164,7 +163,6 @@ function HomePageCard({ image, user }) {
 							}
 							id="homepage-post"
 						>
-							{/* {console.log("!!!!!!!!!!", errors,"#####")} */}
 							Post
 						</button>
 					</form>

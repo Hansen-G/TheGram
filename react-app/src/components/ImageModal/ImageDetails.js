@@ -38,7 +38,6 @@ function ImageDetails({ image, user }) {
 		if (comment.trimEnd().length === 0) {
 			error.push("please enter a valid comment")
 			setErrors(error)
-			console.log("@@@@@@@@@", errors)
 		} else if (comment.length > 1000){
 			error.push("Comment must be less than 1000 characters")
 			setErrors(error)
