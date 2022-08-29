@@ -22,7 +22,7 @@ function HomePageCard({ image, user }) {
 		e.preventDefault();
 
 		const error = []
-		if (comment === " ") {
+		if (comment.trimEnd().length === 0) {
 			error.push("please enter a valid comment")
 			setErrors(error)
 			console.log("@@@@@@@@@", errors)
@@ -148,7 +148,10 @@ function HomePageCard({ image, user }) {
 							placeholder="Add a comment..."
 							value={comment}
 							maxLength="1000"
-							onChange={(e) => setComment(e.target.value)}
+							onChange={(e) => {
+								setComment(e.target.value)
+								setErrors([])
+							}}
 							className="post-comment-input"
 						></input>
 						<button
@@ -161,7 +164,7 @@ function HomePageCard({ image, user }) {
 							}
 							id="homepage-post"
 						>
-							{console.log("!!!!!!!!!!", errors,"#####")}
+							{/* {console.log("!!!!!!!!!!", errors,"#####")} */}
 							Post
 						</button>
 					</form>
