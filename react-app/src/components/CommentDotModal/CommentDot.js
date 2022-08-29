@@ -33,13 +33,26 @@ function CommentDot({ setModal, comment, user }) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const editedComment = {
-			comment: commentToBeEdited,
-			commentId: comment.id,
-			imageId: comment.image_id,
-		};
-		dispatch(EditComment(editedComment));
-		setModal(false);
+		const error = []
+		if (commentToBeEdited.trimEnd().length === 0) {
+			error.push("please enter a valid comment")
+			setErrors(error)
+			console.log("@@@@@@@@@", errors)
+		} else if (commentToBeEdited.length > 1000){
+			error.push("Comment must be less than 1000 characters")
+			setErrors(error)
+		} 
+		else {
+			const editedComment = {
+				comment: commentToBeEdited,
+				commentId: comment.id,
+				imageId: comment.image_id,
+			};
+			dispatch(EditComment(editedComment));
+			setModal(false);
+		}
+
+
 	};
 
 	return (
@@ -59,8 +72,10 @@ function CommentDot({ setModal, comment, user }) {
 							row="10"
 							id="dot-edit-comment"
 							value={commentToBeEdited}
-							onChange={(e) =>
+							onChange={(e) =>{
 								setCommentToBeEdited(e.target.value)
+								setErrors([])
+							}
 							}
 						></textarea>
 
@@ -76,7 +91,7 @@ function CommentDot({ setModal, comment, user }) {
 							type="submit"
 							disabled={commentToBeEdited.length === 0 || errors.length}
 							className={
-								commentToBeEdited.length === 0 || errors.length
+								commentToBeEdited.trimEnd().length === 0
 									? "disabled post-commit-submit"
 									: "enabled post-commit-submit"
 							}
