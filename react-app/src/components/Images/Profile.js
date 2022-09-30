@@ -26,10 +26,14 @@ const Profile = () => {
 		if (!Number(userId) || userId === 0) {
 			return history.push("/");
 		}
-		let profileUser = await fetch(`/api/users/${userId}`);
-		const data = await profileUser.json();
-		if (data.error) return history.push("/");
-		else setUser(data);
+		// if (currentUser.id === userId) {
+		// 	setUser(currentUser);
+		// } else {
+			let profileUser = await fetch(`/api/users/${userId}`);
+			const data = await profileUser.json();
+			if (data.error) return history.push("/");
+			else setUser(data);
+		// }
 	};
 
 	const toggleAUserFollow = async (userToFollowId) => {
@@ -47,7 +51,7 @@ const Profile = () => {
 		} else {
 			return history.push("/");
 		}
-		window.scrollTo(0,0)
+		window.scrollTo(0, 0);
 		// dispatch(loadImages(userId));
 		//Call backend
 	}, [dispatch, userId]);

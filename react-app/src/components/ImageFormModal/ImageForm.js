@@ -20,51 +20,76 @@ const ImageForm = ({
 
 	const [errors, setErrors] = useState([]);
 	const [showAccessity, setShowAccessity] = useState(false);
-	const [url, setUrl] = useState(""); //URL we will actually render as an <img/>
-	const [validURL, setValidURL] = useState(false); // Boolean that will show if the URL below is actually a valid image url
-	const setURLAndCheckURL = async (urlInput) => {
-		const res = await isValidUrl(urlInput, setErrors, errors);
-		setValidURL(res);
-		setUrl(urlInput);
-	};
+	const [userImage, setUserImage] = useState(null);
+	// const [url, setUrl] = useState(""); //URL we will actually render as an <img/>
+	// const [validURL, setValidURL] = useState(false); // Boolean that will show if the URL below is actually a valid image url
+
+	// const setURLAndCheckURL = async (urlInput) => {
+	// 	const res = await isValidUrl(urlInput, setErrors, errors);
+	// 	setValidURL(res);
+	// 	setUrl(urlInput);
+	// };
 
 	useEffect(() => {
 		if (image) {
-			setURLAndCheckURL(image.url);
+			// setURLAndCheckURL(image.url);
 			setDescription(image.description);
-			setLocation(image.location)
+			setLocation(image.location);
 			setShowStats(image.show_stats);
 		}
 	}, [image]);
 
-	useEffect(() => {
-		setErrors([]);
-	}, [validURL]);
+	// useEffect(() => {
+	// 	setErrors([]);
+	// }, [validURL]);
+
+	const updateImage = (e) => {
+		// const file = e.target.files[0];
+		// setUserImage(file);
+
+		const file = e.target.files[0];
+		// setImageError(null);
+		let testImage = new Image();
+		// If file size is too large show an error
+		testImage.onload = function () {
+			if (file.size > 5000000) {
+				setUserImage(null);
+				// return setImageError("File size must be less than 5 MB");
+			}
+			setUserImage(file);
+		};
+		// If image does not load show an error
+		testImage.onerror = function () {
+			setUserImage(null);
+			
+			// setImageError("Invalid Image, please try another one");
+		};
+		//Create image to run previous tests
+		testImage.src = URL.createObjectURL(file);
+	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const submitErrors = [];
 
-		if (!validURL) {
-			submitErrors.push(
-				"Invalid URL: Please enter a valid URL ending in - jpg/jpeg/png/webp/avif/gif/svg. Also please make sure this image CORS policy compliant. Image can be blocked by CORS policy due to: No 'Access-Control-Allow-Origin' header being present on the requested resource."
-			);
-		}
-		if (url.includes("File:")) {
-			submitErrors.push(
-				'Invalid URL: URL must not include "File:", Please use original image address'
-			);
-		}
-		if (url.includes(' ')) {
-			submitErrors.push(
-				'Image cannot have an empty space in the url!'
-			)
-		}
-		if (url.length > 1000) {
-			submitErrors.push(
-				"Invalid URL: URL must not be longer than 1000 characters"
-			);
-		}
+		// if (!validURL) {
+		// 	submitErrors.push(
+		// 		"Invalid URL: Please enter a valid URL ending in - jpg/jpeg/png/webp/avif/gif/svg. Also please make sure this image CORS policy compliant. Image can be blocked by CORS policy due to: No 'Access-Control-Allow-Origin' header being present on the requested resource."
+		// 	);
+		// }
+		// if (url.includes("File:")) {
+		// 	submitErrors.push(
+		// 		'Invalid URL: URL must not include "File:", Please use original image address'
+		// 	);
+		// }
+		// if (url.includes(" ")) {
+		// 	submitErrors.push("Image cannot have an empty space in the url!");
+		// }
+		// if (url.length > 1000) {
+		// 	submitErrors.push(
+		// 		"Invalid URL: URL must not be longer than 1000 characters"
+		// 	);
+		// }
 		if (submitErrors.length > 0) {
 			return setErrors(submitErrors);
 		} else {
@@ -72,12 +97,13 @@ const ImageForm = ({
 		}
 		if (!image) {
 			const create_payload = {
-				url,
+				userImage,
 				description,
 				location,
 				alt_description,
 				show_stats,
 			};
+			console.log(create_payload);
 			dispatch(CreateImage(create_payload))
 				.then(() => onClose())
 				.catch(async (data) => {
@@ -90,7 +116,7 @@ const ImageForm = ({
 				location,
 				alt_description,
 				show_stats,
-				url,
+				image,
 			};
 			dispatch(UpdateImage(update_payload))
 				.then(() => onClose())
@@ -128,10 +154,10 @@ const ImageForm = ({
 				<div className="image_form_container">
 					<div className="wrapper">
 						<div className="preview_image_place_holder">
-							{validURL && (
+							{userImage && (
 								<img
 									className="image_to_update"
-									src={url}
+									src={URL.createObjectURL(userImage)}
 									alt="imageto be updated"
 									type="url"
 								></img>
@@ -170,18 +196,22 @@ const ImageForm = ({
 									)}
 								</div>
 								<div className="url">
-									<input
+									{/* <input
 										value={url}
 										onChange={(e) => {
-											setURLAndCheckURL(e.target.value)
-											}
-										}
+											setURLAndCheckURL(e.target.value);
+										}}
 										placeholder="Image URL"
 										type="url"
 										maxLength="1000"
 										required
 										className="post-text-input"
-									/>
+									/> */}
+									<input
+										type="file"
+										accept="image/*"
+										onChange={updateImage}
+									></input>
 								</div>
 								<div className="location">
 									<input
@@ -226,7 +256,7 @@ const ImageForm = ({
 												write your own.
 											</div>
 											<div className="alt-text-container">
-												{validURL && (
+												{/* {validURL && (
 													<>
 														<img
 															className="image_to_update-mini"
@@ -251,7 +281,7 @@ const ImageForm = ({
 															className="post-text-input-alt-text"
 														/>
 													</>
-												)}
+												)} */}
 											</div>
 										</div>
 									)}

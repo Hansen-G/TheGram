@@ -89,13 +89,27 @@ export const loadImages = (id) => async (dispatch) => {
 	}
 };
 // create a image
-export const CreateImage = (image) => async (dispatch) => {
+export const CreateImage = (postData) => async (dispatch) => {
+	const {
+		userImage,
+		description,
+		location,
+		alt_description,
+		show_stats,
+	} = postData;
+
+	const formData = new FormData();
+	formData.append("description", description);
+	formData.append("location", location);
+	formData.append("alt_description", alt_description);
+	formData.append("show_stats", show_stats);
+	formData.append("image", userImage);
+
+	console.log(postData);
+
 	const response = await fetch("/api/images/new", {
 		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(image),
+		body: formData,
 	});
 
 	if (response.ok) {

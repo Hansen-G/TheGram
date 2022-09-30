@@ -8,6 +8,9 @@ from app.forms.image_form import ImageForm, DeleteImageForm, FormValidation
 from app.forms.comment_form import CommentForm
 from app.models import Imageslikes
 
+from app.s3_helpers import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
+
 img_routes = Blueprint('images', __name__)
 
 # Update image
@@ -100,23 +103,42 @@ def delete_images(id):
 def create_images():
     form = ImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-
+        
     if form.validate_on_submit():
-        image = Image(
-            url = form.data['url'],
+        if "image" not in request.files:
+            return {"errors": "image required"}, 400
+   
+        image = request.files["image"]
+
+        if not allowed_file(image.filename):
+            return {"errors": "file type not permitted"}, 400
+        
+        image.filename = get_unique_filename(image.filename)
+
+        upload = upload_file_to_s3(image)
+        # print(upload)
+        if "url" not in upload:
+            # if the dictionary doesn't have a url key
+            # it means that there was an error when we tried to upload
+            # so we send back that error message
+            return upload, 400
+
+        url = upload["url"]
+
+        post = Image(
+            url = url,
             description = form.data['description'],
             alt_description = form.data['alt_description'],
-            show_stats = form.data['show_stats'],
+            show_stats = bool(form.data['show_stats']),
             location = form.data['location'],
             user_id = current_user.id
         )
-        db.session.add(image)
+        db.session.add(post)
         db.session.commit()
 
-        image = image.to_dict()
-        image['post_user'] = User.query.get(image['user_id']).to_dict()
-
-        return image
+        newPost = post.to_dict()
+        newPost['post_user'] = User.query.get(newPost['user_id']).to_dict()
+        return newPost
 
     else:
         return jsonify(form.errors)
