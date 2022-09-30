@@ -128,6 +128,7 @@ export const UpdateImage = (image) => async (dispatch) => {
 		},
 		body: JSON.stringify(image),
 	});
+	console.log("updating thunkingggggggg", image)
 	if (response.ok) {
 		const updatedImage = await response.json();
 		dispatch(editImage(updatedImage));

@@ -37,8 +37,8 @@ def update_images(id):
 
 
     if image_to_be_updated and form.validate_on_submit():
-        if len(form.data['url']) >0 and len(form.data['url']) <250 :
-            image_to_be_updated.url = form.data['url']
+        # if len(form.data['url']) >0 and len(form.data['url']) <250 :
+        #     image_to_be_updated.url = form.data['url']
         if form.data['description']:
             image_to_be_updated.description = form.data['description']
         if form.data['alt_description']:
