@@ -5,11 +5,12 @@ import ImageModal from "../ImageModal/";
 import { CreateComment } from "../../store/images";
 import { toggleALike } from "../../store/images";
 import { cut, pastDate } from "../../util/";
-
+import LikeModal from "../LikeModal";
 function HomePageCard({ image, user }) {
 	const dispatch = useDispatch();
 	const [comment, setComment] = useState("");
 	const [errors, setErrors] = useState([]);
+	const [showLikeModal, setShowLikeModal] = useState(false);
 
 	// useEffect(() => {
 	// 	const newError = [];
@@ -21,15 +22,14 @@ function HomePageCard({ image, user }) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		const error = []
+		const error = [];
 		if (comment.trimEnd().length === 0) {
-			error.push("please enter a valid comment")
-			setErrors(error)
-		} else if (comment.length > 1000){
-			error.push("Comment must be less than 1000 characters")
-			setErrors(error)
-		}
-		else {
+			error.push("please enter a valid comment");
+			setErrors(error);
+		} else if (comment.length > 1000) {
+			error.push("Comment must be less than 1000 characters");
+			setErrors(error);
+		} else {
 			const newComment = {
 				comment: comment,
 				image_id: image.id,
@@ -38,7 +38,6 @@ function HomePageCard({ image, user }) {
 			dispatch(CreateComment(newComment));
 			setComment("");
 		}
-
 	};
 
 	const toggleImageLike = (imageId) => {
@@ -76,7 +75,6 @@ function HomePageCard({ image, user }) {
 			</div>
 			<div className="post-info">
 				<div className="post-function-bar flex">
-
 					<div className="post-function-bar-left">
 						{image.liked_user_ids[user.id] ? (
 							<i
@@ -101,8 +99,27 @@ function HomePageCard({ image, user }) {
                                             <i className="fa-regular fa-bookmark"></i>
                                         </div>     */}
 				</div>
-				<div className="image-likes">
-					{image.user_image_likes} likes
+				<div
+					className="image-likes"
+					onClick={() => {
+						if (Object.values(image.liked_user_ids).length === 0)
+							return;
+						if (showLikeModal === false) {
+							setShowLikeModal(true);
+						}
+					}}
+				>
+					{image.user_image_likes > 0 &&
+						(image.user_image_likes === 1
+							? `${image.user_image_likes} like`
+							: `${image.user_image_likes} likes`)}
+					{image.user_image_likes === 0 && "No likes"}
+					<LikeModal
+						showLikeModal={showLikeModal}
+						setShowLikeModal={setShowLikeModal}
+						likes={image.liked_user_ids}
+						onClose={() => setShowLikeModal(false)}
+					></LikeModal>
 				</div>
 				{image["description"].length <= 100 && (
 					<div className="post-description">
@@ -149,8 +166,8 @@ function HomePageCard({ image, user }) {
 							minLength="1"
 							maxLength="1000"
 							onChange={(e) => {
-								setComment(e.target.value)
-								setErrors([])
+								setComment(e.target.value);
+								setErrors([]);
 							}}
 							className="post-comment-input"
 						></input>

@@ -5,6 +5,7 @@ import { toggleALike, toggleACommentLike } from "../../store/images";
 import { CreateComment } from "../../store/images";
 import CommentDotModal from "../CommentDotModal";
 import ImageDotModal from "../ImageDotModal";
+import LikeModal from "../LikeModal";
 import { pastDate } from "../../util";
 import "./ImageModal.css";
 
@@ -25,6 +26,8 @@ function ImageDetails({ image, user }) {
 	const dispatch = useDispatch();
 	const [comment, setComment] = useState("");
 	const [errors, setErrors] = useState([]);
+	const [showLikeModal, setShowLikeModal] = useState(false);
+
 	useEffect(() => {
 		const newError = [];
 		if (comment.length > 1000) {
@@ -34,15 +37,14 @@ function ImageDetails({ image, user }) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const error = []
+		const error = [];
 		if (comment.trimEnd().length === 0) {
-			error.push("please enter a valid comment")
-			setErrors(error)
-		} else if (comment.length > 1000){
-			error.push("Comment must be less than 1000 characters")
-			setErrors(error)
+			error.push("please enter a valid comment");
+			setErrors(error);
+		} else if (comment.length > 1000) {
+			error.push("Comment must be less than 1000 characters");
+			setErrors(error);
 		} else {
-
 			e.preventDefault();
 			const newComment = {
 				comment: comment,
@@ -175,40 +177,75 @@ function ImageDetails({ image, user }) {
 									</div>
 								</div>
 								<div className="post-function-bar-left">
-                                    {checkLike(
-                                        comment.user_comment_likes,
-                                        user.id
-                                    ) ? (
-                                        <div style={{display: "flex", fontSize: "12px", alignItems: "center"}}>
-                                            <div
-                                                style={{width: "fitContent",whiteSpace: "nowrap"}}>
-                                                    {comment.user_comment_likes.length > 0 ?
-                                                        comment.user_comment_likes.length : null}
-                                            </div>
-                                            <i
-                                                className="fa-solid fa-heart curent_user_liked"
-                                                id="comment-like-icon"
-                                                onClick={() => toggleCommentLike(comment.id, image.id)}
-                                            ></i>
-                                        </div>
-                                    ) : (
-                                        <div style={{display: "flex", fontSize: "12px", alignItems: "center"}}>
-                                            <div
-                                                style={{width: "fitContent",whiteSpace: "nowrap"}}>
-                                                    {comment.user_comment_likes.length > 0 ?
-                                                        comment.user_comment_likes.length: null}
-                                            </div>
-                                            <i
-                                                className="fa-regular fa-heart curent_user_unliked"
-                                                id="comment-like-icon"
-                                                onClick={() => toggleCommentLike(comment.id, image.id)
-                                                }
-                                            ></i>
-                                        </div>
-                                    )}
-                                    {/* <i className="fa-regular fa-comment"></i> */}
-                                    {/* <i className="fa-regular fa-paper-plane"></i> */}
-                                </div>
+									{checkLike(
+										comment.user_comment_likes,
+										user.id
+									) ? (
+										<div
+											style={{
+												display: "flex",
+												fontSize: "12px",
+												alignItems: "center",
+											}}
+										>
+											<div
+												style={{
+													width: "fitContent",
+													whiteSpace: "nowrap",
+												}}
+											>
+												{comment.user_comment_likes
+													.length > 0
+													? comment.user_comment_likes
+															.length
+													: null}
+											</div>
+											<i
+												className="fa-solid fa-heart curent_user_liked"
+												id="comment-like-icon"
+												onClick={() =>
+													toggleCommentLike(
+														comment.id,
+														image.id
+													)
+												}
+											></i>
+										</div>
+									) : (
+										<div
+											style={{
+												display: "flex",
+												fontSize: "12px",
+												alignItems: "center",
+											}}
+										>
+											<div
+												style={{
+													width: "fitContent",
+													whiteSpace: "nowrap",
+												}}
+											>
+												{comment.user_comment_likes
+													.length > 0
+													? comment.user_comment_likes
+															.length
+													: null}
+											</div>
+											<i
+												className="fa-regular fa-heart curent_user_unliked"
+												id="comment-like-icon"
+												onClick={() =>
+													toggleCommentLike(
+														comment.id,
+														image.id
+													)
+												}
+											></i>
+										</div>
+									)}
+									{/* <i className="fa-regular fa-comment"></i> */}
+									{/* <i className="fa-regular fa-paper-plane"></i> */}
+								</div>
 							</div>
 						))}
 				</div>
@@ -236,8 +273,25 @@ function ImageDetails({ image, user }) {
                                         <i className="fa-regular fa-bookmark"></i>
                                     </div>     */}
 				</div>
-				<div className="image-likes">
-					{image.user_image_likes} likes
+				<div
+					className="image-likes"
+					onClick={() => {
+						if (showLikeModal === false) {
+							setShowLikeModal(true);
+						}
+					}}
+				>
+					{image.user_image_likes > 0 &&
+						(image.user_image_likes === 1
+							? `${image.user_image_likes} like`
+							: `${image.user_image_likes} likes`)}
+					{image.user_image_likes === 0 && "No likes"}
+					<LikeModal
+						showLikeModal={showLikeModal}
+						setShowLikeModal={setShowLikeModal}
+						likes={image.liked_user_ids}
+						onClose={() => setShowLikeModal(false)}
+					></LikeModal>
 				</div>
 
 				<div className="modal-date">{pastDate(image.createdAt)}</div>
@@ -257,8 +311,8 @@ function ImageDetails({ image, user }) {
 							placeholder="Add a comment..."
 							value={comment}
 							onChange={(e) => {
-								setComment(e.target.value)
-								setErrors([])
+								setComment(e.target.value);
+								setErrors([]);
 							}}
 							className="modal-comment-input"
 							minLength="1"

@@ -3,6 +3,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loadImages } from "../../store/images";
 import { toggleUserFollow } from "../../store/session";
+import FollowModal from "../FollowModal";
 import Post from "./Post";
 import "./css/Profile.css";
 
@@ -15,6 +16,8 @@ const Profile = () => {
 	const images = Object.values(useSelector((state) => state.images));
 	const currentUser = useSelector((state) => state.session.user);
 	const [loaded, setLoaded] = useState(false);
+	const [showFollowModal, setShowFollowModal] = useState(false);
+	const [type, setType] = useState("");
 	//Fetch user data
 	// const getUser = async () => {
 	// 	let newuser = await fetch(`/api/users/${userId}`);
@@ -29,10 +32,10 @@ const Profile = () => {
 		// if (currentUser.id === userId) {
 		// 	setUser(currentUser);
 		// } else {
-			let profileUser = await fetch(`/api/users/${userId}`);
-			const data = await profileUser.json();
-			if (data.error) return history.push("/");
-			else setUser(data);
+		let profileUser = await fetch(`/api/users/${userId}`);
+		const data = await profileUser.json();
+		if (data.error) return history.push("/");
+		else setUser(data);
 		// }
 	};
 
@@ -122,15 +125,41 @@ const Profile = () => {
 									</span>
 									posts{" "}
 								</div>
-								<div className="inner-user-info-stat">
+								<div
+									className="inner-user-info-stat follow"
+									onClick={() => {
+										if (
+											Object.values(user.followers)
+												.length === 0
+										)
+											return;
+										if (!showFollowModal) {
+											setType("Followers");
+											setShowFollowModal(true);
+										}
+									}}
+								>
 									{" "}
 									<span className="bold-text">
 										{Object.values(user.followers).length}{" "}
 									</span>
 									followers
 								</div>
-								<div className="inner-user-info-stat">
-									<span className="bold-text">
+								<div
+									className="inner-user-info-stat follow"
+									onClick={() => {
+										if (
+											Object.values(user.following)
+												.length === 0
+										)
+											return;
+										if (!showFollowModal) {
+											setType("Following");
+											setShowFollowModal(true);
+										}
+									}}
+								>
+									<span className="bold-text ">
 										{" "}
 										{
 											Object.values(user.following).length
@@ -138,6 +167,12 @@ const Profile = () => {
 									</span>{" "}
 									following
 								</div>
+								<FollowModal
+									showFollowModal={showFollowModal}
+									setShowFollowModal={setShowFollowModal}
+									user={user}
+									type={type}
+								></FollowModal>
 							</div>
 							<div className="profile-name">{user.name}</div>
 							<div className="profile-bio">{user.bio}</div>

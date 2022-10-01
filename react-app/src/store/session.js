@@ -143,7 +143,6 @@ export default function reducer(state = initialState, action) {
 			} else {
 				newState.user.following = {};
 			}
-
 			return newState;
 		default:
 			return state;
