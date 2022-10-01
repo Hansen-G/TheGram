@@ -4,6 +4,7 @@ import { loadHomePage } from "../../store/images";
 import HomePageCard from "../HomePageCard";
 import "./HomePage.css";
 import FollowUsers from "../FollowUsers";
+import LoadingPage from "../LoadingPage";
 
 function HomePage() {
 	const dispatch = useDispatch();
@@ -18,7 +19,7 @@ function HomePage() {
 	useEffect(() => {
 		const timeout = setTimeout(() => {
 			setLoaded(true);
-		}, 250);
+		}, 2050);
 		return () => clearTimeout(timeout);
 	}, []);
 
@@ -32,8 +33,9 @@ function HomePage() {
 
 	return (
 		<div className="home flex">
+			{loaded && user ?
 			<div className="home-left flex">
-				{loaded &&
+				{
 					imagesArr.length > 0 &&
 					imagesArr.map((image) => (
 						<HomePageCard
@@ -41,9 +43,23 @@ function HomePage() {
 							image={image}
 							user={user}
 						/>
-					))}
+				 	))
+				}
+				{<FollowUsers passuser={user} />}
 			</div>
-			{loaded && <FollowUsers passuser={user} />}
+			: user ? <div>
+						{(() => {
+            				let arr = []
+            				for (let i = 0; i <= 3; i++) {
+                				arr.push(
+								<LoadingPage />
+                				)
+            				}
+
+            				return arr
+            			})()}
+					</div> : null}
+			{<FollowUsers passuser={user} />}
 		</div>
 	);
 }

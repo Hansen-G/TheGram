@@ -8,6 +8,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { authenticate } from "./store/session";
 import Profile from "./components/Images/Profile";
 import HomePage from "./components/HomePage";
+import LoadingPage from "./components/LoadingPage";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -30,6 +31,9 @@ function App() {
 			<Switch>
 				<Route path="/login" exact={true}>
 					<LoginForm />
+				</Route>
+				<Route path="/load" exact={true}>
+					<LoadingPage />
 				</Route>
 				<Route path="/sign-up" exact={true}>
 					<SignUpForm />
