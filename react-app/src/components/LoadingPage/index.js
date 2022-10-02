@@ -44,7 +44,7 @@ const LoadingPage = () => {
 				<div className="post-date"></div>
 				<div className="div-line"></div>
 				<div className="post-add-comment flex">
-					<form className="flex card-post">
+					<form className="flex load-card-post">
 						<i
 							className="fa-solid fa-angle-right"
 							id="card-comment-icon"

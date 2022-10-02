@@ -19,7 +19,7 @@ function HomePage() {
 	useEffect(() => {
 		const timeout = setTimeout(() => {
 			setLoaded(true);
-		}, 2050);
+		}, 1350);
 		return () => clearTimeout(timeout);
 	}, []);
 

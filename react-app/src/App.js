@@ -32,9 +32,7 @@ function App() {
 				<Route path="/login" exact={true}>
 					<LoginForm />
 				</Route>
-				<Route path="/load" exact={true}>
-					<LoadingPage />
-				</Route>
+
 				<Route path="/sign-up" exact={true}>
 					<SignUpForm />
 				</Route>
