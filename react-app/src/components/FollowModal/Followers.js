@@ -2,15 +2,25 @@ import "./index.css";
 import { toggleUserFollow, authenticate } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-const Followers = ({ user }) => {
+const Followers = ({ user, setUser }) => {
 	const dispatch = useDispatch();
+	let path = useLocation();
+	let userId = Number(path.pathname.split("/")[1]);
 	const session = useSelector((state) => state.session);
 	const { follower_id, profile_img, username } = user;
 
 	const toggleAUserFollow = async (userToFollowId) => {
 		await dispatch(toggleUserFollow(userToFollowId));
+		getUser();
+	};
+
+	const getUser = async () => {
+		let profileUser = await fetch(`/api/users/${userId}`);
+		const data = await profileUser.json();
+		if (data.error) return;
+		else setUser(data);
 	};
 
 	return (
@@ -52,9 +62,10 @@ const Followers = ({ user }) => {
 						Follow
 					</button>
 				))}
-			{session.user && Number(session.user.id) === Number(follower_id) && (
-				<div className="follow-placeholder"></div>
-			)}
+			{session.user &&
+				Number(session.user.id) === Number(follower_id) && (
+					<div className="follow-placeholder"></div>
+				)}
 		</div>
 	);
 };

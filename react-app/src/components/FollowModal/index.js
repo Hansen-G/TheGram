@@ -4,7 +4,13 @@ import Followers from "./Followers";
 import Following from "./Following";
 import "./index.css";
 
-const FollowModal = ({ user, showFollowModal, setShowFollowModal, type }) => {
+const FollowModal = ({
+	user,
+	showFollowModal,
+	setShowFollowModal,
+	type,
+	setUser,
+}) => {
 	//Prevent scrolling on modal open
 	useEffect(() => {
 		if (showFollowModal) {
@@ -26,6 +32,7 @@ const FollowModal = ({ user, showFollowModal, setShowFollowModal, type }) => {
 										<Followers
 											key={follow.follower_id}
 											user={follow}
+											setUser={setUser}
 										></Followers>
 									);
 								})}
@@ -35,6 +42,7 @@ const FollowModal = ({ user, showFollowModal, setShowFollowModal, type }) => {
 										<Following
 											key={follow.following_id}
 											user={follow}
+											setUser={setUser}
 										></Following>
 									);
 								})}

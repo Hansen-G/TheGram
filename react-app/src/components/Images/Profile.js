@@ -65,6 +65,7 @@ const Profile = () => {
 		}, 250);
 		return () => clearTimeout(timeout);
 	}, []);
+
 	return (
 		<>
 			{loaded && user && (
@@ -172,6 +173,7 @@ const Profile = () => {
 									setShowFollowModal={setShowFollowModal}
 									user={user}
 									type={type}
+									setUser={setUser}
 								></FollowModal>
 							</div>
 							<div className="profile-name">{user.name}</div>
