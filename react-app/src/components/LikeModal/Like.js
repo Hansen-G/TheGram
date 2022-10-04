@@ -12,9 +12,6 @@ const Like = ({ user }) => {
 	const toggleAUserFollow = async (userToFollowId) => {
 		await dispatch(toggleUserFollow(userToFollowId));
 	};
-	useEffect(() => {
-		console.log(session.user.following[id]);
-	}, [session.user]);
 
 	return (
 		<div className="modal-like">
