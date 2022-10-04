@@ -8,6 +8,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { authenticate } from "./store/session";
 import Profile from "./components/Images/Profile";
 import HomePage from "./components/HomePage";
+import LoadingPage from "./components/LoadingPage";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -31,6 +32,7 @@ function App() {
 				<Route path="/login" exact={true}>
 					<LoginForm />
 				</Route>
+
 				<Route path="/sign-up" exact={true}>
 					<SignUpForm />
 				</Route>
