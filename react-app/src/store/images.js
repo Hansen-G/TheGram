@@ -105,7 +105,6 @@ export const CreateImage = (postData) => async (dispatch) => {
 	formData.append("show_stats", show_stats);
 	formData.append("image", userImage);
 
-	console.log(postData);
 
 	const response = await fetch("/api/images/new", {
 		method: "POST",

@@ -94,6 +94,10 @@
 	width: 72px;
 }
 
+.inner-user-info-stat.follow {
+	cursor: pointer;
+}
+
 @media screen and (max-width: 1200px) {
 	.posts-container {
 		gap: 3px;

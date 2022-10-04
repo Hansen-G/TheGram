@@ -15,8 +15,8 @@
 .card-model-container {
 	width: 100% !important;
 	height: 800px;
-    /* Lines I added below for changing image max size on smaller display */
-	max-width: 1000px;
+	/* Lines I added below for changing image max size on smaller display */
+	max-width: 90vw;
 	max-height: 90vh;
 }
 
@@ -158,11 +158,9 @@ input.middle:focus {
 	width: 90%;
 }
 
-
 #comment-like-icon {
-text-align: center;
+	text-align: center;
 }
-
 
 .comment-and-likes {
 	display: flex;
@@ -170,5 +168,4 @@ text-align: center;
 	align-items: center;
 	font-size: 12px;
 	width: fit-content;
-
 }

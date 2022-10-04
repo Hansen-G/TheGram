@@ -10,7 +10,9 @@ function ImageModal({ image, icon, user }) {
 	// function that returns setShwoMOdalfalse and pass as prop
 	const setModal = (show) => setShowModal(show);
 	if (icon === "View") {
-		icon = `View all ${image.comments.length} comments`;
+		icon = `View all ${image.comments.length} ${
+			image.comments.length === 1 ? "comment" : "comments"
+		}`;
 	}
 	//Prevent scrolling on modal open
 	useEffect(() => {

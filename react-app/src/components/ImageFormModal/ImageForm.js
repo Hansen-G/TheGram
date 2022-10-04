@@ -61,7 +61,7 @@ const ImageForm = ({
 		// If image does not load show an error
 		testImage.onerror = function () {
 			setUserImage(null);
-			
+
 			// setImageError("Invalid Image, please try another one");
 		};
 		//Create image to run previous tests
@@ -103,7 +103,6 @@ const ImageForm = ({
 				alt_description,
 				show_stats,
 			};
-			console.log(create_payload);
 			dispatch(CreateImage(create_payload))
 				.then(() => onClose())
 				.catch(async (data) => {

@@ -1,0 +1,44 @@
+.follow-modal-container {
+	max-width: 300px;
+	max-height: 500px;
+	min-width: 200px;
+	width: 40vw;
+	height: 20vh;
+	overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	box-sizing: border-box;
+	position: relative;
+}
+
+.follow-modal-title {
+	border-bottom: solid 1px lightgray;
+
+	width: 100%;
+	text-align: center;
+	padding-bottom: 5px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	position: sticky;
+	z-index: 20;
+	background-color: white;
+	top: 0px;
+	bottom: 100%;
+}
+
+.follow-list-modal {
+	width: 100%;
+}
+
+.modal-follow {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	min-width: 200px;
+	padding: 10px;
+	box-sizing: border-box;
+	align-items: center;
+	background-color: white;
+}
