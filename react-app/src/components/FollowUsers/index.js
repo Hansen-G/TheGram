@@ -43,7 +43,7 @@ const FollowUsers = ({ passuser }) => {
 
 	return (
 		<div className="followers-box">
-			{loaded && Object.values(users).length ? (
+			{loaded && user && Object.values(users).length ? (
 				<>
 					<div className="home-user-card flex">
 						<div className="home-user-card-img-div">
@@ -105,7 +105,7 @@ const FollowUsers = ({ passuser }) => {
 					</div>
 				</>
 			) : (
-				loaded && (
+				passuser && (
 					<>
 						<div className="home-user-card flex">
 							<div className="home-user-card-img-div">
