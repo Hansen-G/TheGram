@@ -1,5 +1,6 @@
 # from distutils.log import error
 from datetime import datetime
+from turtle import pos
 from sqlalchemy import delete
 from flask import Blueprint, jsonify, session, request, redirect, url_for
 from app.models import User, db, Image, Comment
@@ -109,13 +110,14 @@ def create_images():
             return {"errors": "image required"}, 400
    
         image = request.files["image"]
-
+        print(image)
         if not allowed_file(image.filename):
             return {"errors": "file type not permitted"}, 400
         
         image.filename = get_unique_filename(image.filename)
 
         upload = upload_file_to_s3(image)
+        print(upload)
         # print(upload)
         if "url" not in upload:
             # if the dictionary doesn't have a url key
@@ -124,7 +126,7 @@ def create_images():
             return upload, 400
 
         url = upload["url"]
-
+        print(url)
         post = Image(
             url = url,
             description = form.data['description'],
@@ -135,7 +137,8 @@ def create_images():
         )
         db.session.add(post)
         db.session.commit()
-
+        print(post)
+        print(post.to_dict())
         newPost = post.to_dict()
         newPost['post_user'] = User.query.get(newPost['user_id']).to_dict()
         return newPost
