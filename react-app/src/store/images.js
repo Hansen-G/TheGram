@@ -105,13 +105,11 @@ export const CreateImage = (postData) => async (dispatch) => {
 	formData.append("show_stats", show_stats);
 	formData.append("image", userImage);
 
-
 	const response = await fetch("/api/images/new", {
 		method: "POST",
 		body: formData,
 	});
-	const data = await response.json();
-	console.log(data)
+
 	if (response.ok) {
 		const image = await response.json();
 		dispatch(addImage(image));
@@ -128,7 +126,7 @@ export const UpdateImage = (image) => async (dispatch) => {
 		},
 		body: JSON.stringify(image),
 	});
-	console.log("updating thunkingggggggg", image)
+	console.log("updating thunkingggggggg", image);
 	if (response.ok) {
 		const updatedImage = await response.json();
 		dispatch(editImage(updatedImage));
@@ -228,6 +226,7 @@ export default function images(state = initialState, action) {
 			return newState;
 		case ADD_IMAGE:
 			newState = { ...state };
+
 			newState[action.image.id] = action.image;
 			return newState;
 		case EDIT_IMAGE:

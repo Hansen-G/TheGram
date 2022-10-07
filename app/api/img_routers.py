@@ -18,7 +18,6 @@ img_routes = Blueprint('images', __name__)
 @img_routes.route('/new', methods=['POST'])
 @login_required
 def create_images():
-    print('first line of create images')
     form = ImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
         
@@ -27,14 +26,14 @@ def create_images():
             return {"errors": "image required"}, 400
    
         image = request.files["image"]
-        print(image)
+        
         if not allowed_file(image.filename):
             return {"errors": "file type not permitted"}, 400
         
         image.filename = get_unique_filename(image.filename)
 
         upload = upload_file_to_s3(image)
-        print(upload)
+        
         # print(upload)
         if "url" not in upload:
             # if the dictionary doesn't have a url key
@@ -43,7 +42,7 @@ def create_images():
             return upload, 400
 
         url = upload["url"]
-        print(url)
+
         post = Image(
             url = url,
             description = form.data['description'],
@@ -54,14 +53,13 @@ def create_images():
         )
         db.session.add(post)
         db.session.commit()
-        print(post)
-        print(post.to_dict())
+
         newPost = post.to_dict()
         newPost['post_user'] = User.query.get(newPost['user_id']).to_dict()
-        return jsonify({ 'newPost': newPost, 'line': 'Line 61'})
+        return newPost
 
     else:
-        return jsonify({'formErrors':form.errors})
+        return form.errors()
 
 
 
