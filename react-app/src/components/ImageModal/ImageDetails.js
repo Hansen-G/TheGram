@@ -33,7 +33,7 @@ function ImageDetails({ image, user }) {
 		if (comment.length > 1000) {
 			newError.push("Comment must be less than 1000 characters");
 		}
-	}, [image]);
+	}, [image, comment]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

@@ -1,7 +1,6 @@
 import "./index.css";
-import { toggleUserFollow, authenticate } from "../../store/session";
+import { toggleUserFollow } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Following = ({ user, setUser }) => {
@@ -13,9 +12,8 @@ const Following = ({ user, setUser }) => {
 
 	const toggleAUserFollow = async (userToFollowId) => {
 		await dispatch(toggleUserFollow(userToFollowId));
-		getUser()
+		getUser();
 	};
-
 
 	const getUser = async () => {
 		let profileUser = await fetch(`/api/users/${userId}`);
@@ -30,6 +28,7 @@ const Following = ({ user, setUser }) => {
 				<img
 					src={profile_img}
 					className="modal-like-profile-image"
+					alt='profile'
 				></img>
 			</Link>
 			<Link to={`/${following_id}`}>{username}</Link>
@@ -63,9 +62,10 @@ const Following = ({ user, setUser }) => {
 						Follow
 					</button>
 				))}
-			{session.user && Number(session.user.id) === Number(following_id) && (
-				<div className="follow-placeholder"></div>
-			)}
+			{session.user &&
+				Number(session.user.id) === Number(following_id) && (
+					<div className="follow-placeholder"></div>
+				)}
 		</div>
 	);
 };

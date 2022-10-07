@@ -18,25 +18,16 @@ const Profile = () => {
 	const [loaded, setLoaded] = useState(false);
 	const [showFollowModal, setShowFollowModal] = useState(false);
 	const [type, setType] = useState("");
-	//Fetch user data
-	// const getUser = async () => {
-	// 	let newuser = await fetch(`/api/users/${userId}`);
 
-	// 	let data = await newuser.json();
-	// 	setUser(data);
-	// };
 	const getUser = async () => {
 		if (!Number(userId) || userId === 0) {
 			return history.push("/");
 		}
-		// if (currentUser.id === userId) {
-		// 	setUser(currentUser);
-		// } else {
+
 		let profileUser = await fetch(`/api/users/${userId}`);
 		const data = await profileUser.json();
 		if (data.error) return history.push("/");
 		else setUser(data);
-		// }
 	};
 
 	const toggleAUserFollow = async (userToFollowId) => {
@@ -55,9 +46,7 @@ const Profile = () => {
 			return history.push("/");
 		}
 		window.scrollTo(0, 0);
-		// dispatch(loadImages(userId));
-		//Call backend
-	}, [dispatch, userId]);
+	}, [dispatch, userId, history, path]);
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {

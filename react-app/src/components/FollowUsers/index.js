@@ -9,7 +9,7 @@ const FollowUsers = ({ passuser }) => {
 	const dispatch = useDispatch();
 	const [users, setUsers] = useState([]);
 	const [user, setUser] = useState();
-	const [loaded, setLoaded] = useState(false);
+
 	const currentUser = useSelector((state) => state.session.user);
 	const userId = currentUser.id;
 
@@ -21,14 +21,7 @@ const FollowUsers = ({ passuser }) => {
 			setUsers(fetchedusers);
 		};
 		getData();
-	}, [dispatch, user]);
-
-	useEffect(() => {
-		const timeout = setTimeout(() => {
-			setLoaded(true);
-		}, 250);
-		return () => clearTimeout(timeout);
-	}, []);
+	}, [dispatch, user, userId]);
 
 	//Fetch user data
 	const getUser = async () => {

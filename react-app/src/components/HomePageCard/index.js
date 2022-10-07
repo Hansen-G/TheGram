@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import ImageModal from "../ImageModal/";
@@ -11,13 +11,6 @@ function HomePageCard({ image, user }) {
 	const [comment, setComment] = useState("");
 	const [errors, setErrors] = useState([]);
 	const [showLikeModal, setShowLikeModal] = useState(false);
-
-	// useEffect(() => {
-	// 	const newError = [];
-	// 	if (comment.length > 1000) {
-	// 		newError.push("Comment must be less than 1000 characters");
-	// 	}
-	// }, [comment]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
