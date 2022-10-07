@@ -11,7 +11,7 @@ function ImageDotModal({ image, user }) {
     return (
         <>
 
-            <button className='edit-botton' onClick={() => setShowModal(true)}>
+            <button className='edit-button' onClick={() => setShowModal(true)}>
                 <i className="fa-solid fa-ellipsis dot-icon"></i>
             </button>
             {showModal && (

@@ -50,13 +50,13 @@ const NavBar = () => {
 							>
 								<i className="fa-solid fa-house icon"></i>
 							</NavLink>
-							<NavLink to="/" className="nav-bar-link">
+							<div className="nav-bar-link">
 								<i
 									className="fa-regular fa-square-plus icon"
 									onClick={() => setShowModal(!showModal)}
 								></i>
-							</NavLink>
-							
+							</div>
+
 							<div
 								onClick={() => setShowMenu(!showMenu)}
 								className="profile-pic-anchor"

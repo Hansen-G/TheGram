@@ -21,7 +21,7 @@ const ImageForm = ({
 	const [errors, setErrors] = useState([]);
 	const [showAccessity, setShowAccessity] = useState(false);
 	const [userImage, setUserImage] = useState(null);
-	const [image_url, setImageURL] = useState();
+	const [image_url, setImageURL] = useState(null);
 	// const [url, setUrl] = useState(""); //URL we will actually render as an <img/>
 	// const [validURL, setValidURL] = useState(false); // Boolean that will show if the URL below is actually a valid image url
 
@@ -38,6 +38,7 @@ const ImageForm = ({
 			setLocation(image.location);
 			setShowStats(image.show_stats);
 			setImageURL(image.url);
+			setAltDescription(image.alt_description);
 		}
 	}, [image]);
 
@@ -131,20 +132,20 @@ const ImageForm = ({
 	};
 
 	return (
-		<div className="image_form_container-main">
+		<div className="image-form-container-main">
 			<form onSubmit={handleSubmit}>
-				<div className="button_container">
+				<div className="button-container">
 					<i
 						className="fa-solid fa-arrow-left-long"
 						onClick={() => {
 							setShowModal(false);
 						}}
 					></i>
-					<div className="form_title">
+					<div className="form-title">
 						{image ? "Edit info" : "Create new post"}
 					</div>
 					<button
-						className={`create_submit_button ${
+						className={`create-submit-button ${
 							errors.length > 0 ? "disabled" : ""
 						}`}
 						type="submit"
@@ -153,31 +154,31 @@ const ImageForm = ({
 						{image ? "Done" : "Share"}
 					</button>
 				</div>
-				<div className="image_form_container">
+				<div className="image-form-container">
 					<div className="wrapper">
-						<div className="preview_image_place_holder">
+						<div className="preview-image-place-holder">
 							{image && (
 								<img
-									className="image_to_update"
+									className="image-to-update"
 									src={image.url}
-									alt="existing image"
+									alt={alt_description}
 								></img>
 							)}
 
 							{userImage && (
 								<img
-									className="image_to_update"
+									className="image-to-update"
 									src={URL.createObjectURL(userImage)}
 									alt="imageto be updated"
 									type="url"
 								></img>
 							)}
 						</div>
-						<div className="right_div_container">
+						<div className="right-div-container">
 							<div className="add-image-info">
-								<div className="user_profile_container">
+								<div className="user-profile-container">
 									<img
-										className="user_profile_pic"
+										className="user-profile-pic"
 										src={user.profile_img}
 										alt="profile"
 									></img>
@@ -220,14 +221,14 @@ const ImageForm = ({
 									/> */}
 
 										<label
-											htmlFor="file_input"
-											className="image_input_button"
+											htmlFor="file-input"
+											className="image-input-button"
 										>
 											Click to upload image
 										</label>
 										<input
-											id="file_input"
-											className="upload_image_container"
+											id="file-input"
+											className="upload-image-container"
 											type="file"
 											accept="image/*"
 											onChange={updateImage}
@@ -246,8 +247,8 @@ const ImageForm = ({
 										className="post-text-input"
 									/>
 								</div>
-								<div className="alt_description">
-									<div className="accessibility_container">
+								<div className="alt-description">
+									<div className="accessibility-container">
 										<div> Accessibility </div>
 										{showAccessity && (
 											<i
@@ -268,7 +269,7 @@ const ImageForm = ({
 									</div>
 									{showAccessity && (
 										<div>
-											<div className="accessibility_words">
+											<div className="accessibility-words">
 												Alt text describes your photos
 												for people with visual
 												impairments. Alt text will be
@@ -277,12 +278,19 @@ const ImageForm = ({
 												write your own.
 											</div>
 											<div className="alt-text-container">
-												{/* {validURL && (
+												{(image_url || userImage) && (
 													<>
 														<img
-															className="image_to_update-mini"
-															src={url}
-															alt="imageto be updated"
+															className="image-to-update-mini"
+															src={
+																image_url ||
+																URL.createObjectURL(
+																	userImage
+																)
+															}
+															alt={
+																alt_description
+															}
 															type="url"
 														></img>
 
@@ -302,7 +310,7 @@ const ImageForm = ({
 															className="post-text-input-alt-text"
 														/>
 													</>
-												)} */}
+												)}
 											</div>
 										</div>
 									)}
