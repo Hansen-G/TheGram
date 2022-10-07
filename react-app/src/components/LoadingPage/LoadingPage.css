@@ -197,3 +197,17 @@
 	animation-direction: alternate;
 	/* animation-direction: reverse; */
 }
+
+@media screen and (max-width: 750px) {
+	.loading-home-left {
+		max-width: 100vw;
+	}
+
+	.loading-card-post-container {
+		max-width: 98vw;
+	}
+
+	.loading-post-comment-input {
+		max-width: 75vw;
+	}
+}
