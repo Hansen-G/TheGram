@@ -11,7 +11,7 @@ function CommentDotModal({ comment, user }) {
     return (
         <>
 
-            <button className='comment-edit-botton' onClick={() => setShowModal(true)}>
+            <button className='comment-edit-button' onClick={() => setShowModal(true)}>
                 <i className="fa-solid fa-ellipsis comment-dot-icon"></i>
                 
             </button>

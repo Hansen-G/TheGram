@@ -1,4 +1,4 @@
-.comments-botton {
+.comments-button {
 	background-color: rgba(0, 0, 0, 0);
 	border: none;
 	padding: 0;
@@ -194,7 +194,7 @@ input.middle:focus {
 		min-width: 90vw;
 	}
 
-	.comment-edit-botton {
+	.comment-edit-button {
 		margin-left: 0px;
 		padding: 0px;
 	}
