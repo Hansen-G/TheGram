@@ -107,7 +107,35 @@
 
 @media screen and (max-width: 750px) {
 	.inner-user-info {
-		flex-direction: column;
-		gap: 5px;
+		justify-content: space-around;
+	}
+	.profile-image-bio {
+		max-width: 50px;
+		max-height: 50px;
+	}
+
+	.user-info {
+		padding: 10px !important;
+		margin-bottom: 10px !important;
+		box-sizing: border-box;
+	}
+
+	.profile-master-div {
+		margin-left: 0px !important;
+		margin-right: 0px !important;
+		padding-left: 0px !important;
+		width: 100vw !important;
+	}
+
+	.posts-container {
+		padding: 5px;
+		padding-left: 20px;
+		box-sizing: border-box;
+	}
+
+	.inner-user-info-stat {
+		max-width: fit-content;
+		white-space: nowrap;
+		padding-right: 0px;
 	}
 }
