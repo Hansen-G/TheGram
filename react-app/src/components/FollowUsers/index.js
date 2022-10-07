@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const FollowUsers = ({ passuser }) => {
 	const dispatch = useDispatch();
-	const [users, setUsers] = useState({});
+	const [users, setUsers] = useState([]);
 	const [user, setUser] = useState();
 	const [loaded, setLoaded] = useState(false);
 	const currentUser = useSelector((state) => state.session.user);
@@ -40,10 +40,10 @@ const FollowUsers = ({ passuser }) => {
 		await dispatch(toggleUserFollow(userToFollowId));
 		await getUser(userId);
 	};
-
+	console.log(users);
 	return (
 		<div className="followers-box">
-			{loaded && user && Object.values(users).length ? (
+			{users.length > 0 && (
 				<>
 					<div className="home-user-card flex">
 						<div className="home-user-card-img-div">
@@ -68,71 +68,69 @@ const FollowUsers = ({ passuser }) => {
 					</div>
 					<p className="home-suggestion">Suggestions For You</p>
 					<div>
-						{users.length > 0
-							? users.map((user) => (
-									<div className="follow-card" key={user.id}>
-										<Link to={`/${user.id}`}>
-											<img
-												className="profile-image-follow-box"
-												src={user.profile_img}
-												alt="profile"
-											/>
-										</Link>
-										<Link to={`/${user.id}`}>
-											<div className="p-follow-box">
-												<div className="home-user-card-username">
-													{user.username}
-												</div>
-												<div className="home-suggest-for-you">
-													Suggested for you
-												</div>
+						{users.map((user) => {
+							console.log(users);
+							return (
+								<div className="follow-card" key={user.id}>
+									<Link to={`/${user.id}`}>
+										<img
+											className="profile-image-follow-box"
+											src={user.profile_img}
+											alt="profile"
+										/>
+									</Link>
+									<Link to={`/${user.id}`}>
+										<div className="p-follow-box">
+											<div className="home-user-card-username">
+												{user.username}
 											</div>
-										</Link>
-										<button
-											className="follow-box-button"
-											onClick={() => {
-												toggleAUserFollow(
-													currentUser.id,
-													user.id
-												);
-											}}
-										>
-											Follow
-										</button>
-									</div>
-							  ))
-							: null}
+											<div className="home-suggest-for-you">
+												Suggested for you
+											</div>
+										</div>
+									</Link>
+									<button
+										className="follow-box-button"
+										onClick={() => {
+											toggleAUserFollow(
+												currentUser.id,
+												user.id
+											);
+										}}
+									>
+										Follow
+									</button>
+								</div>
+							);
+						})}
 					</div>
 				</>
-			) : (
-				passuser && (
-					<>
-						<div className="home-user-card flex">
-							<div className="home-user-card-img-div">
-								<Link to={`/${passuser.id}`}>
-									<img
-										src={passuser.profile_img}
-										className="home-user-card-img"
-										alt="profile"
-									></img>
-								</Link>
-							</div>
-							<div className="home-user-card-name">
-								<Link to={`/${passuser.id}`}>
-									<div className="home-user-card-username">
-										{passuser.username}
-									</div>
-									<div className="home-user-card-name-place">
-										{passuser.name}
-									</div>
-								</Link>
-							</div>
+			)}
+			{!users.length && passuser && (
+				<>
+					<div className="home-user-card flex">
+						<div className="home-user-card-img-div">
+							<Link to={`/${passuser.id}`}>
+								<img
+									src={passuser.profile_img}
+									className="home-user-card-img"
+									alt="profile"
+								></img>
+							</Link>
 						</div>
-						<p className="home-suggestion">
-							No More users to follow
-						</p>
-					</>
-				)
+						<div className="home-user-card-name">
+							<Link to={`/${passuser.id}`}>
+								<div className="home-user-card-username">
+									{passuser.username}
+								</div>
+								<div className="home-user-card-name-place">
+									{passuser.name}
+								</div>
+							</Link>
+						</div>
+					</div>
+					<p className="home-suggestion">No More users to follow</p>
+				</>
 			)}
 			<div className="copy-right flex">
 				2022 THEGRAMME

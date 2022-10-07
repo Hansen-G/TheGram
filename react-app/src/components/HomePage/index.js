@@ -13,7 +13,7 @@ function HomePage() {
 
 	useEffect(() => {
 		dispatch(loadHomePage(user.id));
-		window.scrollTo(0,0)
+		window.scrollTo(0, 0);
 	}, [dispatch, user]);
 
 	useEffect(() => {
@@ -33,32 +33,30 @@ function HomePage() {
 
 	return (
 		<div className="home flex">
-			{loaded && user ?
-			<div className="home-left flex">
-				{
-					imagesArr.length > 0 &&
-					imagesArr.map((image) => (
-						<HomePageCard
-							key={image.id}
-							image={image}
-							user={user}
-						/>
-				 	))
-				}
-				{<FollowUsers passuser={user} />}
-			</div>
-			: user ? <div>
-						{(() => {
-            				let arr = []
-            				for (let i = 0; i <= 3; i++) {
-                				arr.push(
-								<LoadingPage key={i}/>
-                				)
-            				}
+			{loaded && user ? (
+				<div className="home-left flex">
+					{imagesArr.length > 0 &&
+						imagesArr.map((image) => (
+							<HomePageCard
+								key={image.id}
+								image={image}
+								user={user}
+							/>
+						))}
+					{/* {<FollowUsers passuser={user} />} */}
+				</div>
+			) : user ? (
+				<div>
+					{(() => {
+						let arr = [];
+						for (let i = 0; i <= 3; i++) {
+							arr.push(<LoadingPage key={i} />);
+						}
 
-            				return arr
-            			})()}
-					</div> : null}
+						return arr;
+					})()}
+				</div>
+			) : null}
 			{<FollowUsers passuser={user} />}
 		</div>
 	);
