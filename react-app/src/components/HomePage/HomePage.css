@@ -201,7 +201,7 @@ a {
 		max-width: 100vw;
 		box-sizing: border-box;
 		padding-top: 5px;
-		flex-direction: column-reverse;
+		flex-direction: column;
 		align-items: center;
 	}
 
@@ -225,7 +225,7 @@ a {
 	.post-commit-submit {
 		white-space: nowrap;
 	}
-	
+
 	.post-add-comment,
 	.card-post,
 	.post-info,
@@ -236,5 +236,10 @@ a {
 	.post-all-comments,
 	.post-image-detail {
 		max-width: 90vw;
+	}
+
+	.followers-box {
+		padding-left: 0px !important;
+		margin: 0px !important;
 	}
 }
