@@ -110,7 +110,8 @@ export const CreateImage = (postData) => async (dispatch) => {
 		method: "POST",
 		body: formData,
 	});
-	console.log(response)
+	const data = await response.json();
+	console.log(data)
 	if (response.ok) {
 		const image = await response.json();
 		dispatch(addImage(image));
