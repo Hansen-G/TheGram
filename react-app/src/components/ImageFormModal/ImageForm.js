@@ -2,14 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./ImageForm.css";
 import { CreateImage, UpdateImage } from "../../store/images";
-import { isValidUrl } from "../../util";
-const ImageForm = ({
-	onClose,
-	setShowModal,
-	// showModal,
-	image,
-	setModal,
-}) => {
+
+const ImageForm = ({ onClose, setShowModal, image }) => {
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.session.user);
 
@@ -22,18 +16,9 @@ const ImageForm = ({
 	const [showAccessity, setShowAccessity] = useState(false);
 	const [userImage, setUserImage] = useState(null);
 	const [image_url, setImageURL] = useState(null);
-	// const [url, setUrl] = useState(""); //URL we will actually render as an <img/>
-	// const [validURL, setValidURL] = useState(false); // Boolean that will show if the URL below is actually a valid image url
-
-	// const setURLAndCheckURL = async (urlInput) => {
-	// 	const res = await isValidUrl(urlInput, setErrors, errors);
-	// 	setValidURL(res);
-	// 	setUrl(urlInput);
-	// };
 
 	useEffect(() => {
 		if (image) {
-			// setURLAndCheckURL(image.url);
 			setDescription(image.description);
 			setLocation(image.location);
 			setShowStats(image.show_stats);
@@ -42,29 +27,19 @@ const ImageForm = ({
 		}
 	}, [image]);
 
-	// useEffect(() => {
-	// 	setErrors([]);
-	// }, [validURL]);
-
 	const updateImage = (e) => {
-		// const file = e.target.files[0];
-		// setUserImage(file);
 		const file = e.target.files[0];
-		// setImageError(null);
 		let testImage = new Image();
-		// If file size is too large show an error
+
 		testImage.onload = function () {
 			if (file.size > 5000000) {
 				setUserImage(null);
-				// return setImageError("File size must be less than 5 MB");
 			}
 			setUserImage(file);
 		};
 		// If image does not load show an error
 		testImage.onerror = function () {
 			setUserImage(null);
-
-			// setImageError("Invalid Image, please try another one");
 		};
 		//Create image to run previous tests
 		testImage.src = URL.createObjectURL(file);
@@ -74,24 +49,6 @@ const ImageForm = ({
 		e.preventDefault();
 		const submitErrors = [];
 
-		// if (!validURL) {
-		// 	submitErrors.push(
-		// 		"Invalid URL: Please enter a valid URL ending in - jpg/jpeg/png/webp/avif/gif/svg. Also please make sure this image CORS policy compliant. Image can be blocked by CORS policy due to: No 'Access-Control-Allow-Origin' header being present on the requested resource."
-		// 	);
-		// }
-		// if (url.includes("File:")) {
-		// 	submitErrors.push(
-		// 		'Invalid URL: URL must not include "File:", Please use original image address'
-		// 	);
-		// }
-		// if (url.includes(" ")) {
-		// 	submitErrors.push("Image cannot have an empty space in the url!");
-		// }
-		// if (url.length > 1000) {
-		// 	submitErrors.push(
-		// 		"Invalid URL: URL must not be longer than 1000 characters"
-		// 	);
-		// }
 		if (submitErrors.length > 0) {
 			return setErrors(submitErrors);
 		} else {
@@ -118,7 +75,6 @@ const ImageForm = ({
 				location,
 				alt_description,
 				show_stats,
-				// image,
 				image_url,
 			};
 			dispatch(UpdateImage(update_payload))
@@ -183,7 +139,6 @@ const ImageForm = ({
 									></img>
 									<div>{user.name}</div>
 								</div>
-
 								<div className="description">
 									<textarea
 										className="description-text-area"
@@ -207,18 +162,6 @@ const ImageForm = ({
 								</div>
 								{image ? null : (
 									<div className="url">
-										{/* <input
-										value={url}
-										onChange={(e) => {
-											setURLAndCheckURL(e.target.value);
-										}}
-										placeholder="Image URL"
-										type="url"
-										maxLength="1000"
-										required
-										className="post-text-input"
-									/> */}
-
 										<label
 											htmlFor="file-input"
 											className="image-input-button"
@@ -229,7 +172,7 @@ const ImageForm = ({
 											id="file-input"
 											className="upload-image-container"
 											type="file"
-											accept="image/*"
+											accept="image/png, image/jpg, image/jpeg, image/gif"
 											onChange={updateImage}
 										></input>
 									</div>

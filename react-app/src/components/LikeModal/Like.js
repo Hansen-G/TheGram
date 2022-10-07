@@ -1,7 +1,6 @@
 import "./index.css";
-import { toggleUserFollow, authenticate } from "../../store/session";
+import { toggleUserFollow} from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Like = ({ user }) => {
@@ -19,6 +18,7 @@ const Like = ({ user }) => {
 				<img
 					src={profile_img}
 					className="modal-like-profile-image"
+					alt='profile'
 				></img>
 			</Link>
 			<Link to={`/${id}`}>{username}</Link>

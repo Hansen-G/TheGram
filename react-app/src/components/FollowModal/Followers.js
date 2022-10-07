@@ -1,7 +1,6 @@
 import "./index.css";
-import { toggleUserFollow, authenticate } from "../../store/session";
+import { toggleUserFollow} from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Followers = ({ user, setUser }) => {
@@ -29,6 +28,7 @@ const Followers = ({ user, setUser }) => {
 				<img
 					src={profile_img}
 					className="modal-like-profile-image"
+					alt='profile'
 				></img>
 			</Link>
 			<Link to={`/${follower_id}`}>{username}</Link>

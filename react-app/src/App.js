@@ -7,8 +7,7 @@ import NavBar from "./components/NavBar/index";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { authenticate } from "./store/session";
 import Profile from "./components/Images/Profile";
-import HomePage from "./components/HomePage";
-import LoadingPage from "./components/LoadingPage";
+import HomePage from "./components/HomePage";;
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
