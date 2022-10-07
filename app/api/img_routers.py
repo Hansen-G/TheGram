@@ -1,6 +1,5 @@
 # from distutils.log import error
 from datetime import datetime
-from turtle import pos
 from sqlalchemy import delete
 from flask import Blueprint, jsonify, session, request, redirect, url_for
 from app.models import User, db, Image, Comment
@@ -102,6 +101,7 @@ def delete_images(id):
 @img_routes.route('/new', methods=['POST'])
 @login_required
 def create_images():
+    print('first line of create images')
     form = ImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
         
