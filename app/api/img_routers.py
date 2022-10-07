@@ -48,7 +48,7 @@ def create_images():
             url = url,
             description = form.data['description'],
             alt_description = form.data['alt_description'],
-            show_stats = bool(form.data['show_stats']),
+            # show_stats = bool(form.data['show_stats']),
             location = form.data['location'],
             user_id = current_user.id
         )
@@ -58,10 +58,10 @@ def create_images():
         print(post.to_dict())
         newPost = post.to_dict()
         newPost['post_user'] = User.query.get(newPost['user_id']).to_dict()
-        return newPost
+        return jsonify({ 'newPost': newPost, 'line': 'Line 61'})
 
     else:
-        return jsonify(form.errors)
+        return jsonify({'formErrors':form.errors})
 
 
 
