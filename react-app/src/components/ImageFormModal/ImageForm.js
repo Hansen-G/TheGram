@@ -21,6 +21,7 @@ const ImageForm = ({
 	const [errors, setErrors] = useState([]);
 	const [showAccessity, setShowAccessity] = useState(false);
 	const [userImage, setUserImage] = useState(null);
+	const [image_url, setImageURL] = useState()
 	// const [url, setUrl] = useState(""); //URL we will actually render as an <img/>
 	// const [validURL, setValidURL] = useState(false); // Boolean that will show if the URL below is actually a valid image url
 
@@ -36,6 +37,7 @@ const ImageForm = ({
 			setDescription(image.description);
 			setLocation(image.location);
 			setShowStats(image.show_stats);
+			setImageURL(image.url)
 		}
 	}, [image]);
 
@@ -46,7 +48,7 @@ const ImageForm = ({
 	const updateImage = (e) => {
 		// const file = e.target.files[0];
 		// setUserImage(file);
-
+		console.log("eeeeeeeeee", e.target.files)
 		const file = e.target.files[0];
 		// setImageError(null);
 		let testImage = new Image();
@@ -115,7 +117,8 @@ const ImageForm = ({
 				location,
 				alt_description,
 				show_stats,
-				image,
+				// image,
+				image_url
 			};
 			dispatch(UpdateImage(update_payload))
 				.then(() => onClose())
@@ -141,9 +144,8 @@ const ImageForm = ({
 						{image ? "Edit info" : "Create new post"}
 					</div>
 					<button
-						className={`create_submit_button ${
-							errors.length > 0 ? "disabled" : ""
-						}`}
+						className={`create_submit_button ${errors.length > 0 ? "disabled" : ""
+							}`}
 						type="submit"
 						disabled={errors.length > 0}
 					>
@@ -153,6 +155,16 @@ const ImageForm = ({
 				<div className="image_form_container">
 					<div className="wrapper">
 						<div className="preview_image_place_holder">
+							{
+								image && (
+									<img
+										className="image_to_update"
+										src={image.url}
+										alt="existing image"
+									></img>
+								)
+							}
+
 							{userImage && (
 								<img
 									className="image_to_update"
@@ -194,8 +206,10 @@ const ImageForm = ({
 										</div>
 									)}
 								</div>
-								<div className="url">
-									{/* <input
+								{
+									image ? null :
+										<div className="url">
+											{/* <input
 										value={url}
 										onChange={(e) => {
 											setURLAndCheckURL(e.target.value);
@@ -206,12 +220,15 @@ const ImageForm = ({
 										required
 										className="post-text-input"
 									/> */}
-									<input
-										type="file"
-										accept="image/*"
-										onChange={updateImage}
-									></input>
-								</div>
+
+											<label htmlFor="file_input" className="image_input_button">Click to upload image</label>
+											<input id="file_input"
+												className="upload_image_container"
+												type="file"
+												accept="image/*"
+												onChange={updateImage}
+											></input>
+										</div>}
 								<div className="location">
 									<input
 										value={location}
