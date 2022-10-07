@@ -40,7 +40,6 @@ const FollowUsers = ({ passuser }) => {
 		await dispatch(toggleUserFollow(userToFollowId));
 		await getUser(userId);
 	};
-	console.log(users);
 	return (
 		<div className="followers-box">
 			{users.length > 0 && (

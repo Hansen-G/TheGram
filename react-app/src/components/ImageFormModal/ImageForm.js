@@ -49,7 +49,6 @@ const ImageForm = ({
 	const updateImage = (e) => {
 		// const file = e.target.files[0];
 		// setUserImage(file);
-		console.log("eeeeeeeeee", e.target.files);
 		const file = e.target.files[0];
 		// setImageError(null);
 		let testImage = new Image();
