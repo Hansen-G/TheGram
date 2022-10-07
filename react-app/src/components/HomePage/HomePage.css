@@ -194,3 +194,10 @@ a {
 	position: relative;
 	right: 0;
 }
+
+@media screen and (max-width: 750px) {
+	.home {
+		/* margin-left: 0px; */
+		background-color: green;
+	}
+}
