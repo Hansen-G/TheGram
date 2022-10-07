@@ -104,3 +104,10 @@
 		margin: 0;
 	}
 }
+
+@media screen and (max-width: 750px) {
+	.inner-user-info {
+		flex-direction: column;
+		gap: 5px;
+	}
+}

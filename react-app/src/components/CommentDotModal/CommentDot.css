@@ -1,126 +1,122 @@
 .edit-botton {
-    position: absolute;
-    right: 20px;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0px;
-    
+	position: absolute;
+	right: 20px;
+	background-color: rgba(0, 0, 0, 0);
+	border: 0px;
 }
 .dot-icon {
-    font-size: 20px;
+	font-size: 20px;
 }
 
-.dot-modal{
-    width: 400px;
+.dot-modal {
+	width: 400px;
 }
 
 .dot-bar {
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    font-size: 14px;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
+	font-size: 14px;
 }
 
-.cancel-edit-button{
-    background-color: rgba(0, 0, 0, 0);
-    border: 0px;
-    font-size: 14px;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
+.cancel-edit-button {
+	background-color: rgba(0, 0, 0, 0);
+	border: 0px;
+	font-size: 14px;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
 }
 
-.dot-edit-form 
-input[type=text],
+.dot-edit-form input[type="text"],
 textarea,
 select {
-    width: 300px;
-    padding: 12px 20px;
-    margin: 8px 0;
-    height: 100px;
-    box-sizing: border-box;
-    font-size: 14px;
-    color: #6E6E6E;
-
+	width: 300px;
+	padding: 12px 20px;
+	margin: 8px 0;
+	height: 100px;
+	box-sizing: border-box;
+	font-size: 14px;
+	color: #6e6e6e;
 }
 
-.dot-edit-form 
-div {
-    width: 100%;
-    text-align: center;
+.dot-edit-form div {
+	width: 100%;
+	text-align: center;
 }
-
 
 #edit-comment {
-    height: 300px;
+	height: 300px;
 }
 
 .dot-edit-form-div {
-    flex-direction: column;
-    align-items: center;
-    
-    height: 250px;
+	flex-direction: column;
+	align-items: center;
+
+	height: 250px;
 }
 
 #edit-comment-post {
-    bottom: 120px;
-    right: 180px;
-    height: 20px;
+	bottom: 120px;
+	right: 180px;
+	height: 20px;
 }
 
-#dot-edit-comment{
-    max-height: 180px;
-    max-width: 300px;
+#dot-edit-comment {
+	max-height: 180px;
+	max-width: 300px;
 }
 
-.edit-error{
-    font-size: 14px;
-    color: #6E6E6E;
+.edit-error {
+	font-size: 14px;
+	color: #6e6e6e;
 }
 
 .card {
-    
-   
-    overflow: hidden;
-    align-items: center;
-    position: relative;
-    box-shadow: 0 14px 26px rgba(0, 0, 0, 0.04);
-    transition: all 0.3s ease-out;
-    text-decoration: none;
+	overflow: hidden;
+	align-items: center;
+	position: relative;
+	box-shadow: 0 14px 26px rgba(0, 0, 0, 0.04);
+	transition: all 0.3s ease-out;
+	text-decoration: none;
 }
 
 .card:hover {
-    transform: translateY(-0px) scale(1.005) translateZ(0);
-    background-color: rgba(199, 199, 199, 0.2);
-    box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11),
-        0 24px 46px var(--box-shadow-color);
+	transform: translateY(-0px) scale(1.005) translateZ(0);
+	background-color: rgba(199, 199, 199, 0.2);
+	box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11),
+		0 24px 46px var(--box-shadow-color);
 }
 
 .card:hover .overlay {
-    transform: scale(4) translateZ(0);
+	transform: scale(4) translateZ(0);
 }
 
 .card:hover .circle {
-    border-color: var(--bg-color-light);
-    background: var(--bg-color);
+	border-color: var(--bg-color-light);
+	background: var(--bg-color);
 }
 
-
 .card:hover div {
-    /* color: rgb(255, 255, 255); */
-
+	/* color: rgb(255, 255, 255); */
 }
 
 .card:active {
-    transform: scale(1) translateZ(0);
-    box-shadow: 0 15px 24px rgba(0, 0, 0, 0.11),
-        0 15px 24px var(--box-shadow-color);
+	transform: scale(1) translateZ(0);
+	box-shadow: 0 15px 24px rgba(0, 0, 0, 0.11),
+		0 15px 24px var(--box-shadow-color);
 }
 
-
 .comment-edit-botton {
-    background-color: rgba(0, 0, 0, 0);
-    border: 0px;
-    margin-left: 10px;
-    color: #6E6E6E;
+	background-color: rgba(0, 0, 0, 0);
+	border: 0px;
+	margin-left: 10px;
+	color: #6e6e6e;
+}
 
+@media screen and (max-width: 750px) {
+	.dot-modal {
+		min-width: none;
+		width: 90vw;
+	}
 }

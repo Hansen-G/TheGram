@@ -226,3 +226,19 @@ input[type="file"] {
 .image_input_button:hover {
 	background-color: #efefef;
 }
+
+@media screen and (max-width: 750px) {
+	.wrapper {
+		flex-direction: column;
+	}
+
+	.preview_image_place_holder {
+		width: 100%;
+	}
+
+	.right_div_container {
+		width: 100% !important;
+		padding: 5px;
+		box-sizing: border-box;
+	}
+}

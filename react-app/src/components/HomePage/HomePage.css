@@ -197,7 +197,8 @@ a {
 
 @media screen and (max-width: 750px) {
 	.home {
-		/* margin-left: 0px; */
-		background-color: green;
+		margin: 0;
+		/* background-color: green; */
+		max-width: 100vw;
 	}
 }
