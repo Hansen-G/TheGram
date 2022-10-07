@@ -26,7 +26,7 @@ function ImageModal({ image, icon, user }) {
 	return (
 		<>
 			<button
-				className="comments-botton"
+				className="comments-button"
 				onClick={() => setShowModal(true)}
 			>
 				{icon}

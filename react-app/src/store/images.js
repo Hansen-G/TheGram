@@ -126,7 +126,6 @@ export const UpdateImage = (image) => async (dispatch) => {
 		},
 		body: JSON.stringify(image),
 	});
-	console.log("updating thunkingggggggg", image);
 	if (response.ok) {
 		const updatedImage = await response.json();
 		dispatch(editImage(updatedImage));
@@ -192,9 +191,9 @@ export const EditComment = ({ commentId, comment, imageId }) => async (
 		body: JSON.stringify({ comment: comment }),
 	});
 	if (response.ok) {
-		const new_comment = await response.json();
+		const newComment = await response.json();
 		dispatch(editComment(comment, commentId, imageId));
-		return new_comment;
+		return newComment;
 	}
 };
 //delete comment

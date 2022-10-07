@@ -40,7 +40,6 @@ const FollowUsers = ({ passuser }) => {
 		await dispatch(toggleUserFollow(userToFollowId));
 		await getUser(userId);
 	};
-	console.log(users);
 	return (
 		<div className="followers-box">
 			{users.length > 0 && (
@@ -68,8 +67,7 @@ const FollowUsers = ({ passuser }) => {
 					</div>
 					<p className="home-suggestion">Suggestions For You</p>
 					<div>
-						{users.map((user) => {
-							console.log(users);
+						{users.slice(0, 5).map((user) => {
 							return (
 								<div className="follow-card" key={user.id}>
 									<Link to={`/${user.id}`}>
